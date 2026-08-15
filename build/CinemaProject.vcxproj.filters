@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\models\Pelicula.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\models\Promocion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\models\Beneficio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\models\Solicitud.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\structures\ArbolBinario.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\structures\MatrizDispersa.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\structures\ListasPromociones.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\structures\ListaSolicitudes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\libs\imgui\imgui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\libs\imgui\imgui_draw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\libs\imgui\imgui_tables.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\libs\imgui\imgui_widgets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\libs\imgui\imgui_demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\libs\imgui\backends\imgui_impl_glfw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\libs\imgui\backends\imgui_impl_opengl3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{3D3029A9-CADE-355A-B478-6F1040005943}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
