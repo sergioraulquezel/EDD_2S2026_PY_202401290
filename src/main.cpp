@@ -50,6 +50,8 @@ int main()
     salaCine.reservarAsiento(1, 2, "Maria Lopez");
     salaCine.reservarAsiento(3, 2, "Carlos Ruiz");
 
+    miCartelera.generarReporteGraphviz();
+
     miCartelera.imprimirInorden();
     glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit())

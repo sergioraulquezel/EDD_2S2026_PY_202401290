@@ -1,5 +1,5 @@
-// include/structures/ArbolBinario.hpp
 #pragma once
+#include <fstream>
 #include "../models/Pelicula.h"
 
 class NodoBST {
@@ -17,6 +17,8 @@ private:
     
     NodoBST* insertarRecursivo(NodoBST* nodo, Pelicula* p);
     void inordenRecursivo(NodoBST* nodo);
+
+    void escribirNodosDot(NodoBST* nodo, std::ofstream& archivo);
 
 public:
     ArbolBinario();

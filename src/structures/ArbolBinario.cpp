@@ -1,15 +1,16 @@
 #include "structures/ArbolBinario.h"
 #include <iostream>
 
+#include <fstream>
+#include <cstdlib> // Para la función system()
+
 // --- Constructor ---
 ArbolBinario::ArbolBinario() {
     this->raiz = nullptr; // Inicializamos el árbol completamente vacío
 }
 
-// --- Métodos Públicos ---
 
 void ArbolBinario::insertar(Pelicula* p) {
-    // Llamamos a la función recursiva desde la raíz
     this->raiz = insertarRecursivo(this->raiz, p);
 }
 
@@ -24,11 +25,48 @@ void ArbolBinario::imprimirInorden() {
 }
 
 void ArbolBinario::generarReporteGraphviz() {
-    std::cout << "[Graphviz] Preparando generación de reporte del BST...\n";
+    if (this->raiz == nullptr) {
+        std::cout << "El árbol está vacío. No se puede generar reporte.\n";
+        return;
+    }
+
+    std::ofstream archivo("reporte_bst.dot");
+
+    archivo << "digraph ArbolPeliculas {\n";
+    archivo << "    rankdir=TB;\n"; // Top-Bottom (De arriba hacia abajo)
+    archivo << "    node [shape=record, style=filled, fillcolor=lightcyan, fontname=\"Arial\"];\n";
+
+    escribirNodosDot(this->raiz, archivo);
+
+    archivo << "}\n";
+    archivo.close();
+
+    std::cout << "Generando imagen del arbol...\n";
+    system("dot -Tpng reporte_bst.dot -o reporte_bst.png");
+    std::cout << "Reporte generado: reporte_bst.png\n";
 }
 
+void ArbolBinario::escribirNodosDot(NodoBST* nodo, std::ofstream& archivo) {
+    if (nodo != nullptr) {
+        archivo << "    nodo" << nodo->pelicula->idPelicula
+                << " [label=\"{ID: " << nodo->pelicula->idPelicula 
+                << " | " << nodo->pelicula->titulo << "}\"];\n";
 
-// --- Métodos Privados (Lógica Recursiva) ---
+        // Si tiene hijo izquierdo, dibujar flecha hacia él
+        if (nodo->izquierdo != nullptr) {
+            archivo << "    nodo" << nodo->pelicula->idPelicula 
+                    << " -> nodo" << nodo->izquierdo->pelicula->idPelicula << ";\n";
+            escribirNodosDot(nodo->izquierdo, archivo); // Visitar hijo izquierdo
+        }
+
+        // Si tiene hijo derecho, dibujar flecha hacia él
+        if (nodo->derecho != nullptr) {
+            archivo << "    nodo" << nodo->pelicula->idPelicula 
+                    << " -> nodo" << nodo->derecho->pelicula->idPelicula << ";\n";
+            escribirNodosDot(nodo->derecho, archivo); // Visitar hijo derecho
+        }
+    }
+}
 
 NodoBST* ArbolBinario::insertarRecursivo(NodoBST* nodo, Pelicula* p) {
     if (nodo == nullptr) {

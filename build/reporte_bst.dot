@@ -1,0 +1,11 @@
+digraph ArbolPeliculas {
+    rankdir=TB;
+    node [shape=record, style=filled, fillcolor=lightcyan, fontname="Arial"];
+    nodo50 [label="{ID: 50 | Inception}"];
+    nodo50 -> nodo25;
+    nodo25 [label="{ID: 25 | Interstellar}"];
+    nodo25 -> nodo10;
+    nodo10 [label="{ID: 10 | Matrix}"];
+    nodo50 -> nodo75;
+    nodo75 [label="{ID: 75 | Dune}"];
+}

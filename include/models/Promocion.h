@@ -6,7 +6,7 @@ public:
     int idPromocion;
     std::string nombre;
     std::string descripcion;
-    // Nota: La lista doblemente enlazada de Beneficios irá en la estructura, no aquí.
+    // La lista doblemente enlazada de Beneficios irá en la estructura, no aquí.
 
     Promocion(int id, std::string nom, std::string desc);
 };

@@ -1,4 +1,3 @@
-// include/structures/ListaSolicitudes.hpp
 #pragma once
 #include "../models/Solicitud.h"
 
