@@ -24,6 +24,8 @@ void ArbolBinario::imprimirInorden() {
     std::cout << "--------------------------------------------------\n";
 }
 
+
+
 void ArbolBinario::generarReporteGraphviz() {
     if (this->raiz == nullptr) {
         std::cout << "El árbol está vacío. No se puede generar reporte.\n";
@@ -48,21 +50,21 @@ void ArbolBinario::generarReporteGraphviz() {
 
 void ArbolBinario::escribirNodosDot(NodoBST* nodo, std::ofstream& archivo) {
     if (nodo != nullptr) {
-        archivo << "    nodo" << nodo->pelicula->idPelicula
-                << " [label=\"{ID: " << nodo->pelicula->idPelicula 
-                << " | " << nodo->pelicula->titulo << "}\"];\n";
+        archivo << "    nodo" << nodo->pelicula->getId()
+                << " [label=\"{ID: " << nodo->pelicula->getId()
+                << " | " << nodo->pelicula->getTitulo() << "}\"];\n";
 
         // Si tiene hijo izquierdo, dibujar flecha hacia él
         if (nodo->izquierdo != nullptr) {
-            archivo << "    nodo" << nodo->pelicula->idPelicula 
-                    << " -> nodo" << nodo->izquierdo->pelicula->idPelicula << ";\n";
+            archivo << "    nodo" << nodo->pelicula->getId() 
+                    << " -> nodo" << nodo->izquierdo->pelicula->getId() << ";\n";
             escribirNodosDot(nodo->izquierdo, archivo); // Visitar hijo izquierdo
         }
 
         // Si tiene hijo derecho, dibujar flecha hacia él
         if (nodo->derecho != nullptr) {
-            archivo << "    nodo" << nodo->pelicula->idPelicula 
-                    << " -> nodo" << nodo->derecho->pelicula->idPelicula << ";\n";
+            archivo << "    nodo" << nodo->pelicula->getId() 
+                    << " -> nodo" << nodo->derecho->pelicula->getId() << ";\n";
             escribirNodosDot(nodo->derecho, archivo); // Visitar hijo derecho
         }
     }
@@ -74,18 +76,18 @@ NodoBST* ArbolBinario::insertarRecursivo(NodoBST* nodo, Pelicula* p) {
     }
 
     // Regla de inserción del BST comparando los IDs
-    if (p->idPelicula < nodo->pelicula->idPelicula) {
+    if (p->getId() < nodo->pelicula->getId()) {
         // Si el ID es menor, viajamos por la rama izquierda
         nodo->izquierdo = insertarRecursivo(nodo->izquierdo, p);
     } 
-    else if (p->idPelicula > nodo->pelicula->idPelicula) {
+    else if (p->getId() > nodo->pelicula->getId()) {
         // Si el ID es mayor, viajamos por la rama derecha
         nodo->derecho = insertarRecursivo(nodo->derecho, p);
     } 
     else {
         // Si el ID es igual, decidimos no insertarlo para evitar películas duplicadas
-        std::cout << "Aviso: La película con ID " << p->idPelicula 
-                  << " (" << p->titulo << ") ya existe en la cartelera.\n";
+        std::cout << "Aviso: La película con ID " << p->getId() 
+                  << " (" << p->getTitulo() << ") ya existe en la cartelera.\n";
     }
 
     // Retornamos el nodo actual 
@@ -97,10 +99,32 @@ void ArbolBinario::inordenRecursivo(NodoBST* nodo) {
     if (nodo != nullptr) {
         inordenRecursivo(nodo->izquierdo);
         
-        std::cout << "ID: " << nodo->pelicula->idPelicula 
-                  << " | Titulo: " << nodo->pelicula->titulo 
-                  << " | Genero: " << nodo->pelicula->genero << "\n";
+        std::cout << "ID: " << nodo->pelicula->getId() 
+                  << " | Titulo: " << nodo->pelicula->getTitulo() 
+                  << " | Genero: " << nodo->pelicula->getGenero() << "\n";
         
         inordenRecursivo(nodo->derecho);
     }
+}
+
+// Función para recorrer el BST y pasarlo a un arreglo primitivo (para la tabla de ImGui)
+void ArbolBinario::obtenerPeliculas(Pelicula* arreglo[], int& contador) {
+    obtenerPeliculasRecursivo(this->raiz, arreglo, contador);
+}
+
+// Función auxiliar recursiva corregida con NodoBST (Inorden: Izquierda, Raíz, Derecha)
+void ArbolBinario::obtenerPeliculasRecursivo(NodoBST* nodo, Pelicula* arreglo[], int& contador) {
+    if (nodo == nullptr) {
+        return;
+    }
+    
+    // 1. Recorrer subárbol izquierdo
+    obtenerPeliculasRecursivo(nodo->izquierdo, arreglo, contador);
+    
+    // 2. Guardar la película actual en el arreglo y aumentar el contador
+    arreglo[contador] = nodo->pelicula;
+    contador++;
+    
+    // 3. Recorrer subárbol derecho
+    obtenerPeliculasRecursivo(nodo->derecho, arreglo, contador);
 }

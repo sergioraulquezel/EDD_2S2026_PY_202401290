@@ -1,0 +1,62 @@
+digraph MatrizAsientos {
+  graph [rankdir=TB, splines=ortho, nodesep=0.55, ranksep=0.65, bgcolor="white", labelloc="t", label="Funcion: Matrix - 20:00 - Sala 1\nTotal: 12 | Reservados: 4 | Libres: 8"];
+  node [fontname="Arial", fontsize=11, style="filled", margin="0.08,0.06"];
+  edge [color="#37474f", arrowsize=0.75];
+  funcion [label="Funcion", shape=diamond, fillcolor="#ffffff", color="#37474f", penwidth=1.6];
+  stats [label="Total: 12\nReservados: 4\nLibres: 8", shape=note, fillcolor="#e8f5e9", color="#2e7d32"];
+  fila_1 [label="F1", shape=box, fillcolor="#ffca28", color="#37474f", penwidth=1.4];
+  fila_2 [label="F2", shape=box, fillcolor="#ffca28", color="#37474f", penwidth=1.4];
+  fila_3 [label="F3", shape=box, fillcolor="#ffca28", color="#37474f", penwidth=1.4];
+  fila_4 [label="F4", shape=box, fillcolor="#ffca28", color="#37474f", penwidth=1.4];
+  col_1 [label="C1", shape=box, fillcolor="#ffca28", color="#37474f", penwidth=1.4];
+  col_2 [label="C2", shape=box, fillcolor="#ffca28", color="#37474f", penwidth=1.4];
+  col_3 [label="C3", shape=box, fillcolor="#ffca28", color="#37474f", penwidth=1.4];
+  asiento_1_1 [label="Ale\nF1-C1", shape=circle, width=0.9, fixedsize=false, fillcolor="#ff6b6b", color="#37474f", penwidth=1.4];
+  asiento_1_2 [label="Jens\nF1-C2", shape=circle, width=0.9, fixedsize=false, fillcolor="#ff6b6b", color="#37474f", penwidth=1.4];
+  asiento_1_3 [label="F1-C3\nLibre", shape=box, style="rounded,dashed,filled", fillcolor="#fff1f1", color="#cfcfcf", fontcolor="#777777"];
+  asiento_2_1 [label="F2-C1\nLibre", shape=box, style="rounded,dashed,filled", fillcolor="#fff1f1", color="#cfcfcf", fontcolor="#777777"];
+  asiento_2_2 [label="F2-C2\nLibre", shape=box, style="rounded,dashed,filled", fillcolor="#fff1f1", color="#cfcfcf", fontcolor="#777777"];
+  asiento_2_3 [label="F2-C3\nLibre", shape=box, style="rounded,dashed,filled", fillcolor="#fff1f1", color="#cfcfcf", fontcolor="#777777"];
+  asiento_3_1 [label="Jose\nF3-C1", shape=circle, width=0.9, fixedsize=false, fillcolor="#ff6b6b", color="#37474f", penwidth=1.4];
+  asiento_3_2 [label="F3-C2\nLibre", shape=box, style="rounded,dashed,filled", fillcolor="#fff1f1", color="#cfcfcf", fontcolor="#777777"];
+  asiento_3_3 [label="F3-C3\nLibre", shape=box, style="rounded,dashed,filled", fillcolor="#fff1f1", color="#cfcfcf", fontcolor="#777777"];
+  asiento_4_1 [label="F4-C1\nLibre", shape=box, style="rounded,dashed,filled", fillcolor="#fff1f1", color="#cfcfcf", fontcolor="#777777"];
+  asiento_4_2 [label="F4-C2\nLibre", shape=box, style="rounded,dashed,filled", fillcolor="#fff1f1", color="#cfcfcf", fontcolor="#777777"];
+  asiento_4_3 [label="Juan\nF4-C3", shape=circle, width=0.9, fixedsize=false, fillcolor="#ff6b6b", color="#37474f", penwidth=1.4];
+  { rank=same; funcion; col_1; col_2; col_3; stats; }
+  { rank=same; fila_1; asiento_1_1; asiento_1_2; asiento_1_3; }
+  { rank=same; fila_2; asiento_2_1; asiento_2_2; asiento_2_3; }
+  { rank=same; fila_3; asiento_3_1; asiento_3_2; asiento_3_3; }
+  { rank=same; fila_4; asiento_4_1; asiento_4_2; asiento_4_3; }
+  funcion -> col_1;
+  funcion -> fila_1;
+  col_1 -> col_2;
+  col_2 -> col_3;
+  fila_1 -> fila_2;
+  fila_2 -> fila_3;
+  fila_3 -> fila_4;
+  fila_1 -> asiento_1_1 [dir=both];
+  asiento_1_1 -> asiento_1_2 [dir=both];
+  asiento_1_2 -> asiento_1_3 [dir=both];
+  fila_2 -> asiento_2_1 [dir=both];
+  asiento_2_1 -> asiento_2_2 [dir=both];
+  asiento_2_2 -> asiento_2_3 [dir=both];
+  fila_3 -> asiento_3_1 [dir=both];
+  asiento_3_1 -> asiento_3_2 [dir=both];
+  asiento_3_2 -> asiento_3_3 [dir=both];
+  fila_4 -> asiento_4_1 [dir=both];
+  asiento_4_1 -> asiento_4_2 [dir=both];
+  asiento_4_2 -> asiento_4_3 [dir=both];
+  col_1 -> asiento_1_1 [dir=both];
+  asiento_1_1 -> asiento_2_1 [dir=both];
+  asiento_2_1 -> asiento_3_1 [dir=both];
+  asiento_3_1 -> asiento_4_1 [dir=both];
+  col_2 -> asiento_1_2 [dir=both];
+  asiento_1_2 -> asiento_2_2 [dir=both];
+  asiento_2_2 -> asiento_3_2 [dir=both];
+  asiento_3_2 -> asiento_4_2 [dir=both];
+  col_3 -> asiento_1_3 [dir=both];
+  asiento_1_3 -> asiento_2_3 [dir=both];
+  asiento_2_3 -> asiento_3_3 [dir=both];
+  asiento_3_3 -> asiento_4_3 [dir=both];
+}

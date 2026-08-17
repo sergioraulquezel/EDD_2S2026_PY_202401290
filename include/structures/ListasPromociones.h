@@ -36,7 +36,11 @@ public:
 
     ListaCircularPromociones();
     void insertarPromocion(Promocion* p);
-    void agregarBeneficioAPromocion(int idPromocion, Beneficio* b);
+    bool agregarBeneficioAPromocion(int idPromocion, Beneficio* b);
+    NodoPromocion* buscarPromocion(int idPromocion);
+    bool existePromocion(int idPromocion);
+    int contarPromociones();
+    int contarBeneficios(NodoPromocion* nodoPromocion);
     
     void generarReporteGraphviz();
 };

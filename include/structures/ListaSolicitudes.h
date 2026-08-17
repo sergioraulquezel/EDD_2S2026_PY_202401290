@@ -16,7 +16,10 @@ public:
 
     ListaCircularDoble();
     void insertarSolicitud(Solicitud* s);
-    void cambiarEstadoSolicitud(int idSolicitud, std::string nuevoEstado);
+    bool cambiarEstadoSolicitud(int idSolicitud, std::string nuevoEstado);
+    NodoSolicitud* buscarSolicitud(int idSolicitud);
+    int contarSolicitudes();
+    int contarPorEstado(std::string estado);
     
     void generarReporteGraphviz();
 };

@@ -39,6 +39,9 @@ set(PROJECT_SOURCES
     src/structures/MatrizDispersa.cpp
     src/structures/ListasPromociones.cpp
     src/structures/ListaSolicitudes.cpp
+    src/ui/PanelAdmin.cpp
+    src/ui/PanelLogin.cpp
+    src/ui/PanelCliente.cpp
 )
 
 # Crear el ejecutable

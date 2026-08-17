@@ -28,6 +28,15 @@
     <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\structures\ListaSolicitudes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\ui\PanelAdmin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\ui\PanelLogin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\ui\PanelCliente.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\libs\imgui\imgui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

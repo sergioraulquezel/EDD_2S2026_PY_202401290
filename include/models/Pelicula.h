@@ -1,13 +1,27 @@
-#pragma once
+#ifndef PELICULA_H
+#define PELICULA_H
+
 #include <string>
 
 class Pelicula {
-public:
-    int idPelicula; // Clave para ordenar el Árbol Binario 
+private:
+    int id;
     std::string titulo;
-    std::string director;
-    int duracionMinutos;
     std::string genero;
+    int duracion;
+    std::string clasificacion;
 
-    Pelicula(int id, std::string t, std::string d, int dur, std::string g);
+public:
+    // Solo la declaración (sin llaves ni código aquí)
+    Pelicula(int _id, std::string _titulo, std::string _genero, int _duracion, std::string _clasificacion);
+
+    // Getters
+    int getId() { return id; }
+    std::string getTitulo() { return titulo; }
+    std::string getGenero() { return genero; }
+    int getDuracion() { return duracion; }
+    std::string getClasificacion() { return clasificacion; }
+   
 };
+
+#endif

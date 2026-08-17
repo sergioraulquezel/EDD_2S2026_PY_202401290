@@ -438,6 +438,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\structures\MatrizDispersa.cpp" />
     <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\structures\ListasPromociones.cpp" />
     <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\structures\ListaSolicitudes.cpp" />
+    <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\ui\PanelAdmin.cpp" />
+    <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\ui\PanelLogin.cpp" />
+    <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\ui\PanelCliente.cpp" />
     <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\libs\imgui\imgui.cpp" />
     <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\libs\imgui\imgui_draw.cpp" />
     <ClCompile Include="C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\libs\imgui\imgui_tables.cpp" />

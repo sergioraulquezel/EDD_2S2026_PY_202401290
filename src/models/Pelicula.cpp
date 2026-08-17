@@ -1,10 +1,9 @@
 #include "models/Pelicula.h"
 
-// Implementación del constructor
-Pelicula::Pelicula(int id, std::string t, std::string d, int dur, std::string g) {
-    this->idPelicula = id;
-    this->titulo = t;
-    this->director = d;
-    this->duracionMinutos = dur;
-    this->genero = g;
+Pelicula::Pelicula(int _id, std::string _titulo, std::string _genero, int _duracion, std::string _clasificacion) {
+    this->id = _id;
+    this->titulo = _titulo;
+    this->genero = _genero;
+    this->duracion = _duracion;
+    this->clasificacion = _clasificacion;
 }

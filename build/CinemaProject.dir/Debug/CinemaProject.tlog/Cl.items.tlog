@@ -7,6 +7,9 @@ C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\structures\ArbolBinario.cpp;C
 C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\structures\MatrizDispersa.cpp;C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\build\CinemaProject.dir\Debug\MatrizDispersa.obj
 C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\structures\ListasPromociones.cpp;C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\build\CinemaProject.dir\Debug\ListasPromociones.obj
 C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\structures\ListaSolicitudes.cpp;C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\build\CinemaProject.dir\Debug\ListaSolicitudes.obj
+C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\ui\PanelAdmin.cpp;C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\build\CinemaProject.dir\Debug\PanelAdmin.obj
+C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\ui\PanelLogin.cpp;C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\build\CinemaProject.dir\Debug\PanelLogin.obj
+C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\src\ui\PanelCliente.cpp;C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\build\CinemaProject.dir\Debug\PanelCliente.obj
 C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\libs\imgui\imgui.cpp;C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\build\CinemaProject.dir\Debug\imgui.obj
 C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\libs\imgui\imgui_draw.cpp;C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\build\CinemaProject.dir\Debug\imgui_draw.obj
 C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\libs\imgui\imgui_tables.cpp;C:\Users\EQUIPO\Documents\202401290_P1_EDD_LAB\build\CinemaProject.dir\Debug\imgui_tables.obj

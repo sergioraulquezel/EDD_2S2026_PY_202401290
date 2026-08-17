@@ -1,0 +1,20 @@
+digraph Promociones {
+  graph [rankdir=TB, splines=true, nodesep=0.75, ranksep=0.65, bgcolor="white", labelloc="t", label="Reporte 3: Lista Circular de Listas (Promociones y Beneficios)"];
+  node [shape=box, style="rounded,filled", fontname="Arial", fontsize=10, margin="0.08,0.06"];
+  edge [fontname="Arial", fontsize=9, color="#37474f", arrowsize=0.8];
+  { rank=same; promo_1; promo_2; }
+  promo_1 [label="Codigo: 1\nLunes Estudiantil\nDescuentos con carnet universitario", fillcolor="#dceff1", color="#37474f", penwidth=1.5];
+  promo_1 -> promo_2 [constraint=false];
+  ben_1_0 [label="Descuento en boleto\n50%", fillcolor="#fff9c4", color="#9e9d24"];
+  promo_1 -> ben_1_0 [dir=both, color="#546e7a"];
+  ben_1_1 [label="Descuento en pipocas grandes\n20%", fillcolor="#fff9c4", color="#9e9d24"];
+  ben_1_0 -> ben_1_1 [dir=both, color="#546e7a"];
+  null_1 [label="null", width=0.45, height=0.2, fontsize=8, fillcolor="#fff9c4", color="#9e9d24"];
+  ben_1_1 -> null_1 [style=dashed, color="#546e7a"];
+  promo_2 [label="Codigo: 2\nMiercoles 2x1\nLleva a un acompaniante gratis", fillcolor="#dceff1", color="#37474f", penwidth=1.5];
+  promo_2 -> promo_1 [constraint=false, minlen=2, label="circular"];
+  ben_2_0 [label="Boleto extra gratis\n100%", fillcolor="#fff9c4", color="#9e9d24"];
+  promo_2 -> ben_2_0 [dir=both, color="#546e7a"];
+  null_2 [label="null", width=0.45, height=0.2, fontsize=8, fillcolor="#fff9c4", color="#9e9d24"];
+  ben_2_0 -> null_2 [style=dashed, color="#546e7a"];
+}

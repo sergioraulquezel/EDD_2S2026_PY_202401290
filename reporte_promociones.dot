@@ -1,0 +1,32 @@
+digraph Promociones {
+  graph [rankdir=TB, splines=true, nodesep=0.75, ranksep=0.65, bgcolor="white", labelloc="t", label="Reporte 3: Lista Circular de Listas (Promociones y Beneficios)"];
+  node [shape=box, style="rounded,filled", fontname="Arial", fontsize=10, margin="0.08,0.06"];
+  edge [fontname="Arial", fontsize=9, color="#37474f", arrowsize=0.8];
+  { rank=same; promo_1; promo_2; promo_3; }
+  promo_1 [label="Codigo: 1\nMartes CinemaUSAC\nVigencia: Lunes y Martes", fillcolor="#dceff1", color="#37474f", penwidth=1.5];
+  promo_1 -> promo_2 [constraint=false];
+  ben_1_0 [label="Refil Gratis\n0%", fillcolor="#fff9c4", color="#9e9d24"];
+  promo_1 -> ben_1_0 [dir=both, color="#546e7a"];
+  ben_1_1 [label="Segunda funcion con -25%\n25%", fillcolor="#fff9c4", color="#9e9d24"];
+  ben_1_0 -> ben_1_1 [dir=both, color="#546e7a"];
+  ben_1_2 [label="Nachos gratis\n0%", fillcolor="#fff9c4", color="#9e9d24"];
+  ben_1_1 -> ben_1_2 [dir=both, color="#546e7a"];
+  null_1 [label="null", width=0.45, height=0.2, fontsize=8, fillcolor="#fff9c4", color="#9e9d24"];
+  ben_1_2 -> null_1 [style=dashed, color="#546e7a"];
+  promo_2 [label="Codigo: 2\nMiercoles 2x1\nVigencia: Miercoles", fillcolor="#dceff1", color="#37474f", penwidth=1.5];
+  promo_2 -> promo_3 [constraint=false];
+  ben_2_0 [label="Entradas 2x1\n50%", fillcolor="#fff9c4", color="#9e9d24"];
+  promo_2 -> ben_2_0 [dir=both, color="#546e7a"];
+  ben_2_1 [label="Combos 2x1\n50%", fillcolor="#fff9c4", color="#9e9d24"];
+  ben_2_0 -> ben_2_1 [dir=both, color="#546e7a"];
+  null_2 [label="null", width=0.45, height=0.2, fontsize=8, fillcolor="#fff9c4", color="#9e9d24"];
+  ben_2_1 -> null_2 [style=dashed, color="#546e7a"];
+  promo_3 [label="Codigo: 3\nCombo Familiar\nVigencia: Fines de semana", fillcolor="#dceff1", color="#37474f", penwidth=1.5];
+  promo_3 -> promo_1 [constraint=false, minlen=2, label="circular"];
+  ben_3_0 [label="2 bebidas grandes, 3 porciones de nacho\n0%", fillcolor="#fff9c4", color="#9e9d24"];
+  promo_3 -> ben_3_0 [dir=both, color="#546e7a"];
+  ben_3_1 [label="Asientos con 10% de descuento\n10%", fillcolor="#fff9c4", color="#9e9d24"];
+  ben_3_0 -> ben_3_1 [dir=both, color="#546e7a"];
+  null_3 [label="null", width=0.45, height=0.2, fontsize=8, fillcolor="#fff9c4", color="#9e9d24"];
+  ben_3_1 -> null_3 [style=dashed, color="#546e7a"];
+}
