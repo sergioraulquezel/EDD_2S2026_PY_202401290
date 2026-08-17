@@ -1,10 +1,10 @@
 digraph Solicitudes {
   rankdir=LR;
   node [shape=box, style=filled, fontname="Arial"];
-  sol_1 [label="Solicitud 1\nClienteActual\nCelebracion de cumpleanos con decoracion especial\nAprobada", fillcolor="#d7ead1"];
+  sol_1 [label="Solicitud 1\nClienteActual\nCelebracion de cumpleanos con decoracion especial\nPendiente", fillcolor="#fce8b2"];
   sol_1 -> sol_2 [label="sig"];
   sol_1 -> sol_2 [label="ant", color="#888888"];
-  sol_2 [label="Solicitud 2\nClienteActual\nCelebracion de despedida de soltera.\nRechazada", fillcolor="#f4c7c3"];
+  sol_2 [label="Solicitud 2\nClienteActual\nCelebracion por dia del padre\nPendiente", fillcolor="#fce8b2"];
   sol_2 -> sol_1 [label="sig"];
   sol_2 -> sol_1 [label="ant", color="#888888"];
 }

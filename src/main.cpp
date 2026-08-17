@@ -47,10 +47,10 @@ int main()
 
     
 
-    Pelicula *p1 = new Pelicula(50, "Inception", "Nolan", 148, "Ciencia Ficcion");
-    Pelicula *p2 = new Pelicula(25, "Interstellar", "Nolan", 169, "Ciencia Ficcion");
-    Pelicula *p3 = new Pelicula(75, "Dune", "Villeneuve", 155, "Aventura");
-    Pelicula *p4 = new Pelicula(10, "Matrix", "Wachowski", 136, "Acción");
+    Pelicula *p1 = new Pelicula(50, "Inception", "Nolan", 148, "Ciencia Ficcion", "24/08/2026");
+    Pelicula *p2 = new Pelicula(25, "Interstellar", "Nolan", 169, "Ciencia Ficcion", "30/09/2026");
+    Pelicula *p3 = new Pelicula(75, "Dune", "Villeneuve", 155, "Aventura", "15/10/2026");
+    Pelicula *p4 = new Pelicula(10, "Matrix", "Wachowski", 136, "Accion", "20/08/2026");
     miCartelera.insertar(p1);
     miCartelera.insertar(p2);
     miCartelera.insertar(p3);

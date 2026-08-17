@@ -1,9 +1,10 @@
 #include "models/Pelicula.h"
 
-Pelicula::Pelicula(int _id, std::string _titulo, std::string _genero, int _duracion, std::string _clasificacion) {
+Pelicula::Pelicula(int _id, std::string _titulo, std::string _genero, int _duracion, std::string _clasificacion, std::string _fechaFin) {
     this->id = _id;
     this->titulo = _titulo;
     this->genero = _genero;
     this->duracion = _duracion;
     this->clasificacion = _clasificacion;
+    this->fechaFin = _fechaFin;
 }

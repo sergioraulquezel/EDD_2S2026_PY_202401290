@@ -60,7 +60,7 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
 
             if (ImGui::Button("Guardar Pelicula en Cartelera", ImVec2(220, 30)))
             {
-                Pelicula *nuevaPelicula = new Pelicula(inputIdNum, inputTitulo, inputGenero, inputDuracion, inputClasificacion);
+                Pelicula *nuevaPelicula = new Pelicula(inputIdNum, inputTitulo, inputGenero, inputDuracion, inputClasificacion, inputFin);
                 cartelera.insertar(nuevaPelicula);
                 std::cout << "Película " << inputTitulo << " agregada al BST con éxito.\n";
             }
@@ -121,7 +121,7 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
                     ImGui::TableSetColumnIndex(6);
                     ImGui::Text("01/08/2026");
                     ImGui::TableSetColumnIndex(7);
-                    ImGui::Text("15/08/2026");
+                    ImGui::Text("%s", p->getFechaFin().empty() ? "Sin fecha" : p->getFechaFin().c_str());
                 }
 
                 if (cantidadPeliculas == 0)
