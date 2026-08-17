@@ -4,7 +4,9 @@
 #include <ctime>
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include <string>
+#include <vector>
 
 static std::string escaparDotBST(const std::string& texto) {
     std::string salida;
@@ -69,6 +71,44 @@ static bool estaProximaARetirarBST(Pelicula* pelicula) {
     return diasRestantes >= 0 && diasRestantes < 7;
 }
 
+static std::vector<std::string> separarCSV(const std::string& linea) {
+    std::vector<std::string> campos;
+    std::string campo;
+    bool dentroComillas = false;
+
+    for (size_t i = 0; i < linea.size(); ++i) {
+        char ch = linea[i];
+        if (ch == '"') {
+            if (dentroComillas && i + 1 < linea.size() && linea[i + 1] == '"') {
+                campo += '"';
+                ++i;
+            } else {
+                dentroComillas = !dentroComillas;
+            }
+        } else if (ch == ',' && !dentroComillas) {
+            campos.push_back(campo);
+            campo.clear();
+        } else {
+            campo += ch;
+        }
+    }
+
+    campos.push_back(campo);
+    return campos;
+}
+
+static int extraerIdDesdeCodigo(const std::string& codigo) {
+    std::string digitos;
+    for (char ch : codigo) {
+        if (ch >= '0' && ch <= '9') {
+            digitos += ch;
+        }
+    }
+
+    if (digitos.empty()) return 0;
+    return std::stoi(digitos);
+}
+
 ArbolBinario::ArbolBinario() {
     this->raiz = nullptr;
 }
@@ -122,13 +162,81 @@ void ArbolBinario::generarReporteGraphviz() {
     }
 }
 
+int ArbolBinario::cargarPeliculasCSV(std::string rutaArchivo) {
+    std::ifstream archivo(rutaArchivo);
+    if (!archivo.is_open()) {
+        std::cout << "[ERROR] No se pudo abrir el archivo CSV: " << rutaArchivo << "\n";
+        return 0;
+    }
+
+    std::string linea;
+    int insertadas = 0;
+    int lineaActual = 0;
+
+    while (std::getline(archivo, linea)) {
+        lineaActual++;
+        if (!linea.empty() && linea.back() == '\r') {
+            linea.pop_back();
+        }
+
+        if (linea.empty()) continue;
+        if (lineaActual == 1 && linea.find("codigo") != std::string::npos && linea.find("titulo") != std::string::npos) {
+            continue;
+        }
+
+        std::vector<std::string> campos = separarCSV(linea);
+        if (campos.size() < 8) {
+            std::cout << "[CSV] Linea " << lineaActual << " ignorada: se esperaban 8 columnas.\n";
+            continue;
+        }
+
+        std::string codigo = campos[0];
+        int id = extraerIdDesdeCodigo(codigo);
+        if (id <= 0) {
+            std::cout << "[CSV] Linea " << lineaActual << " ignorada: codigo invalido '" << codigo << "'.\n";
+            continue;
+        }
+
+        if (existeIdRecursivo(this->raiz, id)) {
+            std::cout << "[CSV] Linea " << lineaActual << " ignorada: codigo duplicado '" << codigo << "'.\n";
+            continue;
+        }
+
+        int duracion = 0;
+        try {
+            duracion = std::stoi(campos[3]);
+        } catch (...) {
+            std::cout << "[CSV] Linea " << lineaActual << " ignorada: duracion invalida.\n";
+            continue;
+        }
+
+        Pelicula* pelicula = new Pelicula(
+            id,
+            campos[1],
+            campos[2],
+            duracion,
+            campos[4],
+            campos[7],
+            codigo,
+            campos[5],
+            campos[6]
+        );
+
+        insertar(pelicula);
+        insertadas++;
+    }
+
+    std::cout << "[CSV] Peliculas cargadas correctamente: " << insertadas << "\n";
+    return insertadas;
+}
+
 void ArbolBinario::escribirNodosDot(NodoBST* nodo, std::ofstream& archivo) {
     if (nodo != nullptr) {
         std::string color = estaProximaARetirarBST(nodo->pelicula) ? "#ffe082" : "#b7e1a1";
         std::string fechaFin = nodo->pelicula->getFechaFin().empty() ? "Sin fecha fin" : nodo->pelicula->getFechaFin();
 
         archivo << "    nodo" << nodo->pelicula->getId()
-                << " [fillcolor=\"" << color << "\", label=\"Codigo: CO-" << nodo->pelicula->getId()
+                << " [fillcolor=\"" << color << "\", label=\"Codigo: " << escaparDotBST(nodo->pelicula->getCodigo())
                 << "\\nTitulo: " << escaparDotBST(nodo->pelicula->getTitulo())
                 << "\\nDuracion: " << nodo->pelicula->getDuracion() << " min"
                 << "\\nClasificacion: " << escaparDotBST(nodo->pelicula->getClasificacion())
@@ -147,6 +255,13 @@ void ArbolBinario::escribirNodosDot(NodoBST* nodo, std::ofstream& archivo) {
             escribirNodosDot(nodo->derecho, archivo);
         }
     }
+}
+
+bool ArbolBinario::existeIdRecursivo(NodoBST* nodo, int id) {
+    if (nodo == nullptr) return false;
+    if (nodo->pelicula->getId() == id) return true;
+    if (id < nodo->pelicula->getId()) return existeIdRecursivo(nodo->izquierdo, id);
+    return existeIdRecursivo(nodo->derecho, id);
 }
 
 NodoBST* ArbolBinario::insertarRecursivo(NodoBST* nodo, Pelicula* p) {

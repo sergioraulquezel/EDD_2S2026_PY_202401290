@@ -6,11 +6,7 @@ digraph ArbolPeliculas {
     leyenda_verde [label="En cartelera", fillcolor="#b7e1a1"];
     leyenda_amarillo [label="Proximo a retirar (< 7 dias)", fillcolor="#ffe082"];
     { rank=same; leyenda_verde; leyenda_amarillo; }
-    nodo50 [fillcolor="#b7e1a1", label="Codigo: CO-50\nTitulo: Inception\nDuracion: 148 min\nClasificacion: PG-13\nFecha fin: 24/08/2026"];
-    nodo50 -> nodo25;
-    nodo25 [fillcolor="#b7e1a1", label="Codigo: CO-25\nTitulo: Interstellar\nDuracion: 169 min\nClasificacion: PG-13\nFecha fin: 30/09/2026"];
-    nodo25 -> nodo10;
-    nodo10 [fillcolor="#ffe082", label="Codigo: CO-10\nTitulo: Matrix\nDuracion: 136 min\nClasificacion: R\nFecha fin: 20/08/2026"];
-    nodo50 -> nodo75;
-    nodo75 [fillcolor="#b7e1a1", label="Codigo: CO-75\nTitulo: Dune\nDuracion: 155 min\nClasificacion: PG-13\nFecha fin: 15/10/2026"];
+    nodo1 [fillcolor="#b7e1a1", label="Codigo: P001\nTitulo: Avatar 3\nDuracion: 180 min\nClasificacion: B15\nFecha fin: 2026-03-15"];
+    nodo1 -> nodo2;
+    nodo2 [fillcolor="#ffe082", label="Codigo: P002\nTitulo: Intensamente 2\nDuracion: 100 min\nClasificacion: AA\nFecha fin: 2026-08-20"];
 }

@@ -6,15 +6,11 @@ digraph ArbolPeliculas {
     leyenda_verde [label="En cartelera", fillcolor="#b7e1a1"];
     leyenda_amarillo [label="Proximo a retirar (< 7 dias)", fillcolor="#ffe082"];
     { rank=same; leyenda_verde; leyenda_amarillo; }
-    nodo50 [fillcolor="#b7e1a1", label="Codigo: CO-50\nTitulo: Inception\nDuracion: 148 min\nClasificacion: Ciencia Ficcion\nFecha fin: 24/08/2026"];
+    nodo50 [fillcolor="#b7e1a1", label="Codigo: P050\nTitulo: Inception\nDuracion: 148 min\nClasificacion: Ciencia Ficcion\nFecha fin: 24/08/2026"];
     nodo50 -> nodo25;
-    nodo25 [fillcolor="#b7e1a1", label="Codigo: CO-25\nTitulo: Interstellar\nDuracion: 169 min\nClasificacion: Ciencia Ficcion\nFecha fin: 30/09/2026"];
+    nodo25 [fillcolor="#b7e1a1", label="Codigo: P025\nTitulo: Interstellar\nDuracion: 169 min\nClasificacion: Ciencia Ficcion\nFecha fin: 30/09/2026"];
     nodo25 -> nodo10;
-    nodo10 [fillcolor="#ffe082", label="Codigo: CO-10\nTitulo: Matrix\nDuracion: 136 min\nClasificacion: Accion\nFecha fin: 20/08/2026"];
-    nodo10 -> nodo21;
-    nodo21 [fillcolor="#b7e1a1", label="Codigo: CO-21\nTitulo: Dudas \nDuracion: 120 min\nClasificacion: Accion\nFecha fin: 12/10/2026"];
+    nodo10 [fillcolor="#ffe082", label="Codigo: P010\nTitulo: Matrix\nDuracion: 136 min\nClasificacion: Accion\nFecha fin: 20/08/2026"];
     nodo50 -> nodo75;
-    nodo75 [fillcolor="#b7e1a1", label="Codigo: CO-75\nTitulo: Dune\nDuracion: 155 min\nClasificacion: Aventura\nFecha fin: 15/10/2026"];
-    nodo75 -> nodo65;
-    nodo65 [fillcolor="#b7e1a1", label="Codigo: CO-65\nTitulo: Dudas de ti misma\nDuracion: 120 min\nClasificacion: Accion\nFecha fin: 12/10/2026"];
+    nodo75 [fillcolor="#b7e1a1", label="Codigo: P075\nTitulo: Dune\nDuracion: 155 min\nClasificacion: Aventura\nFecha fin: 15/10/2026"];
 }

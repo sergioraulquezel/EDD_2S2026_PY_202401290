@@ -47,6 +47,7 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
             static char inputIdioma[50] = "";
             static char inputEstreno[50] = "";
             static char inputFin[50] = "";
+            static char rutaCSV[260] = "C:\\\\ruta\\\\peliculas.csv";
 
             ImGui::InputInt("ID Numérico (para ordenar BST)", &inputIdNum);
             ImGui::InputText("Código Película", inputId, IM_ARRAYSIZE(inputId));
@@ -60,7 +61,7 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
 
             if (ImGui::Button("Guardar Pelicula en Cartelera", ImVec2(220, 30)))
             {
-                Pelicula *nuevaPelicula = new Pelicula(inputIdNum, inputTitulo, inputGenero, inputDuracion, inputClasificacion, inputFin);
+                Pelicula *nuevaPelicula = new Pelicula(inputIdNum, inputTitulo, inputGenero, inputDuracion, inputClasificacion, inputFin, inputId, inputIdioma, inputEstreno);
                 cartelera.insertar(nuevaPelicula);
                 std::cout << "Película " << inputTitulo << " agregada al BST con éxito.\n";
             }
@@ -70,6 +71,16 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
             {
                 cartelera.generarReporteGraphviz();
             }
+
+            ImGui::Spacing();
+            ImGui::Separator();
+            ImGui::Text("Carga Masiva de Peliculas desde CSV:");
+            ImGui::InputText("Ruta CSV", rutaCSV, IM_ARRAYSIZE(rutaCSV));
+            if (ImGui::Button("Cargar CSV a Cartelera", ImVec2(220, 30)))
+            {
+                cartelera.cargarPeliculasCSV(rutaCSV);
+            }
+            ImGui::TextDisabled("Formato: codigo,titulo,genero,duracion,clasificacion,idioma,fecha_estreno,fecha_fin");
 
             ImGui::Spacing();
             ImGui::Separator();
@@ -102,7 +113,7 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
                     ImGui::TableNextRow();
 
                     ImGui::TableSetColumnIndex(0);
-                    ImGui::Text("CO-%d", p->getId());
+                    ImGui::Text("%s", p->getCodigo().c_str());
 
                     ImGui::TableSetColumnIndex(1);
                     ImGui::Text("%s", p->getTitulo().c_str());
@@ -117,9 +128,9 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
                     ImGui::Text("%s", p->getClasificacion().c_str());
 
                     ImGui::TableSetColumnIndex(5);
-                    ImGui::Text("SUB-ESPAÑOL");
+                    ImGui::Text("%s", p->getIdioma().empty() ? "Sin idioma" : p->getIdioma().c_str());
                     ImGui::TableSetColumnIndex(6);
-                    ImGui::Text("01/08/2026");
+                    ImGui::Text("%s", p->getFechaEstreno().empty() ? "Sin fecha" : p->getFechaEstreno().c_str());
                     ImGui::TableSetColumnIndex(7);
                     ImGui::Text("%s", p->getFechaFin().empty() ? "Sin fecha" : p->getFechaFin().c_str());
                 }
