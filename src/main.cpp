@@ -22,6 +22,51 @@ static void glfw_error_callback(int error, const char *description)
     std::cerr << "GLFW Error " << error << ": " << description << std::endl;
 }
 
+static void aplicarTemaCine()
+{
+    aplicarTemaCine();
+    ImGuiStyle &style = ImGui::GetStyle();
+
+    style.WindowPadding = ImVec2(18, 16);
+    style.FramePadding = ImVec2(12, 7);
+    style.ItemSpacing = ImVec2(10, 9);
+    style.ItemInnerSpacing = ImVec2(8, 6);
+    style.ScrollbarSize = 14.0f;
+    style.WindowRounding = 8.0f;
+    style.ChildRounding = 7.0f;
+    style.FrameRounding = 6.0f;
+    style.PopupRounding = 7.0f;
+    style.ScrollbarRounding = 8.0f;
+    style.GrabRounding = 6.0f;
+    style.TabRounding = 6.0f;
+    style.WindowBorderSize = 1.0f;
+
+    ImVec4 *colors = style.Colors;
+    colors[ImGuiCol_Text] = ImVec4(0.92f, 0.95f, 0.96f, 1.00f);
+    colors[ImGuiCol_TextDisabled] = ImVec4(0.55f, 0.62f, 0.66f, 1.00f);
+    colors[ImGuiCol_WindowBg] = ImVec4(0.07f, 0.09f, 0.11f, 1.00f);
+    colors[ImGuiCol_ChildBg] = ImVec4(0.10f, 0.13f, 0.16f, 1.00f);
+    colors[ImGuiCol_PopupBg] = ImVec4(0.08f, 0.10f, 0.12f, 0.98f);
+    colors[ImGuiCol_Border] = ImVec4(0.20f, 0.27f, 0.31f, 1.00f);
+    colors[ImGuiCol_FrameBg] = ImVec4(0.12f, 0.16f, 0.19f, 1.00f);
+    colors[ImGuiCol_FrameBgHovered] = ImVec4(0.17f, 0.23f, 0.27f, 1.00f);
+    colors[ImGuiCol_FrameBgActive] = ImVec4(0.20f, 0.29f, 0.33f, 1.00f);
+    colors[ImGuiCol_TitleBg] = ImVec4(0.05f, 0.07f, 0.09f, 1.00f);
+    colors[ImGuiCol_TitleBgActive] = ImVec4(0.08f, 0.13f, 0.16f, 1.00f);
+    colors[ImGuiCol_Button] = ImVec4(0.12f, 0.42f, 0.48f, 1.00f);
+    colors[ImGuiCol_ButtonHovered] = ImVec4(0.15f, 0.54f, 0.62f, 1.00f);
+    colors[ImGuiCol_ButtonActive] = ImVec4(0.10f, 0.34f, 0.40f, 1.00f);
+    colors[ImGuiCol_Header] = ImVec4(0.13f, 0.33f, 0.38f, 1.00f);
+    colors[ImGuiCol_HeaderHovered] = ImVec4(0.16f, 0.45f, 0.52f, 1.00f);
+    colors[ImGuiCol_HeaderActive] = ImVec4(0.12f, 0.38f, 0.45f, 1.00f);
+    colors[ImGuiCol_Tab] = ImVec4(0.10f, 0.16f, 0.19f, 1.00f);
+    colors[ImGuiCol_TabHovered] = ImVec4(0.16f, 0.48f, 0.55f, 1.00f);
+    colors[ImGuiCol_TabActive] = ImVec4(0.12f, 0.36f, 0.42f, 1.00f);
+    colors[ImGuiCol_TableHeaderBg] = ImVec4(0.12f, 0.26f, 0.30f, 1.00f);
+    colors[ImGuiCol_TableRowBg] = ImVec4(0.09f, 0.12f, 0.14f, 1.00f);
+    colors[ImGuiCol_TableRowBgAlt] = ImVec4(0.11f, 0.15f, 0.18f, 1.00f);
+}
+
 int main()
 {
     // 1. INSTANCIAR TODAS LAS ESTRUCTURAS (Una sola vez)
@@ -120,6 +165,7 @@ int main()
             else if (g_rolUsuarioActual == "cliente")
             {
                 panelCliente.dibujar(miCartelera, misFunciones, misPromociones, misSolicitudes);
+                if (false) {
                 // Aquí puedes colocar la vista destinada al usuario cliente simulado
                 ImGui::Begin("Panel de Cliente", nullptr, ImGuiWindowFlags_NoCollapse);
                 ImGui::Text("¡Bienvenido al sistema de cine, cliente!");
@@ -128,6 +174,7 @@ int main()
                     g_estaAutenticado = false;
                 }
                 ImGui::End();
+                }
             }
         }
 
@@ -136,7 +183,7 @@ int main()
         int display_w, display_h;
         glfwGetFramebufferSize(window, &display_w, &display_h);
         glViewport(0, 0, display_w, display_h);
-        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+        glClearColor(0.04f, 0.06f, 0.08f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 

@@ -6,7 +6,7 @@ digraph ArbolPeliculas {
     leyenda_verde [label="En cartelera", fillcolor="#b7e1a1"];
     leyenda_amarillo [label="Proximo a retirar (< 7 dias)", fillcolor="#ffe082"];
     { rank=same; leyenda_verde; leyenda_amarillo; }
-    nodo50 [fillcolor="#b7e1a1", label="Codigo: P050\nTitulo: Inception\nDuracion: 148 min\nClasificacion: Ciencia Ficcion\nFecha fin: 24/08/2026"];
+    nodo50 [fillcolor="#ffe082", label="Codigo: P050\nTitulo: Inception\nDuracion: 148 min\nClasificacion: Ciencia Ficcion\nFecha fin: 24/08/2026"];
     nodo50 -> nodo25;
     nodo25 [fillcolor="#b7e1a1", label="Codigo: P025\nTitulo: Interstellar\nDuracion: 169 min\nClasificacion: Ciencia Ficcion\nFecha fin: 30/09/2026"];
     nodo25 -> nodo10;

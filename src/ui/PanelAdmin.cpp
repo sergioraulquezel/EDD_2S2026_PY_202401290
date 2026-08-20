@@ -24,8 +24,21 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
         return nullptr;
     };
 
-    // Iniciar la ventana principal de ImGui cubriendo el espacio
-    ImGui::Begin("Panel Administrativo - Cine", nullptr, ImGuiWindowFlags_NoCollapse);
+    ImGuiIO& io = ImGui::GetIO();
+    ImGui::SetNextWindowPos(ImVec2(16, 16), ImGuiCond_Always);
+    ImGui::SetNextWindowSize(ImVec2(io.DisplaySize.x - 32, io.DisplaySize.y - 32), ImGuiCond_Always);
+    ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_MenuBar;
+    ImGui::Begin("Panel Administrativo - Cine", nullptr, windowFlags);
+
+    if (ImGui::BeginMenuBar())
+    {
+        ImGui::Text("Cinema EDD | Administrador");
+        ImGui::EndMenuBar();
+    }
+
+    ImGui::TextColored(ImVec4(0.34f, 0.86f, 0.92f, 1.0f), "Gestion del sistema de cine");
+    ImGui::TextDisabled("Cartelera, funciones, promociones, solicitudes y reportes");
+    ImGui::Separator();
 
     if (ImGui::BeginTabBar("MenuPrincipal"))
     {

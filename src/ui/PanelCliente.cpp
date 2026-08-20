@@ -29,8 +29,21 @@ static void dibujarPromocionCliente(NodoPromocion* nodo)
 
 void PanelCliente::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &funciones, ListaCircularPromociones &promociones, ListaCircularDoble &solicitudes)
 {
-    ImGui::Begin("PANEL DE USUARIO - RESERVAS", nullptr, ImGuiWindowFlags_NoCollapse);
-    ImGui::SetWindowSize(ImVec2(860, 740), ImGuiCond_FirstUseEver);
+    ImGuiIO& io = ImGui::GetIO();
+    ImGui::SetNextWindowPos(ImVec2(16, 16), ImGuiCond_Always);
+    ImGui::SetNextWindowSize(ImVec2(io.DisplaySize.x - 32, io.DisplaySize.y - 32), ImGuiCond_Always);
+    ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_MenuBar;
+    ImGui::Begin("Panel de Cliente - Cine", nullptr, windowFlags);
+
+    if (ImGui::BeginMenuBar())
+    {
+        ImGui::Text("Cinema EDD | Cliente");
+        ImGui::EndMenuBar();
+    }
+
+    ImGui::TextColored(ImVec4(0.34f, 0.86f, 0.92f, 1.0f), "Reserva de funciones");
+    ImGui::TextDisabled("Consulta cartelera, promociones, solicitudes especiales y asientos");
+    ImGui::Separator();
 
     if (ImGui::BeginTabBar("MenuClienteTabs"))
     {
