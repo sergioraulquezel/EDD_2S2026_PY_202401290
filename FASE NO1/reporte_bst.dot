@@ -1,0 +1,252 @@
+digraph ArbolPeliculas {
+    rankdir=TB;
+    ordering=out;
+    graph [bgcolor="white", labelloc="t", fontsize=18, fontname="Arial", label="Arbol binario de busqueda (Cartelera de Peliculas)\nEstado BST: CORRECTO | Total de peliculas: 40"];
+    graph [nodesep=0.55, ranksep=0.80];
+    node [shape=box, style="rounded,filled", fontname="Arial", fontsize=10, color="#37474f", penwidth=1.4, margin="0.10,0.08"];
+    edge [color="#37474f", arrowsize=0.8, fontname="Arial", fontsize=9, weight=2];
+    subgraph cluster_leyenda {
+        label="Leyenda";
+        color="#cfd8dc";
+        style="rounded";
+        leyenda_verde [label="Verde: en cartelera", fillcolor="#b7e1a1"];
+        leyenda_amarillo [label="Amarillo: proximo a retirar (menos de una semana)", fillcolor="#ffe082"];
+        leyenda_gris [label="Gris: fecha fin vencida", fillcolor="#e0e0e0"];
+        { rank=same; leyenda_verde; leyenda_amarillo; leyenda_gris; }
+    }
+    nodo1 [fillcolor="#e0e0e0", label="Codigo: P001\nTitulo: Avatar 3\nDuracion: 180 min\nClasificacion: B15\nFecha fin: 2026-03-15\nEstado: Fecha fin vencida (-159 dias)"];
+    nulo1 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo1 -> nulo1 [style=invis, weight=10];
+    nodo1 -> nodo2 [label="der"];
+    { rank=same; nulo1; nodo2; }
+    nulo1 -> nodo2 [style=invis, weight=20];
+    nodo2 [fillcolor="#e0e0e0", label="Codigo: P002\nTitulo: Intensamente 2\nDuracion: 100 min\nClasificacion: AA\nFecha fin: 2026-04-04\nEstado: Fecha fin vencida (-139 dias)"];
+    nulo2 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo2 -> nulo2 [style=invis, weight=10];
+    nodo2 -> nodo3 [label="der"];
+    { rank=same; nulo2; nodo3; }
+    nulo2 -> nodo3 [style=invis, weight=20];
+    nodo3 [fillcolor="#e0e0e0", label="Codigo: P003\nTitulo: Dune Parte Tres\nDuracion: 165 min\nClasificacion: B12\nFecha fin: 2026-04-20\nEstado: Fecha fin vencida (-123 dias)"];
+    nulo3 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo3 -> nulo3 [style=invis, weight=10];
+    nodo3 -> nodo4 [label="der"];
+    { rank=same; nulo3; nodo4; }
+    nulo3 -> nodo4 [style=invis, weight=20];
+    nodo4 [fillcolor="#e0e0e0", label="Codigo: P004\nTitulo: El Reino Perdido\nDuracion: 128 min\nClasificacion: B\nFecha fin: 2026-05-01\nEstado: Fecha fin vencida (-112 dias)"];
+    nulo4 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo4 -> nulo4 [style=invis, weight=10];
+    nodo4 -> nodo5 [label="der"];
+    { rank=same; nulo4; nodo5; }
+    nulo4 -> nodo5 [style=invis, weight=20];
+    nodo5 [fillcolor="#e0e0e0", label="Codigo: P005\nTitulo: Noche de Sombras\nDuracion: 102 min\nClasificacion: C\nFecha fin: 2026-04-25\nEstado: Fecha fin vencida (-118 dias)"];
+    nulo5 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo5 -> nulo5 [style=invis, weight=10];
+    nodo5 -> nodo6 [label="der"];
+    { rank=same; nulo5; nodo6; }
+    nulo5 -> nodo6 [style=invis, weight=20];
+    nodo6 [fillcolor="#e0e0e0", label="Codigo: P006\nTitulo: Corazon de Acero\nDuracion: 118 min\nClasificacion: B15\nFecha fin: 2026-05-10\nEstado: Fecha fin vencida (-103 dias)"];
+    nulo6 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo6 -> nulo6 [style=invis, weight=10];
+    nodo6 -> nodo7 [label="der"];
+    { rank=same; nulo6; nodo7; }
+    nulo6 -> nodo7 [style=invis, weight=20];
+    nodo7 [fillcolor="#e0e0e0", label="Codigo: P007\nTitulo: La Ruta del Sol\nDuracion: 111 min\nClasificacion: A\nFecha fin: 2026-05-20\nEstado: Fecha fin vencida (-93 dias)"];
+    nulo7 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo7 -> nulo7 [style=invis, weight=10];
+    nodo7 -> nodo8 [label="der"];
+    { rank=same; nulo7; nodo8; }
+    nulo7 -> nodo8 [style=invis, weight=20];
+    nodo8 [fillcolor="#e0e0e0", label="Codigo: P008\nTitulo: Pixel Heroes\nDuracion: 96 min\nClasificacion: AA\nFecha fin: 2026-06-01\nEstado: Fecha fin vencida (-81 dias)"];
+    nulo8 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo8 -> nulo8 [style=invis, weight=10];
+    nodo8 -> nodo9 [label="der"];
+    { rank=same; nulo8; nodo9; }
+    nulo8 -> nodo9 [style=invis, weight=20];
+    nodo9 [fillcolor="#e0e0e0", label="Codigo: P009\nTitulo: Codigo Fantasma\nDuracion: 109 min\nClasificacion: B15\nFecha fin: 2026-06-05\nEstado: Fecha fin vencida (-77 dias)"];
+    nulo9 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo9 -> nulo9 [style=invis, weight=10];
+    nodo9 -> nodo10 [label="der"];
+    { rank=same; nulo9; nodo10; }
+    nulo9 -> nodo10 [style=invis, weight=20];
+    nodo10 [fillcolor="#e0e0e0", label="Codigo: P010\nTitulo: Planeta Azul\nDuracion: 88 min\nClasificacion: A\nFecha fin: 2026-05-30\nEstado: Fecha fin vencida (-83 dias)"];
+    nulo10 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo10 -> nulo10 [style=invis, weight=10];
+    nodo10 -> nodo11 [label="der"];
+    { rank=same; nulo10; nodo11; }
+    nulo10 -> nodo11 [style=invis, weight=20];
+    nodo11 [fillcolor="#e0e0e0", label="Codigo: P011\nTitulo: Mision Galactica\nDuracion: 140 min\nClasificacion: B12\nFecha fin: 2026-06-18\nEstado: Fecha fin vencida (-64 dias)"];
+    nulo11 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo11 -> nulo11 [style=invis, weight=10];
+    nodo11 -> nodo12 [label="der"];
+    { rank=same; nulo11; nodo12; }
+    nulo11 -> nodo12 [style=invis, weight=20];
+    nodo12 [fillcolor="#e0e0e0", label="Codigo: P012\nTitulo: El Ultimo Tren\nDuracion: 124 min\nClasificacion: B\nFecha fin: 2026-06-22\nEstado: Fecha fin vencida (-60 dias)"];
+    nulo12 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo12 -> nulo12 [style=invis, weight=10];
+    nodo12 -> nodo13 [label="der"];
+    { rank=same; nulo12; nodo13; }
+    nulo12 -> nodo13 [style=invis, weight=20];
+    nodo13 [fillcolor="#e0e0e0", label="Codigo: P013\nTitulo: Risas en Familia\nDuracion: 95 min\nClasificacion: A\nFecha fin: 2026-06-15\nEstado: Fecha fin vencida (-67 dias)"];
+    nulo13 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo13 -> nulo13 [style=invis, weight=10];
+    nodo13 -> nodo14 [label="der"];
+    { rank=same; nulo13; nodo14; }
+    nulo13 -> nodo14 [style=invis, weight=20];
+    nodo14 [fillcolor="#e0e0e0", label="Codigo: P014\nTitulo: Rescate Urbano\nDuracion: 116 min\nClasificacion: B15\nFecha fin: 2026-07-01\nEstado: Fecha fin vencida (-51 dias)"];
+    nulo14 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo14 -> nulo14 [style=invis, weight=10];
+    nodo14 -> nodo15 [label="der"];
+    { rank=same; nulo14; nodo15; }
+    nulo14 -> nodo15 [style=invis, weight=20];
+    nodo15 [fillcolor="#e0e0e0", label="Codigo: P015\nTitulo: La Casa del Eco\nDuracion: 101 min\nClasificacion: C\nFecha fin: 2026-06-30\nEstado: Fecha fin vencida (-52 dias)"];
+    nulo15 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo15 -> nulo15 [style=invis, weight=10];
+    nodo15 -> nodo16 [label="der"];
+    { rank=same; nulo15; nodo16; }
+    nulo15 -> nodo16 [style=invis, weight=20];
+    nodo16 [fillcolor="#e0e0e0", label="Codigo: P016\nTitulo: Magia en Paris\nDuracion: 108 min\nClasificacion: A\nFecha fin: 2026-07-10\nEstado: Fecha fin vencida (-42 dias)"];
+    nulo16 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo16 -> nulo16 [style=invis, weight=10];
+    nodo16 -> nodo17 [label="der"];
+    { rank=same; nulo16; nodo17; }
+    nulo16 -> nodo17 [style=invis, weight=20];
+    nodo17 [fillcolor="#e0e0e0", label="Codigo: P017\nTitulo: Robot Junior\nDuracion: 92 min\nClasificacion: AA\nFecha fin: 2026-07-25\nEstado: Fecha fin vencida (-27 dias)"];
+    nulo17 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo17 -> nulo17 [style=invis, weight=10];
+    nodo17 -> nodo18 [label="der"];
+    { rank=same; nulo17; nodo18; }
+    nulo17 -> nodo18 [style=invis, weight=20];
+    nodo18 [fillcolor="#e0e0e0", label="Codigo: P018\nTitulo: Operacion Trueno\nDuracion: 130 min\nClasificacion: B15\nFecha fin: 2026-08-01\nEstado: Fecha fin vencida (-20 dias)"];
+    nulo18 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo18 -> nulo18 [style=invis, weight=10];
+    nodo18 -> nodo19 [label="der"];
+    { rank=same; nulo18; nodo19; }
+    nulo18 -> nodo19 [style=invis, weight=20];
+    nodo19 [fillcolor="#e0e0e0", label="Codigo: P019\nTitulo: Secretos del Bosque\nDuracion: 119 min\nClasificacion: B\nFecha fin: 2026-08-12\nEstado: Fecha fin vencida (-9 dias)"];
+    nulo19 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo19 -> nulo19 [style=invis, weight=10];
+    nodo19 -> nodo20 [label="der"];
+    { rank=same; nulo19; nodo20; }
+    nulo19 -> nodo20 [style=invis, weight=20];
+    nodo20 [fillcolor="#e0e0e0", label="Codigo: P020\nTitulo: La Gran Final\nDuracion: 105 min\nClasificacion: A\nFecha fin: 2026-08-18\nEstado: Fecha fin vencida (-3 dias)"];
+    nulo20 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo20 -> nulo20 [style=invis, weight=10];
+    nodo20 -> nodo21 [label="der"];
+    { rank=same; nulo20; nodo21; }
+    nulo20 -> nodo21 [style=invis, weight=20];
+    nodo21 [fillcolor="#b7e1a1", label="Codigo: P021\nTitulo: Memorias del Futuro\nDuracion: 132 min\nClasificacion: B12\nFecha fin: 2026-08-30\nEstado: En cartelera (9 dias)"];
+    nulo21 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo21 -> nulo21 [style=invis, weight=10];
+    nodo21 -> nodo22 [label="der"];
+    { rank=same; nulo21; nodo22; }
+    nulo21 -> nodo22 [style=invis, weight=20];
+    nodo22 [fillcolor="#b7e1a1", label="Codigo: P022\nTitulo: Amigos por Siempre\nDuracion: 99 min\nClasificacion: A\nFecha fin: 2026-09-02\nEstado: En cartelera (12 dias)"];
+    nulo22 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo22 -> nulo22 [style=invis, weight=10];
+    nodo22 -> nodo23 [label="der"];
+    { rank=same; nulo22; nodo23; }
+    nulo22 -> nodo23 [style=invis, weight=20];
+    nodo23 [fillcolor="#b7e1a1", label="Codigo: P023\nTitulo: El Caso Meridian\nDuracion: 113 min\nClasificacion: B15\nFecha fin: 2026-09-15\nEstado: En cartelera (25 dias)"];
+    nulo23 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo23 -> nulo23 [style=invis, weight=10];
+    nodo23 -> nodo24 [label="der"];
+    { rank=same; nulo23; nodo24; }
+    nulo23 -> nodo24 [style=invis, weight=20];
+    nodo24 [fillcolor="#b7e1a1", label="Codigo: P024\nTitulo: Leyenda Maya\nDuracion: 121 min\nClasificacion: B\nFecha fin: 2026-09-20\nEstado: En cartelera (30 dias)"];
+    nulo24 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo24 -> nulo24 [style=invis, weight=10];
+    nodo24 -> nodo25 [label="der"];
+    { rank=same; nulo24; nodo25; }
+    nulo24 -> nodo25 [style=invis, weight=20];
+    nodo25 [fillcolor="#b7e1a1", label="Codigo: P025\nTitulo: Ciudad Neon\nDuracion: 126 min\nClasificacion: C\nFecha fin: 2026-09-30\nEstado: En cartelera (40 dias)"];
+    nulo25 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo25 -> nulo25 [style=invis, weight=10];
+    nodo25 -> nodo26 [label="der"];
+    { rank=same; nulo25; nodo26; }
+    nulo25 -> nodo26 [style=invis, weight=20];
+    nodo26 [fillcolor="#b7e1a1", label="Codigo: P026\nTitulo: Un Verano Inesperado\nDuracion: 104 min\nClasificacion: A\nFecha fin: 2026-10-01\nEstado: En cartelera (41 dias)"];
+    nulo26 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo26 -> nulo26 [style=invis, weight=10];
+    nodo26 -> nodo27 [label="der"];
+    { rank=same; nulo26; nodo27; }
+    nulo26 -> nodo27 [style=invis, weight=20];
+    nodo27 [fillcolor="#b7e1a1", label="Codigo: P027\nTitulo: Guardianes del Tiempo\nDuracion: 137 min\nClasificacion: B12\nFecha fin: 2026-10-10\nEstado: En cartelera (50 dias)"];
+    nulo27 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo27 -> nulo27 [style=invis, weight=10];
+    nodo27 -> nodo28 [label="der"];
+    { rank=same; nulo27; nodo28; }
+    nulo27 -> nodo28 [style=invis, weight=20];
+    nodo28 [fillcolor="#b7e1a1", label="Codigo: P028\nTitulo: La Isla Secreta\nDuracion: 115 min\nClasificacion: B\nFecha fin: 2026-10-20\nEstado: En cartelera (60 dias)"];
+    nulo28 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo28 -> nulo28 [style=invis, weight=10];
+    nodo28 -> nodo29 [label="der"];
+    { rank=same; nulo28; nodo29; }
+    nulo28 -> nodo29 [style=invis, weight=20];
+    nodo29 [fillcolor="#b7e1a1", label="Codigo: P029\nTitulo: Sombras del Pasado\nDuracion: 118 min\nClasificacion: B15\nFecha fin: 2026-10-28\nEstado: En cartelera (68 dias)"];
+    nulo29 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo29 -> nulo29 [style=invis, weight=10];
+    nodo29 -> nodo30 [label="der"];
+    { rank=same; nulo29; nodo30; }
+    nulo29 -> nodo30 [style=invis, weight=20];
+    nodo30 [fillcolor="#b7e1a1", label="Codigo: P030\nTitulo: Campeones Pequenos\nDuracion: 90 min\nClasificacion: AA\nFecha fin: 2026-11-05\nEstado: En cartelera (76 dias)"];
+    nulo30 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo30 -> nulo30 [style=invis, weight=10];
+    nodo30 -> nodo31 [label="der"];
+    { rank=same; nulo30; nodo31; }
+    nulo30 -> nodo31 [style=invis, weight=20];
+    nodo31 [fillcolor="#b7e1a1", label="Codigo: P031\nTitulo: Alerta Roja\nDuracion: 122 min\nClasificacion: B15\nFecha fin: 2026-11-12\nEstado: En cartelera (83 dias)"];
+    nulo31 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo31 -> nulo31 [style=invis, weight=10];
+    nodo31 -> nodo32 [label="der"];
+    { rank=same; nulo31; nodo32; }
+    nulo31 -> nodo32 [style=invis, weight=20];
+    nodo32 [fillcolor="#b7e1a1", label="Codigo: P032\nTitulo: La Melodia Perdida\nDuracion: 107 min\nClasificacion: A\nFecha fin: 2026-11-20\nEstado: En cartelera (91 dias)"];
+    nulo32 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo32 -> nulo32 [style=invis, weight=10];
+    nodo32 -> nodo33 [label="der"];
+    { rank=same; nulo32; nodo33; }
+    nulo32 -> nodo33 [style=invis, weight=20];
+    nodo33 [fillcolor="#b7e1a1", label="Codigo: P033\nTitulo: Expedicion Abisal\nDuracion: 93 min\nClasificacion: A\nFecha fin: 2026-11-30\nEstado: En cartelera (101 dias)"];
+    nulo33 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo33 -> nulo33 [style=invis, weight=10];
+    nodo33 -> nodo34 [label="der"];
+    { rank=same; nulo33; nodo34; }
+    nulo33 -> nodo34 [style=invis, weight=20];
+    nodo34 [fillcolor="#b7e1a1", label="Codigo: P034\nTitulo: Hotel Medianoche\nDuracion: 98 min\nClasificacion: C\nFecha fin: 2026-12-01\nEstado: En cartelera (102 dias)"];
+    nulo34 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo34 -> nulo34 [style=invis, weight=10];
+    nodo34 -> nodo35 [label="der"];
+    { rank=same; nulo34; nodo35; }
+    nulo34 -> nodo35 [style=invis, weight=20];
+    nodo35 [fillcolor="#b7e1a1", label="Codigo: P035\nTitulo: El Inventor\nDuracion: 112 min\nClasificacion: B\nFecha fin: 2026-12-10\nEstado: En cartelera (111 dias)"];
+    nulo35 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo35 -> nulo35 [style=invis, weight=10];
+    nodo35 -> nodo36 [label="der"];
+    { rank=same; nulo35; nodo36; }
+    nulo35 -> nodo36 [style=invis, weight=20];
+    nodo36 [fillcolor="#b7e1a1", label="Codigo: P036\nTitulo: Venganza Digital\nDuracion: 117 min\nClasificacion: C\nFecha fin: 2026-12-18\nEstado: En cartelera (119 dias)"];
+    nulo36 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo36 -> nulo36 [style=invis, weight=10];
+    nodo36 -> nodo37 [label="der"];
+    { rank=same; nulo36; nodo37; }
+    nulo36 -> nodo37 [style=invis, weight=20];
+    nodo37 [fillcolor="#b7e1a1", label="Codigo: P037\nTitulo: Princesa Estelar\nDuracion: 94 min\nClasificacion: AA\nFecha fin: 2026-12-28\nEstado: En cartelera (129 dias)"];
+    nulo37 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo37 -> nulo37 [style=invis, weight=10];
+    nodo37 -> nodo38 [label="der"];
+    { rank=same; nulo37; nodo38; }
+    nulo37 -> nodo38 [style=invis, weight=20];
+    nodo38 [fillcolor="#b7e1a1", label="Codigo: P038\nTitulo: Laberinto Mental\nDuracion: 110 min\nClasificacion: B15\nFecha fin: 2027-01-05\nEstado: En cartelera (137 dias)"];
+    nulo38 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo38 -> nulo38 [style=invis, weight=10];
+    nodo38 -> nodo39 [label="der"];
+    { rank=same; nulo38; nodo39; }
+    nulo38 -> nodo39 [style=invis, weight=20];
+    nodo39 [fillcolor="#b7e1a1", label="Codigo: P039\nTitulo: Navidad en Casa\nDuracion: 101 min\nClasificacion: A\nFecha fin: 2027-01-12\nEstado: En cartelera (144 dias)"];
+    nulo39 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo39 -> nulo39 [style=invis, weight=10];
+    nodo39 -> nodo40 [label="der"];
+    { rank=same; nulo39; nodo40; }
+    nulo39 -> nodo40 [style=invis, weight=20];
+    nodo40 [fillcolor="#b7e1a1", label="Codigo: P040\nTitulo: Destino Marte\nDuracion: 136 min\nClasificacion: B12\nFecha fin: 2027-01-20\nEstado: En cartelera (152 dias)"];
+}

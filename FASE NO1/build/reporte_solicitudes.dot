@@ -1,0 +1,22 @@
+digraph Solicitudes {
+  rankdir=LR;
+  node [shape=box, style=filled, fontname="Arial"];
+  sol_1 [label="Solicitud 1\nCliente 1\nCelebracion de cumpleanos con decoracion especial\nAprobada", fillcolor="#d7ead1"];
+  sol_1 -> sol_2 [label="sig"];
+  sol_1 -> sol_6 [label="ant", color="#888888"];
+  sol_2 [label="Solicitud 2\nCliente 1\nCalificacion 1: tipo: cumpleaños\nAprobada", fillcolor="#d7ead1"];
+  sol_2 -> sol_3 [label="sig"];
+  sol_2 -> sol_1 [label="ant", color="#888888"];
+  sol_3 [label="Solicitud 3\nCliente 1\nCalificacion 2: tipo: aniversario\nAprobada", fillcolor="#d7ead1"];
+  sol_3 -> sol_4 [label="sig"];
+  sol_3 -> sol_2 [label="ant", color="#888888"];
+  sol_4 [label="Solicitud 4\nCliente 1\nCalificacion 3: tipo: aniversario\nPendiente", fillcolor="#fce8b2"];
+  sol_4 -> sol_5 [label="sig"];
+  sol_4 -> sol_3 [label="ant", color="#888888"];
+  sol_5 [label="Solicitud 5\nCliente 1\nCalificacion 4: tipo: Despedida de soltera\nPendiente", fillcolor="#fce8b2"];
+  sol_5 -> sol_6 [label="sig"];
+  sol_5 -> sol_4 [label="ant", color="#888888"];
+  sol_6 [label="Solicitud 6\nCliente 1\nCalificacion 5: tipo: Despedida de soltero\nPendiente", fillcolor="#fce8b2"];
+  sol_6 -> sol_1 [label="sig"];
+  sol_6 -> sol_5 [label="ant", color="#888888"];
+}

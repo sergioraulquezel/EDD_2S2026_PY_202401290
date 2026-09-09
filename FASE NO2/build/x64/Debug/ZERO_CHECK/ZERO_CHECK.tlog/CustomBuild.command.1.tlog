@@ -1,0 +1,10 @@
+^C:\USERS\EQUIPO\DOCUMENTS\202401290_P1_EDD_LAB\BUILD\CMAKEFILES\1CB8DA7ACE61C717B2958D5665DE9EE2\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/EQUIPO/Documents/202401290_P1_EDD_LAB -BC:/Users/EQUIPO/Documents/202401290_P1_EDD_LAB/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/EQUIPO/Documents/202401290_P1_EDD_LAB/build/CinemaProject.slnx
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
