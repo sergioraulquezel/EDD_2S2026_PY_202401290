@@ -1,0 +1,28 @@
+digraph AVLFunciones {
+  rankdir=TB;
+  graph [bgcolor="white", labelloc="t", fontname="Arial", fontsize=18, label="Arbol AVL de Funciones"];
+  node [shape=circle, style="filled", fontname="Arial", fontsize=9, color="#37474f", penwidth=1.4, width=1.25, fixedsize=false];
+  edge [color="#37474f", arrowsize=0.8];
+  leyenda_programada [label="Programada", fillcolor="#b7e1a1"];
+  leyenda_realizada [label="Realizada", fillcolor="#ff8a80"];
+  { rank=same; leyenda_programada; leyenda_realizada; }
+  "F004" [fillcolor="#b7e1a1", label="F004\nCoco\n17:30\nSala 2\nAltura: 4"];
+  "F004" -> "F002";
+  "F002" [fillcolor="#b7e1a1", label="F002\nInterestelar\n19:00\nSala 1\nAltura: 2"];
+  "F002" -> "F001";
+  "F001" [fillcolor="#b7e1a1", label="F001\nInterestelar\n14:00\nSala 1\nAltura: 1"];
+  "F002" -> "F003";
+  "F003" [fillcolor="#b7e1a1", label="F003\nCoco\n13:30\nSala 2\nAltura: 1"];
+  "F004" -> "F008";
+  "F008" [fillcolor="#b7e1a1", label="F008\nToy Story\n15:00\nSala 4\nAltura: 3"];
+  "F008" -> "F006";
+  "F006" [fillcolor="#b7e1a1", label="F006\nEl Origen\n21:00\nSala 3\nAltura: 2"];
+  "F006" -> "F005";
+  "F005" [fillcolor="#b7e1a1", label="F005\nEl Origen\n16:00\nSala 3\nAltura: 1"];
+  "F006" -> "F007";
+  "F007" [fillcolor="#b7e1a1", label="F007\nToy Story\n11:00\nSala 4\nAltura: 1"];
+  "F008" -> "F009";
+  "F009" [fillcolor="#b7e1a1", label="F009\nMatrix\n18:00\nSala 5\nAltura: 2"];
+  "F009" -> "F010";
+  "F010" [fillcolor="#b7e1a1", label="F010\nMatrix\n22:00\nSala 5\nAltura: 1"];
+}
