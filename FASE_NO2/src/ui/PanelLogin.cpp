@@ -1,5 +1,6 @@
 #include "ui/PanelLogin.h"
 #include "imgui.h"
+#include "models/Cliente.h"
 #include <cstdio>
 #include <iostream>
 #include <string>
@@ -8,6 +9,7 @@ bool g_estaAutenticado = false;
 std::string g_rolUsuarioActual = "";
 std::string g_correoUsuarioActual = "";
 std::string g_nombreUsuarioActual = "";
+std::string g_idClienteActual = "";
 
 struct UsuarioDemo
 {
@@ -18,25 +20,13 @@ struct UsuarioDemo
 };
 
 static const UsuarioDemo USUARIOS_DEMO[] = {
-    {"admin@cine.com", "123456", "admin", "Administrador"},
+    {"AdminCine@gmail.com", "admin123Pass", "admin", "Administrador"},
     {"cliente1@cine.com", "123456", "cliente", "Cliente 1"},
     {"cliente2@cine.com", "123456", "cliente", "Cliente 2"},
     {"cliente3@cine.com", "123456", "cliente", "Cliente 3"},
     {"cliente4@cine.com", "123456", "cliente", "Cliente 4"},
     {"cliente5@cine.com", "123456", "cliente", "Cliente 5"},
 };
-
-static const UsuarioDemo* buscarUsuario(const std::string& correo, const std::string& password)
-{
-    for (const UsuarioDemo& usuario : USUARIOS_DEMO)
-    {
-        if (correo == usuario.correo && password == usuario.password)
-        {
-            return &usuario;
-        }
-    }
-    return nullptr;
-}
 
 static void botonCredencial(const char* texto, const UsuarioDemo& usuario, char inputCorreo[], char inputPassword[])
 {
@@ -47,11 +37,17 @@ static void botonCredencial(const char* texto, const UsuarioDemo& usuario, char 
     }
 }
 
-void dibujarPanelLogin()
+void dibujarPanelLogin(ArbolBClientes& clientes)
 {
-    static char inputCorreo[128] = "admin@cine.com";
-    static char inputPassword[128] = "123456";
+    static char inputCorreo[128] = "AdminCine@gmail.com";
+    static char inputPassword[128] = "admin123Pass";
+    static char regId[32] = "U006";
+    static char regNombre[100] = "Cliente Nuevo";
+    static char regCorreo[128] = "cliente6@cine.com";
+    static char regTelefono[32] = "55550006";
+    static char regPassword[128] = "123456";
     static std::string mensajeError = "";
+    static std::string mensajeRegistro = "";
 
     ImGuiIO& io = ImGui::GetIO();
     ImVec2 tamVentana(460, 430);
@@ -111,26 +107,69 @@ void dibujarPanelLogin()
     {
         std::string correo(inputCorreo);
         std::string password(inputPassword);
-        const UsuarioDemo* usuario = buscarUsuario(correo, password);
-
-        if (usuario != nullptr)
+        if (correo == USUARIOS_DEMO[0].correo && password == USUARIOS_DEMO[0].password)
         {
             g_estaAutenticado = true;
-            g_rolUsuarioActual = usuario->rol;
-            g_correoUsuarioActual = usuario->correo;
-            g_nombreUsuarioActual = usuario->nombre;
+            g_rolUsuarioActual = "admin";
+            g_correoUsuarioActual = correo;
+            g_nombreUsuarioActual = "Administrador";
+            g_idClienteActual.clear();
             mensajeError = "";
-            std::cout << "[LOGIN] Sesion iniciada como " << usuario->nombre << ".\n";
+            std::cout << "[LOGIN] Sesion iniciada como Administrador.\n";
         }
         else
         {
-            mensajeError = "Correo o contrasena incorrectos.";
+            Cliente* cliente = nullptr;
+            if (clientes.autenticar(correo, password, cliente))
+            {
+                g_estaAutenticado = true;
+                g_rolUsuarioActual = "cliente";
+                g_correoUsuarioActual = cliente->correo;
+                g_nombreUsuarioActual = cliente->nombre;
+                g_idClienteActual = cliente->id;
+                mensajeError = "";
+                std::cout << "[LOGIN] Sesion iniciada como " << cliente->nombre << ".\n";
+            }
+            else
+            {
+                mensajeError = "Correo o contrasena incorrectos.";
+            }
         }
     }
     ImGui::PopStyleColor(3);
 
     ImGui::Spacing();
-    ImGui::TextDisabled("Admin: admin@cine.com | pass: 123456");
+    ImGui::Separator();
+    if (ImGui::CollapsingHeader("Registro de Cliente"))
+    {
+        ImGui::InputText("ID Cliente", regId, IM_ARRAYSIZE(regId));
+        ImGui::InputText("Nombre", regNombre, IM_ARRAYSIZE(regNombre));
+        ImGui::InputText("Correo registro", regCorreo, IM_ARRAYSIZE(regCorreo));
+        ImGui::InputText("Telefono", regTelefono, IM_ARRAYSIZE(regTelefono));
+        ImGui::InputText("Password registro", regPassword, IM_ARRAYSIZE(regPassword), ImGuiInputTextFlags_Password);
+
+        if (ImGui::Button("Crear cuenta de cliente", ImVec2(-1, 36)))
+        {
+            Cliente nuevo(regId, regNombre, regCorreo, regTelefono, regPassword);
+            if (clientes.insertar(nuevo))
+            {
+                mensajeRegistro = "Cliente registrado en Arbol B: " + nuevo.id;
+                mensajeError = "";
+            }
+            else
+            {
+                mensajeRegistro = "No se pudo registrar: ID o correo duplicado/campos invalidos.";
+            }
+        }
+
+        if (!mensajeRegistro.empty())
+        {
+            ImGui::TextWrapped("%s", mensajeRegistro.c_str());
+        }
+    }
+
+    ImGui::Spacing();
+    ImGui::TextDisabled("Admin: AdminCine@gmail.com | pass: admin123Pass");
     ImGui::TextDisabled("Clientes: cliente1@cine.com, cliente2@cine.com, cliente3@cine.com");
     ImGui::TextDisabled("          cliente4@cine.com, cliente5@cine.com | pass: 123456");
     ImGui::End();

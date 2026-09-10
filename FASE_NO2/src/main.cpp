@@ -9,6 +9,8 @@
 // (Asegúrate de que la extensión coincida con tus archivos, .hpp o .h)
 #include "structures/ArbolBinario.h"
 #include "structures/ArbolAVLFunciones.h"
+#include "structures/ArbolBClientes.h"
+#include "structures/TablaHashReservas.h"
 #include "structures/ListasPromociones.h"
 #include "structures/MatrizDispersa.h"
 #include "structures/ListaSolicitudes.h" // <-- FALTABA ESTE INCLUDE
@@ -73,10 +75,18 @@ int main()
     ListaCircularPromociones misPromociones;
     ArbolBinario miCartelera;
     ArbolAVLFunciones arbolFunciones;
+    ArbolBClientes arbolClientes;
+    TablaHashReservas tablaReservas;
     std::vector<FuncionCine> misFunciones;
     ListaCircularDoble misSolicitudes;
     PanelAdmin panel;
     PanelCliente panelCliente;
+
+    arbolClientes.insertar(Cliente("U001", "Cliente 1", "cliente1@cine.com", "55550001", "123456"));
+    arbolClientes.insertar(Cliente("U002", "Cliente 2", "cliente2@cine.com", "55550002", "123456"));
+    arbolClientes.insertar(Cliente("U003", "Cliente 3", "cliente3@cine.com", "55550003", "123456"));
+    arbolClientes.insertar(Cliente("U004", "Cliente 4", "cliente4@cine.com", "55550004", "123456"));
+    arbolClientes.insertar(Cliente("U005", "Cliente 5", "cliente5@cine.com", "55550005", "123456"));
 
     Promocion *promo1 = new Promocion(1, "Lunes Estudiantil", "Descuentos con carnet universitario");
     Promocion *promo2 = new Promocion(2, "Miercoles 2x1", "Lleva a un acompaniante gratis");
@@ -129,18 +139,18 @@ int main()
         // CONTROL DE ACCESO: LOGIN VS PANEL ADMINISTRATIVO / CLIENTE
         if (!g_estaAutenticado)
         {
-            dibujarPanelLogin(); // Muestra la ventana de inicio de sesión
+            dibujarPanelLogin(arbolClientes); // Muestra la ventana de inicio de sesión
         }
         else
         {
             if (g_rolUsuarioActual == "admin")
             {
                 // Muestra el panel administrativo si entra el admin
-                panel.dibujar(miCartelera, misFunciones, arbolFunciones, misPromociones, misSolicitudes);
+                panel.dibujar(miCartelera, misFunciones, arbolFunciones, misPromociones, misSolicitudes, arbolClientes, tablaReservas);
             }
             else if (g_rolUsuarioActual == "cliente")
             {
-                panelCliente.dibujar(miCartelera, misFunciones, misPromociones, misSolicitudes);
+                panelCliente.dibujar(miCartelera, misFunciones, misPromociones, misSolicitudes, arbolClientes, tablaReservas);
                 if (false) {
                 // Aquí puedes colocar la vista destinada al usuario cliente simulado
                 ImGui::Begin("Panel de Cliente", nullptr, ImGuiWindowFlags_NoCollapse);

@@ -1,6 +1,9 @@
 #include "ui/PanelCliente.h"
 #include "ui/PanelLogin.h"
 #include "imgui.h"
+#include "models/Reserva.h"
+#include <ctime>
+#include <cstdio>
 #include <iostream>
 #include <string>
 
@@ -14,6 +17,28 @@ static std::string obtenerTitularClienteActual()
 static std::string obtenerNombreClienteActual()
 {
     return g_nombreUsuarioActual.empty() ? obtenerTitularClienteActual() : g_nombreUsuarioActual;
+}
+
+static std::string fechaActualCliente()
+{
+    std::time_t ahora = std::time(nullptr);
+    std::tm tiempoLocal{};
+#ifdef _WIN32
+    localtime_s(&tiempoLocal, &ahora);
+#else
+    localtime_r(&ahora, &tiempoLocal);
+#endif
+    char buffer[16];
+    std::snprintf(buffer, sizeof(buffer), "%04d-%02d-%02d",
+                  tiempoLocal.tm_year + 1900, tiempoLocal.tm_mon + 1, tiempoLocal.tm_mday);
+    return buffer;
+}
+
+static std::string generarCodigoReservaCliente(int id)
+{
+    char buffer[16];
+    std::snprintf(buffer, sizeof(buffer), "R%03d", id);
+    return buffer;
 }
 
 static void dibujarPromocionCliente(NodoPromocion* nodo)
@@ -36,8 +61,13 @@ static void dibujarPromocionCliente(NodoPromocion* nodo)
     }
 }
 
-void PanelCliente::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &funciones, ListaCircularPromociones &promociones, ListaCircularDoble &solicitudes)
+void PanelCliente::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &funciones, ListaCircularPromociones &promociones,
+                           ListaCircularDoble &solicitudes, ArbolBClientes& clientes, TablaHashReservas& reservas)
 {
+    static int siguienteIdReserva = 1;
+    static char codigoCancelar[32] = "R001";
+    static std::string mensajeReserva = "";
+
     ImGuiIO& io = ImGui::GetIO();
     ImGui::SetNextWindowPos(ImVec2(16, 16), ImGuiCond_Always);
     ImGui::SetNextWindowSize(ImVec2(io.DisplaySize.x - 32, io.DisplaySize.y - 32), ImGuiCond_Always);
@@ -297,6 +327,10 @@ void PanelCliente::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &fu
 
             ImGui::Text("Mapa de Asientos - %s", funcion.obtenerEtiqueta().c_str());
             ImGui::TextDisabled("Sesion actual: %s (%s)", obtenerNombreClienteActual().c_str(), titularClienteActual.c_str());
+            if (!mensajeReserva.empty())
+            {
+                ImGui::TextWrapped("%s", mensajeReserva.c_str());
+            }
             ImGui::TextColored(ImVec4(0.2f, 0.8f, 0.3f, 1.0f), "[ VERDE = Libre ]");
             ImGui::SameLine();
             ImGui::TextColored(ImVec4(0.9f, 0.2f, 0.2f, 1.0f), "[ ROJO = Ocupado ]");
@@ -313,7 +347,12 @@ void PanelCliente::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &fu
                 {
                     NodoMatriz *nodoAsiento = sala.obtenerAsiento(f, c);
                     bool ocupado = nodoAsiento != nullptr;
-                    bool propio = ocupado && nodoAsiento->titular == titularClienteActual;
+                    bool propio = false;
+                    if (ocupado)
+                    {
+                        Reserva* reservaAsiento = reservas.buscar(nodoAsiento->titular);
+                        propio = reservaAsiento != nullptr && reservaAsiento->idCliente == g_idClienteActual;
+                    }
 
                     if (ocupado)
                     {
@@ -333,15 +372,37 @@ void PanelCliente::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &fu
                     {
                         if (!ocupado)
                         {
-                            sala.reservarAsiento(f, c, titularClienteActual);
-                            if (promoSeleccionada != nullptr)
+                            Cliente* clienteActual = clientes.buscarPorId(g_idClienteActual);
+                            if (clienteActual == nullptr)
                             {
-                                std::cout << "[INFO] Reserva con promocion '" << promoSeleccionada->promocion->nombre << "'.\n";
+                                mensajeReserva = "No se encontro el cliente actual en el Arbol B.";
+                            }
+                            else
+                            {
+                                std::string codigoReserva = generarCodigoReservaCliente(siguienteIdReserva++);
+                                if (sala.reservarAsiento(f, c, codigoReserva))
+                                {
+                                    Reserva nueva(codigoReserva, clienteActual->id, funcion.codigoFuncion, f, c, fechaActualCliente());
+                                    if (reservas.insertar(nueva))
+                                    {
+                                        clienteActual->agregarReserva(codigoReserva);
+                                        mensajeReserva = "Reserva creada: " + codigoReserva + " para " + funcion.codigoFuncion;
+                                        if (promoSeleccionada != nullptr)
+                                        {
+                                            std::cout << "[INFO] Reserva con promocion '" << promoSeleccionada->promocion->nombre << "'.\n";
+                                        }
+                                    }
+                                    else
+                                    {
+                                        sala.cancelarReserva(f, c);
+                                        mensajeReserva = "No se pudo insertar la reserva en la Tabla Hash.";
+                                    }
+                                }
                             }
                         }
                         else if (propio)
                         {
-                            sala.cancelarReserva(f, c);
+                            mensajeReserva = "Use la pestana Historial para cancelar por codigo de reserva.";
                         }
                         else
                         {
@@ -356,6 +417,92 @@ void PanelCliente::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &fu
 
                     ImGui::PopStyleColor(3);
                     if (c < sala.obtenerColumnas()) ImGui::SameLine();
+                }
+            }
+
+            ImGui::EndTabItem();
+        }
+
+        if (ImGui::BeginTabItem("Mi Historial"))
+        {
+            ImGui::Spacing();
+            ImGui::Text("Historial de reservas");
+            ImGui::TextDisabled("Cliente: %s | ID: %s", obtenerNombreClienteActual().c_str(), g_idClienteActual.c_str());
+            ImGui::Separator();
+
+            Cliente* clienteActual = clientes.buscarPorId(g_idClienteActual);
+            if (clienteActual == nullptr)
+            {
+                ImGui::TextColored(ImVec4(1, 0.5f, 0, 1), "No se encontro el cliente actual en el Arbol B.");
+            }
+            else
+            {
+                std::vector<Reserva> reservasCliente = reservas.listarPorCliente(clienteActual->id);
+                if (reservasCliente.empty())
+                {
+                    ImGui::TextDisabled("Todavia no tienes reservas registradas en la Tabla Hash.");
+                }
+                else if (ImGui::BeginTable("TablaHistorialCliente", 6, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg))
+                {
+                    ImGui::TableSetupColumn("Codigo");
+                    ImGui::TableSetupColumn("Funcion");
+                    ImGui::TableSetupColumn("Fecha");
+                    ImGui::TableSetupColumn("Fila");
+                    ImGui::TableSetupColumn("Columna");
+                    ImGui::TableSetupColumn("Estado");
+                    ImGui::TableHeadersRow();
+
+                    for (const Reserva& reserva : reservasCliente)
+                    {
+                        ImGui::TableNextRow();
+                        ImGui::TableSetColumnIndex(0); ImGui::Text("%s", reserva.codigoReserva.c_str());
+                        ImGui::TableSetColumnIndex(1); ImGui::Text("%s", reserva.codigoFuncion.c_str());
+                        ImGui::TableSetColumnIndex(2); ImGui::Text("%s", reserva.fechaReserva.c_str());
+                        ImGui::TableSetColumnIndex(3); ImGui::Text("%d", reserva.fila);
+                        ImGui::TableSetColumnIndex(4); ImGui::Text("%d", reserva.columna);
+                        ImGui::TableSetColumnIndex(5); ImGui::Text("%s", reserva.estado.c_str());
+                    }
+                    ImGui::EndTable();
+                }
+
+                ImGui::Spacing();
+                ImGui::Separator();
+                ImGui::Text("Cancelar reserva propia");
+                ImGui::InputText("Codigo reserva", codigoCancelar, IM_ARRAYSIZE(codigoCancelar));
+                if (ImGui::Button("Cancelar mi reserva", ImVec2(190, 30)))
+                {
+                    Reserva* reserva = reservas.buscar(codigoCancelar);
+                    if (reserva == nullptr)
+                    {
+                        mensajeReserva = "No existe esa reserva en la Tabla Hash.";
+                    }
+                    else if (reserva->idCliente != clienteActual->id)
+                    {
+                        mensajeReserva = "No puedes cancelar una reserva de otro cliente.";
+                    }
+                    else
+                    {
+                        bool asientoLiberado = false;
+                        for (FuncionCine& funcion : funciones)
+                        {
+                            if (funcion.codigoFuncion == reserva->codigoFuncion)
+                            {
+                                asientoLiberado = funcion.asientos.cancelarReserva(reserva->fila, reserva->columna);
+                                break;
+                            }
+                        }
+
+                        clienteActual->eliminarReserva(reserva->codigoReserva);
+                        std::string codigoEliminado = reserva->codigoReserva;
+                        reservas.eliminar(codigoEliminado);
+                        mensajeReserva = "Reserva cancelada: " + codigoEliminado +
+                                         (asientoLiberado ? " | Asiento liberado." : " | Reserva quitada de la Hash.");
+                    }
+                }
+
+                if (!mensajeReserva.empty())
+                {
+                    ImGui::TextWrapped("%s", mensajeReserva.c_str());
                 }
             }
 

@@ -2,6 +2,7 @@
 #include "ui/PanelLogin.h"
 #include "utils/CargaJSONFase2.h"
 #include "imgui.h"
+#include "models/Cliente.h"
 #include <cstdio>
 #include <fstream>
 #include <iostream>
@@ -31,7 +32,8 @@ static void crearArchivoAsientosAdmin(const std::string& archivoAsientos, const 
 }
 
 void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &funciones, ArbolAVLFunciones &arbolFunciones,
-                         ListaCircularPromociones &promociones, ListaCircularDoble &solicitudes)
+                         ListaCircularPromociones &promociones, ListaCircularDoble &solicitudes,
+                         ArbolBClientes& clientes, TablaHashReservas& reservas)
 {
     static char inputHorario[32] = "14:00";
     static char inputSala[32] = "Sala 1";
@@ -719,6 +721,120 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
             if (ImGui::Button("Generar Reporte Graphviz (Solicitudes)", ImVec2(320, 30)))
             {
                 solicitudes.generarReporteGraphviz();
+            }
+
+            ImGui::EndTabItem();
+        }
+
+        if (ImGui::BeginTabItem("Clientes y Reservas"))
+        {
+            ImGui::Spacing();
+            ImGui::Text("Arbol B de orden 4: Clientes");
+            ImGui::Separator();
+
+            static char nuevoId[32] = "U006";
+            static char nuevoNombre[100] = "Cliente Nuevo";
+            static char nuevoCorreo[128] = "cliente6@cine.com";
+            static char nuevoTelefono[32] = "55550006";
+            static char nuevoPassword[128] = "123456";
+            static char buscarClienteId[32] = "U001";
+            static std::string mensajeClientes = "";
+
+            ImGui::InputText("ID", nuevoId, IM_ARRAYSIZE(nuevoId));
+            ImGui::InputText("Nombre Cliente", nuevoNombre, IM_ARRAYSIZE(nuevoNombre));
+            ImGui::InputText("Correo Cliente", nuevoCorreo, IM_ARRAYSIZE(nuevoCorreo));
+            ImGui::InputText("Telefono Cliente", nuevoTelefono, IM_ARRAYSIZE(nuevoTelefono));
+            ImGui::InputText("Password Cliente", nuevoPassword, IM_ARRAYSIZE(nuevoPassword));
+
+            if (ImGui::Button("Agregar Cliente al Arbol B", ImVec2(240, 30)))
+            {
+                Cliente nuevo(nuevoId, nuevoNombre, nuevoCorreo, nuevoTelefono, nuevoPassword);
+                mensajeClientes = clientes.insertar(nuevo)
+                    ? "Cliente agregado al Arbol B: " + nuevo.id
+                    : "No se agrego el cliente. Revise ID/correo duplicado o campos vacios.";
+            }
+            ImGui::SameLine();
+            if (ImGui::Button("Reporte Arbol B Clientes", ImVec2(220, 30)))
+            {
+                clientes.generarReporteGraphviz();
+                mensajeClientes = "Reporte generado: reporte_arbol_b_clientes.png";
+            }
+            ImGui::SameLine();
+            if (ImGui::Button("Reporte Hash Reservas", ImVec2(210, 30)))
+            {
+                reservas.generarReporteGraphviz();
+                mensajeClientes = "Reporte generado: reporte_tabla_hash_reservas.png";
+            }
+
+            if (!mensajeClientes.empty())
+            {
+                ImGui::TextWrapped("%s", mensajeClientes.c_str());
+            }
+
+            ImGui::Spacing();
+            ImGui::Separator();
+            ImGui::Text("Clientes registrados: %d | Reservas en Hash: %d", clientes.contar(), reservas.contar());
+
+            std::vector<Cliente> listaClientes = clientes.listarOrdenado();
+            if (ImGui::BeginTable("TablaClientesB", 6, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg))
+            {
+                ImGui::TableSetupColumn("ID");
+                ImGui::TableSetupColumn("Nombre");
+                ImGui::TableSetupColumn("Correo");
+                ImGui::TableSetupColumn("Telefono");
+                ImGui::TableSetupColumn("Tipo");
+                ImGui::TableSetupColumn("Reservas");
+                ImGui::TableHeadersRow();
+
+                for (const Cliente& cliente : listaClientes)
+                {
+                    ImGui::TableNextRow();
+                    ImGui::TableSetColumnIndex(0); ImGui::Text("%s", cliente.id.c_str());
+                    ImGui::TableSetColumnIndex(1); ImGui::Text("%s", cliente.nombre.c_str());
+                    ImGui::TableSetColumnIndex(2); ImGui::Text("%s", cliente.correo.c_str());
+                    ImGui::TableSetColumnIndex(3); ImGui::Text("%s", cliente.telefono.c_str());
+                    ImGui::TableSetColumnIndex(4); ImGui::Text("%s", cliente.tipo.c_str());
+                    ImGui::TableSetColumnIndex(5); ImGui::Text("%d", (int)cliente.codigosReserva.size());
+                }
+                ImGui::EndTable();
+            }
+
+            ImGui::Spacing();
+            ImGui::Separator();
+            ImGui::Text("Ver reservas por cliente");
+            ImGui::InputText("ID Cliente a consultar", buscarClienteId, IM_ARRAYSIZE(buscarClienteId));
+
+            Cliente* clienteEncontrado = clientes.buscarPorId(buscarClienteId);
+            if (clienteEncontrado == nullptr)
+            {
+                ImGui::TextDisabled("No se encontro ese cliente en el Arbol B.");
+            }
+            else
+            {
+                ImGui::Text("Cliente: %s | %s", clienteEncontrado->nombre.c_str(), clienteEncontrado->correo.c_str());
+                std::vector<Reserva> reservasCliente = reservas.listarPorCliente(clienteEncontrado->id);
+                if (ImGui::BeginTable("TablaReservasClienteAdmin", 6, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg))
+                {
+                    ImGui::TableSetupColumn("Reserva");
+                    ImGui::TableSetupColumn("Funcion");
+                    ImGui::TableSetupColumn("Fecha");
+                    ImGui::TableSetupColumn("Fila");
+                    ImGui::TableSetupColumn("Columna");
+                    ImGui::TableSetupColumn("Estado");
+                    ImGui::TableHeadersRow();
+
+                    for (const Reserva& reserva : reservasCliente)
+                    {
+                        ImGui::TableNextRow();
+                        ImGui::TableSetColumnIndex(0); ImGui::Text("%s", reserva.codigoReserva.c_str());
+                        ImGui::TableSetColumnIndex(1); ImGui::Text("%s", reserva.codigoFuncion.c_str());
+                        ImGui::TableSetColumnIndex(2); ImGui::Text("%s", reserva.fechaReserva.c_str());
+                        ImGui::TableSetColumnIndex(3); ImGui::Text("%d", reserva.fila);
+                        ImGui::TableSetColumnIndex(4); ImGui::Text("%d", reserva.columna);
+                        ImGui::TableSetColumnIndex(5); ImGui::Text("%s", reserva.estado.c_str());
+                    }
+                    ImGui::EndTable();
+                }
             }
 
             ImGui::EndTabItem();

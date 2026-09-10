@@ -32,10 +32,14 @@ set(IMGUI_SOURCES
 set(PROJECT_SOURCES
     src/main.cpp
     src/models/Pelicula.cpp
+    src/models/Cliente.cpp
+    src/models/Reserva.cpp
     src/models/Promocion.cpp           
     src/models/Beneficio.cpp
     src/models/Solicitud.cpp
     src/structures/ArbolBinario.cpp
+    src/structures/ArbolBClientes.cpp
+    src/structures/TablaHashReservas.cpp
     src/structures/MatrizDispersa.cpp
     src/structures/ListasPromociones.cpp
     src/structures/ListaSolicitudes.cpp

@@ -4,6 +4,8 @@
 #include "structures/ListasPromociones.h"
 #include "structures/ListaSolicitudes.h"
 #include "structures/ArbolAVLFunciones.h"
+#include "structures/ArbolBClientes.h"
+#include "structures/TablaHashReservas.h"
 #include "models/FuncionCine.h"
 #include <vector>
 
@@ -23,5 +25,6 @@ public:
     PanelAdmin();
     // Le pasamos las estructuras por referencia para que pueda modificarlas
     void dibujar(ArbolBinario& cartelera, std::vector<FuncionCine>& funciones, ArbolAVLFunciones& arbolFunciones,
-                 ListaCircularPromociones& promociones, ListaCircularDoble& solicitudes);
+                 ListaCircularPromociones& promociones, ListaCircularDoble& solicitudes,
+                 ArbolBClientes& clientes, TablaHashReservas& reservas);
 };

@@ -1,3 +1,0 @@
-C:/Users/EQUIPO/Documents/202401290_P1_EDD_LAB/build/CMakeFiles/CinemaProject.dir
-C:/Users/EQUIPO/Documents/202401290_P1_EDD_LAB/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/EQUIPO/Documents/202401290_P1_EDD_LAB/build/CMakeFiles/ZERO_CHECK.dir
