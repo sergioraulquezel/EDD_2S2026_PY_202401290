@@ -24,6 +24,8 @@ private:
     NodoAVLFuncion* rotarDerecha(NodoAVLFuncion* y);
     NodoAVLFuncion* rotarIzquierda(NodoAVLFuncion* x);
     NodoAVLFuncion* insertarRecursivo(NodoAVLFuncion* nodo, const FuncionCine& funcion);
+    NodoAVLFuncion* eliminarRecursivo(NodoAVLFuncion* nodo, const std::string& codigoFuncion, bool& eliminado);
+    NodoAVLFuncion* minimo(NodoAVLFuncion* nodo);
     NodoAVLFuncion* buscarRecursivo(NodoAVLFuncion* nodo, const std::string& codigoFuncion);
     void listarInorden(NodoAVLFuncion* nodo, std::vector<FuncionCine>& salida);
     void listarPreorden(NodoAVLFuncion* nodo, std::vector<FuncionCine>& salida);
@@ -34,6 +36,7 @@ public:
     ArbolAVLFunciones();
 
     void insertar(const FuncionCine& funcion);
+    bool eliminar(const std::string& codigoFuncion);
     FuncionCine* buscar(const std::string& codigoFuncion);
     std::vector<FuncionCine> obtenerFunciones(const std::string& recorrido);
     void generarReporteGraphviz();

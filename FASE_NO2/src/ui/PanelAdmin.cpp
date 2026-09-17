@@ -1,12 +1,15 @@
 #include "ui/PanelAdmin.h"
 #include "ui/PanelLogin.h"
 #include "utils/CargaJSONFase2.h"
+#include "utils/CargaJSONClientesReservas.h"
+#include "utils/PersistenciaAsientos.h"
 #include "imgui.h"
 #include "models/Cliente.h"
 #include <cstdio>
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <vector>
 
 PanelAdmin::PanelAdmin() {}
 
@@ -91,6 +94,9 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
             static char archivoJSONFase2[120] = "peliculas_funciones.json";
             static std::string mensajeCargaCSV = "";
             static std::string mensajeCargaJSON = "";
+            static std::string mensajePeliculas = "";
+            static int recorridoPeliculasIndex = 1;
+            const char* recorridosPeliculas[] = {"preorden", "inorden", "postorden"};
 
             ImGui::TextColored(ImVec4(0.34f, 0.86f, 0.92f, 1.0f), "Carga Masiva Fase 2 desde JSON:");
             ImGui::InputText("Carpeta JSON", rutaCSV, IM_ARRAYSIZE(rutaCSV));
@@ -160,6 +166,98 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
 
             ImGui::Spacing();
             ImGui::Separator();
+            ImGui::Text("Buscar, editar o eliminar pelicula:");
+
+            if (ImGui::Button("Buscar Pelicula por Codigo", ImVec2(230, 30)))
+            {
+                Pelicula* encontrada = cartelera.buscarPorCodigo(inputId);
+                if (encontrada == nullptr)
+                {
+                    mensajePeliculas = "No se encontro pelicula con codigo: " + std::string(inputId);
+                }
+                else
+                {
+                    inputIdNum = encontrada->getId();
+                    std::snprintf(inputId, sizeof(inputId), "%s", encontrada->getCodigo().c_str());
+                    std::snprintf(inputTitulo, sizeof(inputTitulo), "%s", encontrada->getTitulo().c_str());
+                    std::snprintf(inputGenero, sizeof(inputGenero), "%s", encontrada->getGenero().c_str());
+                    inputDuracion = encontrada->getDuracion();
+                    std::snprintf(inputClasificacion, sizeof(inputClasificacion), "%s", encontrada->getClasificacion().c_str());
+                    std::snprintf(inputIdioma, sizeof(inputIdioma), "%s", encontrada->getIdioma().c_str());
+                    std::snprintf(inputEstreno, sizeof(inputEstreno), "%s", encontrada->getFechaEstreno().c_str());
+                    std::snprintf(inputFin, sizeof(inputFin), "%s", encontrada->getFechaFin().c_str());
+                    mensajePeliculas = "Pelicula encontrada y cargada en el formulario: " + encontrada->getCodigo();
+                }
+            }
+
+            ImGui::SameLine();
+            if (ImGui::Button("Editar Pelicula", ImVec2(160, 30)))
+            {
+                Pelicula* peliculaEditar = cartelera.buscarPorCodigo(inputId);
+                if (peliculaEditar == nullptr)
+                {
+                    mensajePeliculas = "No se encontro la pelicula a editar. Busquela por codigo primero.";
+                }
+                else if (inputDuracion <= 0)
+                {
+                    mensajePeliculas = "La duracion debe ser mayor que cero.";
+                }
+                else
+                {
+                    peliculaEditar->actualizar(inputTitulo, inputGenero, inputDuracion, inputClasificacion,
+                                               inputFin, peliculaEditar->getCodigo(), inputIdioma, inputEstreno);
+                    mensajePeliculas = "Pelicula editada en BST: " + peliculaEditar->getCodigo() +
+                                       " (codigo e ID se conservan para no romper el orden del arbol).";
+                    cartelera.generarReporteGraphviz();
+                }
+            }
+
+            ImGui::SameLine();
+            if (ImGui::Button("Eliminar Pelicula", ImVec2(170, 30)))
+            {
+                Pelicula* peliculaEliminar = cartelera.buscarPorCodigo(inputId);
+                if (peliculaEliminar == nullptr)
+                {
+                    mensajePeliculas = "No se encontro la pelicula a eliminar.";
+                }
+                else
+                {
+                    bool tieneFunciones = false;
+                    for (const FuncionCine& funcion : funciones)
+                    {
+                        if (funcion.pelicula == peliculaEliminar)
+                        {
+                            tieneFunciones = true;
+                            break;
+                        }
+                    }
+
+                    if (tieneFunciones)
+                    {
+                        mensajePeliculas = "No se puede eliminar: la pelicula tiene funciones asociadas. Elimine sus funciones primero.";
+                    }
+                    else
+                    {
+                        std::string codigoEliminado = peliculaEliminar->getCodigo();
+                        bool eliminado = cartelera.eliminarPorCodigo(codigoEliminado);
+                        mensajePeliculas = eliminado
+                            ? "Pelicula eliminada del BST: " + codigoEliminado
+                            : "No se pudo eliminar la pelicula del BST.";
+                        if (eliminado)
+                        {
+                            cartelera.generarReporteGraphviz();
+                        }
+                    }
+                }
+            }
+
+            if (!mensajePeliculas.empty())
+            {
+                ImGui::TextWrapped("%s", mensajePeliculas.c_str());
+            }
+
+            ImGui::Spacing();
+            ImGui::Separator();
             ImGui::Text("Carga Masiva de Peliculas desde CSV:");
             ImGui::InputText("Carpeta CSV", rutaCSV, IM_ARRAYSIZE(rutaCSV));
             ImGui::InputText("Archivo CSV", archivoCSV, IM_ARRAYSIZE(archivoCSV));
@@ -195,9 +293,9 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
 
             ImGui::Spacing();
             ImGui::Separator();
-            Pelicula *arregloPeliculas[100];
-            int cantidadPeliculas = 0;
-            cartelera.obtenerPeliculas(arregloPeliculas, cantidadPeliculas);
+            ImGui::Combo("Recorrido BST", &recorridoPeliculasIndex, recorridosPeliculas, IM_ARRAYSIZE(recorridosPeliculas));
+            std::vector<Pelicula*> arregloPeliculas = cartelera.obtenerPeliculasRecorrido(recorridosPeliculas[recorridoPeliculasIndex]);
+            int cantidadPeliculas = (int)arregloPeliculas.size();
 
             ImGui::Text("Visualización de cartelera");
             ImGui::TextDisabled("Total actual en BST: %d peliculas", cantidadPeliculas);
@@ -271,6 +369,11 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
         {
             if (ImGui::CollapsingHeader("Configuración de Función y Sala", ImGuiTreeNodeFlags_DefaultOpen))
             {
+                static char codigoBuscarFuncion[32] = "F001";
+                static int recorridoFuncionesIndex = 1;
+                static std::string mensajeFunciones = "";
+                const char* recorridosFunciones[] = {"preorden", "inorden", "postorden"};
+
                 ImGui::Text("1. Seleccionar Película de la Cartelera:");
 
                 Pelicula *listaPeliculasArbol[100];
@@ -320,12 +423,17 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
                     {
                         int idFuncion = siguienteIdFuncion++;
                         std::string codigoFuncion = generarCodigoFuncionAdmin(idFuncion);
+                        while (arbolFunciones.buscar(codigoFuncion) != nullptr)
+                        {
+                            idFuncion = siguienteIdFuncion++;
+                            codigoFuncion = generarCodigoFuncionAdmin(idFuncion);
+                        }
                         std::string archivoAsientos = codigoFuncion + "_funcion.json";
 
                         funciones.emplace_back(idFuncion, codigoFuncion, peliculaSeleccionadaParaFuncion, inputHorario, inputSala, inputFilas, inputColumnas, archivoAsientos);
                         arbolFunciones.insertar(funciones.back());
-                        crearArchivoAsientosAdmin(archivoAsientos, codigoFuncion);
                         funcionSeleccionadaIndex = (int)funciones.size() - 1;
+                        crearArchivoAsientosFuncion(funciones.back());
 
                         std::cout << "[INFO] Función creada exitosamente para: "
                                   << peliculaSeleccionadaParaFuncion->getTitulo()
@@ -358,6 +466,12 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
                             if (ImGui::Selectable(label.c_str(), isSelected))
                             {
                                 funcionSeleccionadaIndex = i;
+                                cargarAsientosFuncion(funciones[i]);
+                                peliculaSeleccionadaParaFuncion = funciones[i].pelicula;
+                                std::snprintf(inputHorario, sizeof(inputHorario), "%s", funciones[i].horario.c_str());
+                                std::snprintf(inputSala, sizeof(inputSala), "%s", funciones[i].sala.c_str());
+                                inputFilas = funciones[i].asientos.obtenerFilas();
+                                inputColumnas = funciones[i].asientos.obtenerColumnas();
                             }
                             if (isSelected)
                             {
@@ -366,6 +480,178 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
                         }
                         ImGui::EndCombo();
                     }
+                }
+
+                ImGui::Spacing();
+                ImGui::Separator();
+                ImGui::Text("5. Buscar, editar o eliminar funcion:");
+                ImGui::InputText("Codigo funcion", codigoBuscarFuncion, IM_ARRAYSIZE(codigoBuscarFuncion));
+
+                if (ImGui::Button("Buscar Funcion en AVL", ImVec2(190, 30)))
+                {
+                    FuncionCine* encontradaAVL = arbolFunciones.buscar(codigoBuscarFuncion);
+                    if (encontradaAVL == nullptr)
+                    {
+                        mensajeFunciones = "No se encontro la funcion en el AVL.";
+                    }
+                    else
+                    {
+                        bool ubicadaEnVector = false;
+                        for (int i = 0; i < (int)funciones.size(); ++i)
+                        {
+                            if (funciones[i].codigoFuncion == codigoBuscarFuncion)
+                            {
+                                funcionSeleccionadaIndex = i;
+                                cargarAsientosFuncion(funciones[i]);
+                                peliculaSeleccionadaParaFuncion = funciones[i].pelicula;
+                                std::snprintf(inputHorario, sizeof(inputHorario), "%s", funciones[i].horario.c_str());
+                                std::snprintf(inputSala, sizeof(inputSala), "%s", funciones[i].sala.c_str());
+                                inputFilas = funciones[i].asientos.obtenerFilas();
+                                inputColumnas = funciones[i].asientos.obtenerColumnas();
+                                ubicadaEnVector = true;
+                                break;
+                            }
+                        }
+                        mensajeFunciones = ubicadaEnVector
+                            ? "Funcion encontrada y cargada desde AVL: " + encontradaAVL->codigoFuncion
+                            : "Funcion encontrada en AVL, pero no esta sincronizada en la lista en memoria.";
+                    }
+                }
+
+                ImGui::SameLine();
+                if (ImGui::Button("Editar Funcion Activa", ImVec2(190, 30)))
+                {
+                    FuncionCine* funcionActual = obtenerFuncionActual();
+                    if (funcionActual == nullptr || peliculaSeleccionadaParaFuncion == nullptr)
+                    {
+                        mensajeFunciones = "Seleccione una funcion y una pelicula antes de editar.";
+                    }
+                    else
+                    {
+                        std::string codigoOriginal = funcionActual->codigoFuncion;
+                        std::string archivoOriginal = funcionActual->archivoAsientos;
+                        int idOriginal = funcionActual->id;
+                        MatrizDispersa asientosAnteriores = funcionActual->asientos;
+                        struct AsientoReservadoEditado {
+                            int fila;
+                            int columna;
+                            std::string codigoReserva;
+                        };
+                        std::vector<AsientoReservadoEditado> reservasExistentes;
+                        bool reservasFueraDeRango = false;
+
+                        for (int f = 1; f <= asientosAnteriores.obtenerFilas(); ++f)
+                        {
+                            for (int c = 1; c <= asientosAnteriores.obtenerColumnas(); ++c)
+                            {
+                                NodoMatriz* asiento = asientosAnteriores.obtenerAsiento(f, c);
+                                if (asiento == nullptr) continue;
+
+                                reservasExistentes.push_back({f, c, asiento->titular});
+                                if (f > inputFilas || c > inputColumnas)
+                                {
+                                    reservasFueraDeRango = true;
+                                }
+                            }
+                        }
+
+                        if (reservasFueraDeRango)
+                        {
+                            mensajeFunciones = "No se puede reducir la sala: hay reservas fuera de las nuevas filas/columnas.";
+                        }
+                        else
+                        {
+                        FuncionCine funcionEditada(idOriginal, codigoOriginal, peliculaSeleccionadaParaFuncion,
+                                                   inputHorario, inputSala, inputFilas, inputColumnas,
+                                                   archivoOriginal);
+                            for (const AsientoReservadoEditado& reservaExistente : reservasExistentes)
+                            {
+                                funcionEditada.asientos.reservarAsiento(reservaExistente.fila,
+                                                                        reservaExistente.columna,
+                                                                        reservaExistente.codigoReserva,
+                                                                        false);
+                            }
+
+                        funciones[funcionSeleccionadaIndex] = funcionEditada;
+                        arbolFunciones.insertar(funciones[funcionSeleccionadaIndex]);
+                        guardarAsientosFuncion(funciones[funcionSeleccionadaIndex]);
+                            mensajeFunciones = "Funcion editada en AVL conservando " +
+                                               std::to_string(reservasExistentes.size()) + " reservas: " + codigoOriginal;
+                        }
+                    }
+                }
+
+                ImGui::SameLine();
+                if (ImGui::Button("Eliminar Funcion", ImVec2(160, 30)))
+                {
+                    int indiceEliminar = -1;
+                    std::string codigoEliminar = codigoBuscarFuncion;
+                    if (codigoEliminar.empty() && obtenerFuncionActual() != nullptr)
+                    {
+                        codigoEliminar = obtenerFuncionActual()->codigoFuncion;
+                    }
+
+                    for (int i = 0; i < (int)funciones.size(); ++i)
+                    {
+                        if (funciones[i].codigoFuncion == codigoEliminar)
+                        {
+                            indiceEliminar = i;
+                            break;
+                        }
+                    }
+
+                    if (indiceEliminar < 0)
+                    {
+                        mensajeFunciones = "No se encontro la funcion a eliminar.";
+                    }
+                    else
+                    {
+                        std::string archivoEliminar = funciones[indiceEliminar].archivoAsientos;
+                        bool eliminadoAVL = arbolFunciones.eliminar(codigoEliminar);
+                        funciones.erase(funciones.begin() + indiceEliminar);
+                        std::remove(archivoEliminar.c_str());
+
+                        if (funcionSeleccionadaIndex == indiceEliminar) funcionSeleccionadaIndex = -1;
+                        else if (funcionSeleccionadaIndex > indiceEliminar) --funcionSeleccionadaIndex;
+
+                        mensajeFunciones = eliminadoAVL
+                            ? "Funcion eliminada del AVL y archivo borrado: " + codigoEliminar
+                            : "Funcion quitada de memoria, pero no existia en el AVL: " + codigoEliminar;
+                    }
+                }
+
+                if (!mensajeFunciones.empty())
+                {
+                    ImGui::TextWrapped("%s", mensajeFunciones.c_str());
+                }
+
+                ImGui::Spacing();
+                ImGui::Separator();
+                ImGui::Text("6. Listado de funciones desde AVL:");
+                ImGui::Combo("Recorrido AVL", &recorridoFuncionesIndex, recorridosFunciones, IM_ARRAYSIZE(recorridosFunciones));
+                std::vector<FuncionCine> funcionesRecorrido = arbolFunciones.obtenerFunciones(recorridosFunciones[recorridoFuncionesIndex]);
+                if (ImGui::BeginTable("TablaFuncionesAVL", 6, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg))
+                {
+                    ImGui::TableSetupColumn("Codigo");
+                    ImGui::TableSetupColumn("Pelicula");
+                    ImGui::TableSetupColumn("Horario");
+                    ImGui::TableSetupColumn("Sala");
+                    ImGui::TableSetupColumn("Archivo");
+                    ImGui::TableSetupColumn("Asientos");
+                    ImGui::TableHeadersRow();
+
+                    for (const FuncionCine& funcion : funcionesRecorrido)
+                    {
+                        ImGui::TableNextRow();
+                        ImGui::TableSetColumnIndex(0); ImGui::Text("%s", funcion.codigoFuncion.c_str());
+                        ImGui::TableSetColumnIndex(1); ImGui::Text("%s", funcion.pelicula ? funcion.pelicula->getTitulo().c_str() : "Sin pelicula");
+                        ImGui::TableSetColumnIndex(2); ImGui::Text("%s", funcion.horario.c_str());
+                        ImGui::TableSetColumnIndex(3); ImGui::Text("%s", funcion.sala.c_str());
+                        ImGui::TableSetColumnIndex(4); ImGui::Text("%s", funcion.archivoAsientos.c_str());
+                        ImGui::TableSetColumnIndex(5); ImGui::Text("%dx%d", funcion.asientos.obtenerFilas(), funcion.asientos.obtenerColumnas());
+                    }
+
+                    ImGui::EndTable();
                 }
             }
 
@@ -385,7 +671,10 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
                     FuncionCine* funcionActual = obtenerFuncionActual();
                     if (funcionActual != nullptr)
                     {
-                        funcionActual->asientos.reservarAsiento(fReserva, cReserva, clienteReserva);
+                        if (funcionActual->asientos.reservarAsiento(fReserva, cReserva, clienteReserva))
+                        {
+                            guardarAsientosFuncion(*funcionActual);
+                        }
                     }
                     else
                     {
@@ -399,7 +688,10 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
                     FuncionCine* funcionActual = obtenerFuncionActual();
                     if (funcionActual != nullptr)
                     {
-                        funcionActual->asientos.cancelarReserva(fReserva, cReserva);
+                        if (funcionActual->asientos.cancelarReserva(fReserva, cReserva))
+                        {
+                            guardarAsientosFuncion(*funcionActual);
+                        }
                     }
                     else
                     {
@@ -474,7 +766,10 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
                                 std::string idAsiento = "A##admin_" + std::to_string(f) + "_" + std::to_string(c);
                                 if (ImGui::Button(idAsiento.c_str(), ImVec2(32, 28)) && ocupado)
                                 {
-                                    funcionActual->asientos.cancelarReserva(f, c);
+                                    if (funcionActual->asientos.cancelarReserva(f, c))
+                                    {
+                                        guardarAsientosFuncion(*funcionActual);
+                                    }
                                 }
 
                                 if (ocupado && ImGui::IsItemHovered())
@@ -738,7 +1033,33 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
             static char nuevoTelefono[32] = "55550006";
             static char nuevoPassword[128] = "123456";
             static char buscarClienteId[32] = "U001";
+            static char rutaClientesJSON[260] = "C:\\Users\\EQUIPO\\Downloads\\";
+            static char archivoClientesJSON[120] = "clientes_reservas.json";
             static std::string mensajeClientes = "";
+
+            ImGui::TextColored(ImVec4(0.34f, 0.86f, 0.92f, 1.0f), "Carga Masiva de Clientes y Reservas:");
+            ImGui::InputText("Carpeta Clientes JSON", rutaClientesJSON, IM_ARRAYSIZE(rutaClientesJSON));
+            ImGui::InputText("Archivo Clientes JSON", archivoClientesJSON, IM_ARRAYSIZE(archivoClientesJSON));
+            if (ImGui::Button("Cargar JSON Clientes y Reservas", ImVec2(290, 30)))
+            {
+                std::string rutaCompleta = rutaClientesJSON;
+                if (!rutaCompleta.empty() && rutaCompleta.back() != '\\' && rutaCompleta.back() != '/')
+                {
+                    rutaCompleta += "\\";
+                }
+                rutaCompleta += archivoClientesJSON;
+
+                int total = cargarClientesYReservasJSON(rutaCompleta, clientes, reservas, funciones);
+                mensajeClientes = "JSON clientes/reservas procesado: " + std::to_string(total) +
+                                  " registros agregados | Clientes: " + std::to_string(clientes.contar()) +
+                                  " | Reservas hash: " + std::to_string(reservas.contar());
+                clientes.generarReporteGraphviz();
+                reservas.generarReporteGraphviz();
+            }
+
+            ImGui::Spacing();
+            ImGui::Separator();
+            ImGui::Text("Registro manual de cliente:");
 
             ImGui::InputText("ID", nuevoId, IM_ARRAYSIZE(nuevoId));
             ImGui::InputText("Nombre Cliente", nuevoNombre, IM_ARRAYSIZE(nuevoNombre));
@@ -805,6 +1126,59 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
             ImGui::InputText("ID Cliente a consultar", buscarClienteId, IM_ARRAYSIZE(buscarClienteId));
 
             Cliente* clienteEncontrado = clientes.buscarPorId(buscarClienteId);
+            if (ImGui::Button("Eliminar Cliente y sus Reservas", ImVec2(260, 30)))
+            {
+                Cliente* clienteEliminar = clientes.buscarPorId(buscarClienteId);
+                if (clienteEliminar == nullptr)
+                {
+                    mensajeClientes = "No se encontro el cliente a eliminar.";
+                }
+                else if (g_idClienteActual == clienteEliminar->id)
+                {
+                    mensajeClientes = "No se puede eliminar el cliente de la sesion actual.";
+                }
+                else
+                {
+                    std::string idEliminar = clienteEliminar->id;
+                    std::vector<Reserva> reservasEliminar = reservas.listarPorCliente(idEliminar);
+                    int reservasBorradas = 0;
+                    int asientosLiberados = 0;
+
+                    for (const Reserva& reservaEliminar : reservasEliminar)
+                    {
+                        for (FuncionCine& funcion : funciones)
+                        {
+                            if (funcion.codigoFuncion == reservaEliminar.codigoFuncion)
+                            {
+                                cargarAsientosFuncion(funcion);
+                                if (funcion.asientos.cancelarReserva(reservaEliminar.fila, reservaEliminar.columna))
+                                {
+                                    ++asientosLiberados;
+                                    guardarAsientosFuncion(funcion);
+                                }
+                                break;
+                            }
+                        }
+
+                        if (reservas.eliminar(reservaEliminar.codigoReserva))
+                        {
+                            ++reservasBorradas;
+                        }
+                    }
+
+                    bool clienteBorrado = clientes.eliminar(idEliminar);
+                    mensajeClientes = clienteBorrado
+                        ? "Cliente eliminado: " + idEliminar +
+                          " | Reservas eliminadas: " + std::to_string(reservasBorradas) +
+                          " | Asientos liberados: " + std::to_string(asientosLiberados)
+                        : "No se pudo eliminar el cliente del Arbol B.";
+
+                    clientes.generarReporteGraphviz();
+                    reservas.generarReporteGraphviz();
+                }
+            }
+            clienteEncontrado = clientes.buscarPorId(buscarClienteId);
+
             if (clienteEncontrado == nullptr)
             {
                 ImGui::TextDisabled("No se encontro ese cliente en el Arbol B.");

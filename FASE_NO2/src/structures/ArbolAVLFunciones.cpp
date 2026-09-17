@@ -66,6 +66,13 @@ void ArbolAVLFunciones::insertar(const FuncionCine& funcion)
     raiz = insertarRecursivo(raiz, funcion);
 }
 
+bool ArbolAVLFunciones::eliminar(const std::string& codigoFuncion)
+{
+    bool eliminado = false;
+    raiz = eliminarRecursivo(raiz, codigoFuncion, eliminado);
+    return eliminado;
+}
+
 NodoAVLFuncion* ArbolAVLFunciones::insertarRecursivo(NodoAVLFuncion* nodo, const FuncionCine& funcion)
 {
     if (nodo == nullptr) {
@@ -95,6 +102,59 @@ NodoAVLFuncion* ArbolAVLFunciones::insertarRecursivo(NodoAVLFuncion* nodo, const
         return rotarDerecha(nodo);
     }
     if (factor < -1 && funcion.codigoFuncion < nodo->derecho->funcion.codigoFuncion) {
+        nodo->derecho = rotarDerecha(nodo->derecho);
+        return rotarIzquierda(nodo);
+    }
+
+    return nodo;
+}
+
+NodoAVLFuncion* ArbolAVLFunciones::minimo(NodoAVLFuncion* nodo)
+{
+    NodoAVLFuncion* actual = nodo;
+    while (actual != nullptr && actual->izquierdo != nullptr) {
+        actual = actual->izquierdo;
+    }
+    return actual;
+}
+
+NodoAVLFuncion* ArbolAVLFunciones::eliminarRecursivo(NodoAVLFuncion* nodo, const std::string& codigoFuncion, bool& eliminado)
+{
+    if (nodo == nullptr) return nullptr;
+
+    if (codigoFuncion < nodo->funcion.codigoFuncion) {
+        nodo->izquierdo = eliminarRecursivo(nodo->izquierdo, codigoFuncion, eliminado);
+    } else if (codigoFuncion > nodo->funcion.codigoFuncion) {
+        nodo->derecho = eliminarRecursivo(nodo->derecho, codigoFuncion, eliminado);
+    } else {
+        eliminado = true;
+
+        if (nodo->izquierdo == nullptr || nodo->derecho == nullptr) {
+            NodoAVLFuncion* hijo = nodo->izquierdo != nullptr ? nodo->izquierdo : nodo->derecho;
+            delete nodo;
+            return hijo;
+        }
+
+        NodoAVLFuncion* sucesor = minimo(nodo->derecho);
+        nodo->funcion = sucesor->funcion;
+        bool eliminadoSucesor = false;
+        nodo->derecho = eliminarRecursivo(nodo->derecho, sucesor->funcion.codigoFuncion, eliminadoSucesor);
+    }
+
+    nodo->altura = 1 + std::max(altura(nodo->izquierdo), altura(nodo->derecho));
+    int factor = balance(nodo);
+
+    if (factor > 1 && balance(nodo->izquierdo) >= 0) {
+        return rotarDerecha(nodo);
+    }
+    if (factor > 1 && balance(nodo->izquierdo) < 0) {
+        nodo->izquierdo = rotarIzquierda(nodo->izquierdo);
+        return rotarDerecha(nodo);
+    }
+    if (factor < -1 && balance(nodo->derecho) <= 0) {
+        return rotarIzquierda(nodo);
+    }
+    if (factor < -1 && balance(nodo->derecho) > 0) {
         nodo->derecho = rotarDerecha(nodo->derecho);
         return rotarIzquierda(nodo);
     }

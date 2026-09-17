@@ -1,0 +1,38 @@
+digraph TablaHashReservas {
+  graph [rankdir=LR, bgcolor="white", labelloc="t", fontname="Arial", fontsize=18, label="Reporte 4: Tabla Hash de Reservas\nTamano: 23 | Reservas: 5 | Buckets ocupados: 5 | Colisiones: 0"];
+  node [shape=box, style="rounded,filled", fontname="Arial", fontsize=10, color="#37474f"];
+  edge [color="#37474f", arrowsize=0.8];
+  bucket0 [label="Bucket 0", fillcolor="#eeeeee"];
+  bucket1 [label="Bucket 1", fillcolor="#eeeeee"];
+  bucket2 [label="Bucket 2", fillcolor="#eeeeee"];
+  bucket3 [label="Bucket 3", fillcolor="#eeeeee"];
+  bucket4 [label="Bucket 4", fillcolor="#eeeeee"];
+  bucket5 [label="Bucket 5", fillcolor="#eeeeee"];
+  bucket6 [label="Bucket 6", fillcolor="#eeeeee"];
+  bucket7 [label="Bucket 7", fillcolor="#eeeeee"];
+  bucket8 [label="Bucket 8", fillcolor="#eeeeee"];
+  bucket9 [label="Bucket 9", fillcolor="#eeeeee"];
+  bucket10 [label="Bucket 10", fillcolor="#eeeeee"];
+  bucket11 [label="Bucket 11", fillcolor="#eeeeee"];
+  bucket12 [label="Bucket 12", fillcolor="#eeeeee"];
+  bucket13 [label="Bucket 13", fillcolor="#ffdd75"];
+  res_13_0 [label="R101\nCliente: U006\nFuncion: F001\nF2-C4", fillcolor="#c8e6c9"];
+  bucket13 -> res_13_0;
+  bucket14 [label="Bucket 14", fillcolor="#ffdd75"];
+  res_14_0 [label="R102\nCliente: U006\nFuncion: F003\nF1-C2", fillcolor="#c8e6c9"];
+  bucket14 -> res_14_0;
+  bucket15 [label="Bucket 15", fillcolor="#ffdd75"];
+  res_15_0 [label="R103\nCliente: U007\nFuncion: F002\nF3-C5", fillcolor="#c8e6c9"];
+  bucket15 -> res_15_0;
+  bucket16 [label="Bucket 16", fillcolor="#ffdd75"];
+  res_16_0 [label="R104\nCliente: U007\nFuncion: F005\nF4-C6", fillcolor="#c8e6c9"];
+  bucket16 -> res_16_0;
+  bucket17 [label="Bucket 17", fillcolor="#ffdd75"];
+  res_17_0 [label="R105\nCliente: U008\nFuncion: F007\nF5-C3", fillcolor="#c8e6c9"];
+  bucket17 -> res_17_0;
+  bucket18 [label="Bucket 18", fillcolor="#eeeeee"];
+  bucket19 [label="Bucket 19", fillcolor="#eeeeee"];
+  bucket20 [label="Bucket 20", fillcolor="#eeeeee"];
+  bucket21 [label="Bucket 21", fillcolor="#eeeeee"];
+  bucket22 [label="Bucket 22", fillcolor="#eeeeee"];
+}

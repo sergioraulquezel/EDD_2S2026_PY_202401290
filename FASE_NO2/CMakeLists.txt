@@ -45,6 +45,8 @@ set(PROJECT_SOURCES
     src/structures/ListaSolicitudes.cpp
     src/structures/ArbolAVLFunciones.cpp
     src/utils/CargaJSONFase2.cpp
+    src/utils/CargaJSONClientesReservas.cpp
+    src/utils/PersistenciaAsientos.cpp
     src/ui/PanelAdmin.cpp
     src/ui/PanelLogin.cpp
     src/ui/PanelCliente.cpp

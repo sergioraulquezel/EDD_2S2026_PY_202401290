@@ -1,0 +1,14 @@
+digraph ArbolBClientes {
+  graph [rankdir=TB, bgcolor="white", labelloc="t", fontname="Arial", fontsize=18, label="Reporte 3: Arbol B de Orden 4 de Clientes"];
+  node [shape=record, style="rounded,filled", fontname="Arial", fontsize=10, color="#37474f"];
+  edge [color="#37474f", arrowsize=0.8];
+  nodo0 [fillcolor="#ffdd75", label="<k0> U002\nCliente 2\ncliente2@cine.com|<k1> U004\nCliente 4\ncliente4@cine.com|<k2> U006\nAndrea Lopez\nandrea@cine.com"];
+  nodo1 [fillcolor="#c8e6c9", label="<k0> U001\nCliente 1\ncliente1@cine.com"];
+  nodo0 -> nodo1;
+  nodo2 [fillcolor="#c8e6c9", label="<k0> U003\nCliente 3\ncliente3@cine.com"];
+  nodo0 -> nodo2;
+  nodo3 [fillcolor="#c8e6c9", label="<k0> U005\nCliente 5\ncliente5@cine.com"];
+  nodo0 -> nodo3;
+  nodo4 [fillcolor="#c8e6c9", label="<k0> U007\nMario Castillo\nmario@cine.com|<k1> U008\nSofia Ramirez\nsofia@cine.com"];
+  nodo0 -> nodo4;
+}

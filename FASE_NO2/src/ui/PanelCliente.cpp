@@ -1,5 +1,6 @@
 #include "ui/PanelCliente.h"
 #include "ui/PanelLogin.h"
+#include "utils/PersistenciaAsientos.h"
 #include "imgui.h"
 #include "models/Reserva.h"
 #include <ctime>
@@ -253,6 +254,7 @@ void PanelCliente::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &fu
                         if (ImGui::Selectable(label.c_str(), isSelected))
                         {
                             funcionSeleccionadaIndex = i;
+                            cargarAsientosFuncion(funciones[i]);
                         }
                         if (isSelected) ImGui::SetItemDefaultFocus();
                     }
@@ -386,6 +388,7 @@ void PanelCliente::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &fu
                                     if (reservas.insertar(nueva))
                                     {
                                         clienteActual->agregarReserva(codigoReserva);
+                                        guardarAsientosFuncion(funcion);
                                         mensajeReserva = "Reserva creada: " + codigoReserva + " para " + funcion.codigoFuncion;
                                         if (promoSeleccionada != nullptr)
                                         {
@@ -487,7 +490,12 @@ void PanelCliente::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &fu
                         {
                             if (funcion.codigoFuncion == reserva->codigoFuncion)
                             {
+                                cargarAsientosFuncion(funcion);
                                 asientoLiberado = funcion.asientos.cancelarReserva(reserva->fila, reserva->columna);
+                                if (asientoLiberado)
+                                {
+                                    guardarAsientosFuncion(funcion);
+                                }
                                 break;
                             }
                         }

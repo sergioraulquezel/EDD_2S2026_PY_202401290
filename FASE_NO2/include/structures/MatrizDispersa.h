@@ -39,7 +39,7 @@ public:
     ~MatrizDispersa();
     
     void configurarSala(int totalFilas, int totalColumnas);
-    bool reservarAsiento(int fila, int columna, std::string cliente);
+    bool reservarAsiento(int fila, int columna, std::string cliente, bool mostrarLog = true);
     bool cancelarReserva(int fila, int columna);
     
     void generarReporteGraphviz();

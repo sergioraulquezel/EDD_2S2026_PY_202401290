@@ -83,7 +83,7 @@ void MatrizDispersa::copiarDesde(const MatrizDispersa& otra) {
     while (fila != nullptr) {
         NodoMatriz* asiento = fila->derecha;
         while (asiento != nullptr) {
-            reservarAsiento(asiento->fila, asiento->columna, asiento->titular);
+            reservarAsiento(asiento->fila, asiento->columna, asiento->titular, false);
             asiento = asiento->derecha;
         }
         fila = fila->abajo;
@@ -147,14 +147,18 @@ void MatrizDispersa::configurarSala(int filas, int columnas) {
     std::cout << "Matriz configurada para una sala de " << filas << " filas por " << columnas << " columnas.\n";
 }
 
-bool MatrizDispersa::reservarAsiento(int fila, int columna, std::string cliente) {
+bool MatrizDispersa::reservarAsiento(int fila, int columna, std::string cliente, bool mostrarLog) {
     if (!asientoValido(fila, columna)) {
-        std::cout << "[ERROR] Asiento (" << fila << "," << columna << ") fuera de los limites de la sala.\n";
+        if (mostrarLog) {
+            std::cout << "[ERROR] Asiento (" << fila << "," << columna << ") fuera de los limites de la sala.\n";
+        }
         return false;
     }
 
     if (obtenerAsiento(fila, columna) != nullptr) {
-        std::cout << "[AVISO] El asiento (" << fila << "," << columna << ") ya esta reservado.\n";
+        if (mostrarLog) {
+            std::cout << "[AVISO] El asiento (" << fila << "," << columna << ") ya esta reservado.\n";
+        }
         return false;
     }
 
@@ -185,7 +189,9 @@ bool MatrizDispersa::reservarAsiento(int fila, int columna, std::string cliente)
     actualV->abajo = nuevoAsiento;
     nuevoAsiento->arriba = actualV;
 
-    std::cout << "Asiento (" << fila << "," << columna << ") reservado exitosamente para " << nuevoAsiento->titular << ".\n";
+    if (mostrarLog) {
+        std::cout << "Asiento (" << fila << "," << columna << ") reservado exitosamente para " << nuevoAsiento->titular << ".\n";
+    }
     return true;
 }
 

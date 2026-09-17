@@ -141,6 +141,19 @@ void ArbolBinario::insertar(Pelicula* p) {
     this->raiz = insertarRecursivo(this->raiz, p);
 }
 
+bool ArbolBinario::eliminarPorId(int id, bool liberarMemoria) {
+    bool eliminado = false;
+    this->raiz = eliminarRecursivo(this->raiz, id, eliminado, liberarMemoria);
+    return eliminado;
+}
+
+bool ArbolBinario::eliminarPorCodigo(std::string codigo, bool liberarMemoria) {
+    codigo = limpiarTextoBST(codigo);
+    int id = extraerIdDesdeCodigo(codigo);
+    if (id <= 0) return false;
+    return eliminarPorId(id, liberarMemoria);
+}
+
 void ArbolBinario::imprimirInorden() {
     std::cout << "--- Cartelera de Peliculas (Recorrido Inorden) ---\n";
     if (this->raiz == nullptr) {
@@ -297,6 +310,14 @@ Pelicula* ArbolBinario::buscarPorCodigo(std::string codigo) {
     return buscarPorId(id);
 }
 
+std::vector<Pelicula*> ArbolBinario::obtenerPeliculasRecorrido(const std::string& recorrido) {
+    std::vector<Pelicula*> salida;
+    if (recorrido == "preorden") listarPreordenRecursivo(this->raiz, salida);
+    else if (recorrido == "postorden") listarPostordenRecursivo(this->raiz, salida);
+    else listarInordenRecursivo(this->raiz, salida);
+    return salida;
+}
+
 void ArbolBinario::escribirNodosDot(NodoBST* nodo, std::ofstream& archivo, int& contadorNulos) {
     if (nodo != nullptr) {
         std::string color = "#b7e1a1";
@@ -399,6 +420,49 @@ NodoBST* ArbolBinario::insertarRecursivo(NodoBST* nodo, Pelicula* p) {
     return nodo;
 }
 
+NodoBST* ArbolBinario::minimo(NodoBST* nodo) {
+    NodoBST* actual = nodo;
+    while (actual != nullptr && actual->izquierdo != nullptr) {
+        actual = actual->izquierdo;
+    }
+    return actual;
+}
+
+NodoBST* ArbolBinario::eliminarRecursivo(NodoBST* nodo, int id, bool& eliminado, bool liberarMemoria) {
+    if (nodo == nullptr) return nullptr;
+
+    if (id < nodo->pelicula->getId()) {
+        nodo->izquierdo = eliminarRecursivo(nodo->izquierdo, id, eliminado, liberarMemoria);
+    } else if (id > nodo->pelicula->getId()) {
+        nodo->derecho = eliminarRecursivo(nodo->derecho, id, eliminado, liberarMemoria);
+    } else {
+        eliminado = true;
+
+        if (nodo->izquierdo == nullptr) {
+            NodoBST* derecho = nodo->derecho;
+            if (liberarMemoria) delete nodo->pelicula;
+            delete nodo;
+            return derecho;
+        }
+
+        if (nodo->derecho == nullptr) {
+            NodoBST* izquierdo = nodo->izquierdo;
+            if (liberarMemoria) delete nodo->pelicula;
+            delete nodo;
+            return izquierdo;
+        }
+
+        NodoBST* sucesor = minimo(nodo->derecho);
+        Pelicula* peliculaAnterior = nodo->pelicula;
+        nodo->pelicula = sucesor->pelicula;
+        bool eliminadoSucesor = false;
+        nodo->derecho = eliminarRecursivo(nodo->derecho, sucesor->pelicula->getId(), eliminadoSucesor, false);
+        if (liberarMemoria) delete peliculaAnterior;
+    }
+
+    return nodo;
+}
+
 void ArbolBinario::inordenRecursivo(NodoBST* nodo) {
     if (nodo != nullptr) {
         inordenRecursivo(nodo->izquierdo);
@@ -408,6 +472,27 @@ void ArbolBinario::inordenRecursivo(NodoBST* nodo) {
                   << " | Fecha fin: " << nodo->pelicula->getFechaFin() << "\n";
         inordenRecursivo(nodo->derecho);
     }
+}
+
+void ArbolBinario::listarPreordenRecursivo(NodoBST* nodo, std::vector<Pelicula*>& salida) {
+    if (nodo == nullptr) return;
+    salida.push_back(nodo->pelicula);
+    listarPreordenRecursivo(nodo->izquierdo, salida);
+    listarPreordenRecursivo(nodo->derecho, salida);
+}
+
+void ArbolBinario::listarInordenRecursivo(NodoBST* nodo, std::vector<Pelicula*>& salida) {
+    if (nodo == nullptr) return;
+    listarInordenRecursivo(nodo->izquierdo, salida);
+    salida.push_back(nodo->pelicula);
+    listarInordenRecursivo(nodo->derecho, salida);
+}
+
+void ArbolBinario::listarPostordenRecursivo(NodoBST* nodo, std::vector<Pelicula*>& salida) {
+    if (nodo == nullptr) return;
+    listarPostordenRecursivo(nodo->izquierdo, salida);
+    listarPostordenRecursivo(nodo->derecho, salida);
+    salida.push_back(nodo->pelicula);
 }
 
 bool ArbolBinario::validarBSTRecursivo(NodoBST* nodo, bool& tieneUltimoId, int& ultimoId, int& totalNodos) {

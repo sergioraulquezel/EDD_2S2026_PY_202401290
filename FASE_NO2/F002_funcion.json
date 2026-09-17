@@ -1,4 +1,10 @@
 {
   "codigo_funcion": "F002",
-  "asientos_ocupados": []
+  "asientos_ocupados": [
+    {
+      "fila": 3,
+      "columna": 5,
+      "codigo_reserva": "R103"
+    }
+  ]
 }

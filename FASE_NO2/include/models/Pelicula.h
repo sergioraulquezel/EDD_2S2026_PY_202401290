@@ -18,6 +18,7 @@ private:
 public:
     // Solo la declaración (sin llaves ni código aquí)
     Pelicula(int _id, std::string _titulo, std::string _genero, int _duracion, std::string _clasificacion, std::string _fechaFin = "", std::string _codigo = "", std::string _idioma = "", std::string _fechaEstreno = "");
+    void actualizar(std::string _titulo, std::string _genero, int _duracion, std::string _clasificacion, std::string _fechaFin = "", std::string _codigo = "", std::string _idioma = "", std::string _fechaEstreno = "");
 
     // Getters
     int getId() { return id; }

@@ -134,6 +134,12 @@ static std::vector<std::string> extraerObjetos(const std::string& texto)
 
 static void crearArchivoAsientosVacio(const std::string& nombreArchivo, const std::string& codigoFuncion)
 {
+    std::ifstream existente(nombreArchivo);
+    if (existente.good()) {
+        std::cout << "[JSON] Archivo de asientos existente conservado: " << nombreArchivo << "\n";
+        return;
+    }
+
     std::ofstream archivo(nombreArchivo);
     if (!archivo.is_open()) {
         std::cout << "[JSON] No se pudo crear archivo de asientos: " << nombreArchivo << "\n";
