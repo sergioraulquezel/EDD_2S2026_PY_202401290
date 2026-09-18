@@ -44,6 +44,8 @@ public:
     int cargarPeliculasCSV(std::string rutaArchivo);
     Pelicula* buscarPorId(int id);
     Pelicula* buscarPorCodigo(std::string codigo);
+    int obtenerDiasRestantes(Pelicula* pelicula);
+    std::vector<Pelicula*> obtenerPeliculasProximasAFinalizar(int limiteDias = 7);
     std::vector<Pelicula*> obtenerPeliculasRecorrido(const std::string& recorrido);
     void obtenerPeliculas(Pelicula* arreglo[], int& contador);
 };

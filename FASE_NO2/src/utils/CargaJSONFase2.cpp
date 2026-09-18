@@ -1,8 +1,16 @@
 #include "utils/CargaJSONFase2.h"
+#include "utils/Validaciones.h"
 #include <cctype>
 #include <fstream>
 #include <iostream>
 #include <sstream>
+
+static std::string ultimoMensajeCargaFase2 = "";
+
+std::string obtenerUltimoMensajeCargaFase2()
+{
+    return ultimoMensajeCargaFase2;
+}
 
 static std::string limpiarRuta(const std::string& texto)
 {
@@ -160,7 +168,8 @@ int cargarPeliculasYFuncionesJSON(const std::string& rutaArchivo,
     std::string ruta = limpiarRuta(rutaArchivo);
     std::string contenido = leerArchivoCompleto(ruta);
     if (contenido.empty()) {
-        std::cout << "[JSON] No se pudo abrir o leer el archivo: " << ruta << "\n";
+        ultimoMensajeCargaFase2 = "No se pudo abrir o leer el archivo: " + ruta;
+        std::cout << "[JSON] " << ultimoMensajeCargaFase2 << "\n";
         return 0;
     }
 
@@ -168,6 +177,8 @@ int cargarPeliculasYFuncionesJSON(const std::string& rutaArchivo,
     std::vector<std::string> peliculasJSON = extraerObjetos(arregloPeliculas);
     int peliculasInsertadas = 0;
     int funcionesInsertadas = 0;
+    int peliculasRechazadas = 0;
+    int funcionesRechazadas = 0;
 
     for (const std::string& peliculaObj : peliculasJSON) {
         std::string codigo = obtenerString(peliculaObj, "codigo");
@@ -179,18 +190,31 @@ int cargarPeliculasYFuncionesJSON(const std::string& rutaArchivo,
         std::string fechaEstreno = obtenerString(peliculaObj, "fecha_estreno");
         std::string fechaFin = obtenerString(peliculaObj, "fecha_fin");
 
-        if (codigo.empty() || titulo.empty() || duracion <= 0) {
+        if (campoVacio(codigo) || campoVacio(titulo) || campoVacio(genero) ||
+            campoVacio(clasificacion) || campoVacio(idioma) || duracion <= 0 ||
+            !fechaValida(fechaEstreno) || !fechaValida(fechaFin)) {
+            ++peliculasRechazadas;
             std::cout << "[JSON] Pelicula ignorada por campos obligatorios invalidos.\n";
             continue;
         }
 
         int id = extraerNumero(codigo);
-        Pelicula* pelicula = cartelera.buscarPorCodigo(codigo);
-        if (pelicula == nullptr) {
-            pelicula = new Pelicula(id, titulo, genero, duracion, clasificacion, fechaFin, codigo, idioma, fechaEstreno);
-            cartelera.insertar(pelicula);
-            ++peliculasInsertadas;
+        if (id <= 0) {
+            ++peliculasRechazadas;
+            std::cout << "[JSON] Pelicula ignorada por codigo invalido: " << codigo << "\n";
+            continue;
         }
+
+        Pelicula* pelicula = cartelera.buscarPorCodigo(codigo);
+        if (pelicula != nullptr || cartelera.buscarPorId(id) != nullptr) {
+            ++peliculasRechazadas;
+            std::cout << "[JSON] Pelicula ignorada por codigo duplicado: " << codigo << "\n";
+            continue;
+        }
+
+        pelicula = new Pelicula(id, titulo, genero, duracion, clasificacion, fechaFin, codigo, idioma, fechaEstreno);
+        cartelera.insertar(pelicula);
+        ++peliculasInsertadas;
 
         std::string arregloFunciones = extraerArreglo(peliculaObj, "funciones");
         std::vector<std::string> funcionesJSON = extraerObjetos(arregloFunciones);
@@ -201,8 +225,15 @@ int cargarPeliculasYFuncionesJSON(const std::string& rutaArchivo,
             int filas = obtenerInt(funcionObj, "filas");
             int columnas = obtenerInt(funcionObj, "columnas");
 
-            if (codigoFuncion.empty() || horario.empty() || sala.empty() || filas <= 0 || columnas <= 0) {
+            if (campoVacio(codigoFuncion) || campoVacio(horario) || campoVacio(sala) || filas <= 0 || columnas <= 0) {
+                ++funcionesRechazadas;
                 std::cout << "[JSON] Funcion ignorada por campos invalidos.\n";
+                continue;
+            }
+
+            if (arbolFunciones.buscar(codigoFuncion) != nullptr) {
+                ++funcionesRechazadas;
+                std::cout << "[JSON] Funcion ignorada por codigo duplicado: " << codigoFuncion << "\n";
                 continue;
             }
 
@@ -215,7 +246,10 @@ int cargarPeliculasYFuncionesJSON(const std::string& rutaArchivo,
         }
     }
 
-    std::cout << "[JSON] Peliculas insertadas: " << peliculasInsertadas
-              << " | Funciones insertadas en AVL: " << funcionesInsertadas << "\n";
+    ultimoMensajeCargaFase2 = "Peliculas insertadas: " + std::to_string(peliculasInsertadas) +
+                              " | Funciones insertadas: " + std::to_string(funcionesInsertadas) +
+                              " | Peliculas rechazadas: " + std::to_string(peliculasRechazadas) +
+                              " | Funciones rechazadas: " + std::to_string(funcionesRechazadas);
+    std::cout << "[JSON] " << ultimoMensajeCargaFase2 << "\n";
     return peliculasInsertadas + funcionesInsertadas;
 }

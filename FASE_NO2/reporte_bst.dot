@@ -14,29 +14,29 @@ digraph ArbolPeliculas {
         leyenda_gris [label="Gris: fecha fin vencida", fillcolor="#e0e0e0"];
         { rank=same; leyenda_verde; leyenda_amarillo; leyenda_gris; }
     }
-    nodo1 [fillcolor="#b7e1a1", label="Codigo: P001\nTitulo: Interestelar\nDuracion: 169 min\nClasificacion: B\nFecha fin: 2026-10-15\nEstado: En cartelera (30 dias)"];
+    nodo1 [fillcolor="#b7e1a1", label="Codigo: P001\nTitulo: Interestelar\nDuracion: 169 min\nClasificacion: B\nFecha fin: 2026-10-15\nEstado: En cartelera (28 dias)"];
     nulo1 [shape=point, style=invis, label="", width=0.01, height=0.01];
     nodo1 -> nulo1 [style=invis, weight=10];
     nodo1 -> nodo2 [label="der"];
     { rank=same; nulo1; nodo2; }
     nulo1 -> nodo2 [style=invis, weight=20];
-    nodo2 [fillcolor="#b7e1a1", label="Codigo: P002\nTitulo: Cocoliso\nDuracion: 105 min\nClasificacion: AA\nFecha fin: 2026-10-20\nEstado: En cartelera (35 dias)"];
+    nodo2 [fillcolor="#b7e1a1", label="Codigo: P002\nTitulo: Coco\nDuracion: 105 min\nClasificacion: AA\nFecha fin: 2026-10-20\nEstado: En cartelera (33 dias)"];
     nulo2 [shape=point, style=invis, label="", width=0.01, height=0.01];
     nodo2 -> nulo2 [style=invis, weight=10];
     nodo2 -> nodo3 [label="der"];
     { rank=same; nulo2; nodo3; }
     nulo2 -> nodo3 [style=invis, weight=20];
-    nodo3 [fillcolor="#b7e1a1", label="Codigo: P003\nTitulo: El Origen\nDuracion: 148 min\nClasificacion: B15\nFecha fin: 2026-10-30\nEstado: En cartelera (45 dias)"];
+    nodo3 [fillcolor="#b7e1a1", label="Codigo: P003\nTitulo: El Origen\nDuracion: 148 min\nClasificacion: B15\nFecha fin: 2026-10-30\nEstado: En cartelera (43 dias)"];
     nulo3 [shape=point, style=invis, label="", width=0.01, height=0.01];
     nodo3 -> nulo3 [style=invis, weight=10];
     nodo3 -> nodo4 [label="der"];
     { rank=same; nulo3; nodo4; }
     nulo3 -> nodo4 [style=invis, weight=20];
-    nodo4 [fillcolor="#b7e1a1", label="Codigo: P004\nTitulo: Toy Story\nDuracion: 81 min\nClasificacion: AA\nFecha fin: 2026-10-05\nEstado: En cartelera (20 dias)"];
+    nodo4 [fillcolor="#b7e1a1", label="Codigo: P004\nTitulo: Toy Story\nDuracion: 81 min\nClasificacion: AA\nFecha fin: 2026-10-05\nEstado: En cartelera (18 dias)"];
     nulo4 [shape=point, style=invis, label="", width=0.01, height=0.01];
     nodo4 -> nulo4 [style=invis, weight=10];
     nodo4 -> nodo5 [label="der"];
     { rank=same; nulo4; nodo5; }
     nulo4 -> nodo5 [style=invis, weight=20];
-    nodo5 [fillcolor="#b7e1a1", label="Codigo: P005\nTitulo: Matrix\nDuracion: 136 min\nClasificacion: B15\nFecha fin: 2026-11-01\nEstado: En cartelera (47 dias)"];
+    nodo5 [fillcolor="#b7e1a1", label="Codigo: P005\nTitulo: Matrix\nDuracion: 136 min\nClasificacion: B15\nFecha fin: 2026-11-01\nEstado: En cartelera (45 dias)"];
 }

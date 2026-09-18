@@ -1,4 +1,5 @@
 #include "ui/PanelLogin.h"
+#include "utils/Validaciones.h"
 #include "imgui.h"
 #include "models/Cliente.h"
 #include <cstdio>
@@ -150,15 +151,35 @@ void dibujarPanelLogin(ArbolBClientes& clientes)
 
         if (ImGui::Button("Crear cuenta de cliente", ImVec2(-1, 36)))
         {
-            Cliente nuevo(regId, regNombre, regCorreo, regTelefono, regPassword);
-            if (clientes.insertar(nuevo))
+            if (campoVacio(regId) || campoVacio(regNombre) || campoVacio(regCorreo) ||
+                campoVacio(regTelefono) || campoVacio(regPassword))
             {
-                mensajeRegistro = "Cliente registrado en Arbol B: " + nuevo.id;
-                mensajeError = "";
+                mensajeRegistro = "No se pudo registrar: todos los campos son obligatorios.";
+            }
+            else if (!correoValido(regCorreo))
+            {
+                mensajeRegistro = "No se pudo registrar: correo invalido.";
+            }
+            else if (clientes.buscarPorId(regId) != nullptr)
+            {
+                mensajeRegistro = "No se pudo registrar: ID duplicado.";
+            }
+            else if (clientes.buscarPorCorreo(regCorreo) != nullptr)
+            {
+                mensajeRegistro = "No se pudo registrar: correo duplicado.";
             }
             else
             {
-                mensajeRegistro = "No se pudo registrar: ID o correo duplicado/campos invalidos.";
+                Cliente nuevo(regId, regNombre, regCorreo, regTelefono, regPassword);
+                if (clientes.insertar(nuevo))
+                {
+                    mensajeRegistro = "Cliente registrado en Arbol B: " + nuevo.id;
+                    mensajeError = "";
+                }
+                else
+                {
+                    mensajeRegistro = "No se pudo registrar: revise los datos ingresados.";
+                }
             }
         }
 

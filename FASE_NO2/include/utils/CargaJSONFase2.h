@@ -9,3 +9,4 @@ int cargarPeliculasYFuncionesJSON(const std::string& rutaArchivo,
                                   ArbolBinario& cartelera,
                                   std::vector<FuncionCine>& funciones,
                                   ArbolAVLFunciones& arbolFunciones);
+std::string obtenerUltimoMensajeCargaFase2();

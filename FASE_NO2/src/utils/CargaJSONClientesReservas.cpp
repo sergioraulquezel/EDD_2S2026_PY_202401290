@@ -1,8 +1,16 @@
 #include "utils/CargaJSONClientesReservas.h"
+#include "utils/Validaciones.h"
 #include <cctype>
 #include <fstream>
 #include <iostream>
 #include <sstream>
+
+static std::string ultimoMensajeClientesReservas = "";
+
+std::string obtenerUltimoMensajeCargaClientesReservas()
+{
+    return ultimoMensajeClientesReservas;
+}
 
 static std::string limpiarRutaClientes(const std::string& texto)
 {
@@ -178,11 +186,13 @@ int cargarClientesYReservasJSON(const std::string& rutaArchivo,
     std::string ruta = limpiarRutaClientes(rutaArchivo);
     std::string contenido = leerArchivoClientes(ruta);
     if (contenido.empty()) {
-        std::cout << "[JSON CLIENTES] No se pudo abrir o leer el archivo: " << ruta << "\n";
+        ultimoMensajeClientesReservas = "No se pudo abrir o leer el archivo: " + ruta;
+        std::cout << "[JSON CLIENTES] " << ultimoMensajeClientesReservas << "\n";
         return 0;
     }
 
     int clientesInsertados = 0;
+    int clientesRechazados = 0;
     int reservasInsertadas = 0;
     int reservasRechazadas = 0;
 
@@ -198,12 +208,19 @@ int cargarClientesYReservasJSON(const std::string& rutaArchivo,
         std::string tipo = obtenerStringClientes(clienteObj, "tipo");
         if (tipo.empty()) tipo = "cliente";
 
-        if (id.empty() || nombre.empty() || correo.empty() || password.empty()) {
+        if (campoVacio(id) || campoVacio(nombre) || campoVacio(correo) ||
+            campoVacio(telefono) || campoVacio(password) || !correoValido(correo)) {
+            ++clientesRechazados;
             std::cout << "[JSON CLIENTES] Cliente ignorado por campos obligatorios invalidos.\n";
             continue;
         }
 
         Cliente* cliente = clientes.buscarPorId(id);
+        if (cliente == nullptr && clientes.buscarPorCorreo(correo) != nullptr) {
+            ++clientesRechazados;
+            std::cout << "[JSON CLIENTES] Cliente ignorado por correo duplicado: " << correo << "\n";
+            continue;
+        }
         if (cliente == nullptr) {
             Cliente nuevo(id, nombre, correo, telefono, password, tipo);
             if (clientes.insertar(nuevo)) {
@@ -227,7 +244,8 @@ int cargarClientesYReservasJSON(const std::string& rutaArchivo,
             std::string fechaReserva = obtenerStringClientes(reservaObj, "fecha_reserva");
 
             FuncionCine* funcion = buscarFuncionPorCodigo(funciones, codigoFuncion);
-            if (codigoReserva.empty() || codigoFuncion.empty() || fila <= 0 || columna <= 0 || fechaReserva.empty() || funcion == nullptr) {
+            if (campoVacio(codigoReserva) || campoVacio(codigoFuncion) || fila <= 0 || columna <= 0 ||
+                !fechaValida(fechaReserva) || funcion == nullptr) {
                 ++reservasRechazadas;
                 std::cout << "[JSON CLIENTES] Reserva ignorada por datos invalidos o funcion inexistente: "
                           << codigoReserva << "\n";
@@ -259,8 +277,10 @@ int cargarClientesYReservasJSON(const std::string& rutaArchivo,
         }
     }
 
-    std::cout << "[JSON CLIENTES] Clientes insertados: " << clientesInsertados
-              << " | Reservas insertadas: " << reservasInsertadas
-              << " | Reservas rechazadas: " << reservasRechazadas << "\n";
+    ultimoMensajeClientesReservas = "Clientes insertados: " + std::to_string(clientesInsertados) +
+                                    " | Clientes rechazados: " + std::to_string(clientesRechazados) +
+                                    " | Reservas insertadas: " + std::to_string(reservasInsertadas) +
+                                    " | Reservas rechazadas: " + std::to_string(reservasRechazadas);
+    std::cout << "[JSON CLIENTES] " << ultimoMensajeClientesReservas << "\n";
     return clientesInsertados + reservasInsertadas;
 }

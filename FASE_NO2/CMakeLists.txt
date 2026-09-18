@@ -47,6 +47,7 @@ set(PROJECT_SOURCES
     src/utils/CargaJSONFase2.cpp
     src/utils/CargaJSONClientesReservas.cpp
     src/utils/PersistenciaAsientos.cpp
+    src/utils/Validaciones.cpp
     src/ui/PanelAdmin.cpp
     src/ui/PanelLogin.cpp
     src/ui/PanelCliente.cpp

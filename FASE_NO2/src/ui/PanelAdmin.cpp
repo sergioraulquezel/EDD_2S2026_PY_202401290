@@ -3,6 +3,7 @@
 #include "utils/CargaJSONFase2.h"
 #include "utils/CargaJSONClientesReservas.h"
 #include "utils/PersistenciaAsientos.h"
+#include "utils/Validaciones.h"
 #include "imgui.h"
 #include "models/Cliente.h"
 #include <cstdio>
@@ -111,8 +112,9 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
                 rutaJSON += archivoJSONFase2;
 
                 int totalCargado = cargarPeliculasYFuncionesJSON(rutaJSON, cartelera, funciones, arbolFunciones);
-                mensajeCargaJSON = "JSON procesado: " + std::to_string(totalCargado) +
-                                   " registros agregados | Funciones en memoria: " + std::to_string(funciones.size()) +
+                mensajeCargaJSON = obtenerUltimoMensajeCargaFase2() +
+                                   " | Total agregado: " + std::to_string(totalCargado) +
+                                   " | Funciones en memoria: " + std::to_string(funciones.size()) +
                                    " | Ruta: " + rutaJSON;
 
                 cartelera.generarReporteGraphviz();
@@ -128,6 +130,41 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
                 ImGui::TextColored(ImVec4(0.2f, 0.8f, 0.3f, 1.0f), "%s", mensajeCargaJSON.c_str());
             }
             ImGui::TextDisabled("JSON esperado en C:\\Users\\EQUIPO\\Downloads\\ o en la carpeta que indiques.");
+
+            std::vector<Pelicula*> peliculasProximas = cartelera.obtenerPeliculasProximasAFinalizar(7);
+            if (!peliculasProximas.empty())
+            {
+                ImGui::Spacing();
+                ImGui::Separator();
+                ImGui::TextColored(ImVec4(1.0f, 0.76f, 0.20f, 1.0f),
+                                   "Alerta: %d pelicula(s) finalizan cartelera en menos de 7 dias.",
+                                   (int)peliculasProximas.size());
+
+                if (ImGui::BeginTable("TablaAlertasFinCartelera", 4, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg | ImGuiTableFlags_SizingFixedFit))
+                {
+                    ImGui::TableSetupColumn("Codigo");
+                    ImGui::TableSetupColumn("Titulo");
+                    ImGui::TableSetupColumn("Fecha fin");
+                    ImGui::TableSetupColumn("Dias restantes");
+                    ImGui::TableHeadersRow();
+
+                    for (Pelicula* peliculaAlerta : peliculasProximas)
+                    {
+                        ImGui::TableNextRow();
+                        ImGui::TableSetColumnIndex(0);
+                        ImGui::Text("%s", peliculaAlerta->getCodigo().c_str());
+                        ImGui::TableSetColumnIndex(1);
+                        ImGui::Text("%s", peliculaAlerta->getTitulo().c_str());
+                        ImGui::TableSetColumnIndex(2);
+                        ImGui::Text("%s", peliculaAlerta->getFechaFin().c_str());
+                        ImGui::TableSetColumnIndex(3);
+                        int diasRestantes = cartelera.obtenerDiasRestantes(peliculaAlerta);
+                        ImGui::Text("%d", diasRestantes);
+                    }
+
+                    ImGui::EndTable();
+                }
+            }
 
             ImGui::Spacing();
             ImGui::Separator();
@@ -145,9 +182,31 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
 
             if (ImGui::Button("Guardar Pelicula en Cartelera", ImVec2(220, 30)))
             {
-                Pelicula *nuevaPelicula = new Pelicula(inputIdNum, inputTitulo, inputGenero, inputDuracion, inputClasificacion, inputFin, inputId, inputIdioma, inputEstreno);
-                cartelera.insertar(nuevaPelicula);
-                std::cout << "Película " << inputTitulo << " agregada al BST con éxito.\n";
+                if (inputIdNum <= 0 || campoVacio(inputId) || campoVacio(inputTitulo) || campoVacio(inputGenero) ||
+                    campoVacio(inputClasificacion) || campoVacio(inputIdioma) || campoVacio(inputEstreno) ||
+                    campoVacio(inputFin))
+                {
+                    mensajePeliculas = "Complete todos los campos obligatorios de la pelicula y use un ID mayor que cero.";
+                }
+                else if (inputDuracion <= 0)
+                {
+                    mensajePeliculas = "La duracion debe ser mayor que cero.";
+                }
+                else if (!fechaValida(inputEstreno) || !fechaValida(inputFin))
+                {
+                    mensajePeliculas = "Las fechas deben ser validas. Use formato yyyy-mm-dd o dd/mm/yyyy.";
+                }
+                else if (cartelera.buscarPorCodigo(inputId) != nullptr || cartelera.buscarPorId(inputIdNum) != nullptr)
+                {
+                    mensajePeliculas = "No se agrego la pelicula: codigo o ID duplicado.";
+                }
+                else
+                {
+                    Pelicula *nuevaPelicula = new Pelicula(inputIdNum, inputTitulo, inputGenero, inputDuracion, inputClasificacion, inputFin, inputId, inputIdioma, inputEstreno);
+                    cartelera.insertar(nuevaPelicula);
+                    mensajePeliculas = "Pelicula agregada al BST: " + std::string(inputId);
+                    std::cout << "Película " << inputTitulo << " agregada al BST con éxito.\n";
+                }
             }
 
             ImGui::SameLine();
@@ -201,6 +260,15 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
                 else if (inputDuracion <= 0)
                 {
                     mensajePeliculas = "La duracion debe ser mayor que cero.";
+                }
+                else if (campoVacio(inputTitulo) || campoVacio(inputGenero) || campoVacio(inputClasificacion) ||
+                         campoVacio(inputIdioma) || campoVacio(inputEstreno) || campoVacio(inputFin))
+                {
+                    mensajePeliculas = "No se puede editar: hay campos obligatorios vacios.";
+                }
+                else if (!fechaValida(inputEstreno) || !fechaValida(inputFin))
+                {
+                    mensajePeliculas = "No se puede editar: las fechas no son validas.";
                 }
                 else
                 {
@@ -419,7 +487,19 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
 
                 if (ImGui::Button("Crear / Sobrescribir Función y Asientos", ImVec2(300, 30)))
                 {
-                    if (peliculaSeleccionadaParaFuncion != nullptr)
+                    if (peliculaSeleccionadaParaFuncion == nullptr)
+                    {
+                        mensajeFunciones = "Debe seleccionar una pelicula primero.";
+                    }
+                    else if (campoVacio(inputHorario) || campoVacio(inputSala))
+                    {
+                        mensajeFunciones = "Complete horario y sala para crear la funcion.";
+                    }
+                    else if (inputFilas <= 0 || inputColumnas <= 0)
+                    {
+                        mensajeFunciones = "Filas y columnas deben ser mayores que cero.";
+                    }
+                    else
                     {
                         int idFuncion = siguienteIdFuncion++;
                         std::string codigoFuncion = generarCodigoFuncionAdmin(idFuncion);
@@ -434,15 +514,13 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
                         arbolFunciones.insertar(funciones.back());
                         funcionSeleccionadaIndex = (int)funciones.size() - 1;
                         crearArchivoAsientosFuncion(funciones.back());
+                        mensajeFunciones = "Funcion creada: " + codigoFuncion + " | " +
+                                           std::to_string(inputFilas) + "x" + std::to_string(inputColumnas);
 
                         std::cout << "[INFO] Función creada exitosamente para: "
                                   << peliculaSeleccionadaParaFuncion->getTitulo()
                                   << " a las " << inputHorario << " en " << inputSala
                                   << " (" << inputFilas << "x" << inputColumnas << ")\n";
-                    }
-                    else
-                    {
-                        std::cout << "[ERROR] Debe seleccionar una película primero.\n";
                     }
                 }
 
@@ -525,6 +603,14 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
                     if (funcionActual == nullptr || peliculaSeleccionadaParaFuncion == nullptr)
                     {
                         mensajeFunciones = "Seleccione una funcion y una pelicula antes de editar.";
+                    }
+                    else if (campoVacio(inputHorario) || campoVacio(inputSala))
+                    {
+                        mensajeFunciones = "No se puede editar: horario y sala son obligatorios.";
+                    }
+                    else if (inputFilas <= 0 || inputColumnas <= 0)
+                    {
+                        mensajeFunciones = "No se puede editar: filas y columnas deben ser mayores que cero.";
                     }
                     else
                     {
@@ -1050,8 +1136,9 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
                 rutaCompleta += archivoClientesJSON;
 
                 int total = cargarClientesYReservasJSON(rutaCompleta, clientes, reservas, funciones);
-                mensajeClientes = "JSON clientes/reservas procesado: " + std::to_string(total) +
-                                  " registros agregados | Clientes: " + std::to_string(clientes.contar()) +
+                mensajeClientes = obtenerUltimoMensajeCargaClientesReservas() +
+                                  " | Total agregado: " + std::to_string(total) +
+                                  " | Clientes: " + std::to_string(clientes.contar()) +
                                   " | Reservas hash: " + std::to_string(reservas.contar());
                 clientes.generarReporteGraphviz();
                 reservas.generarReporteGraphviz();
@@ -1069,10 +1156,30 @@ void PanelAdmin::dibujar(ArbolBinario &cartelera, std::vector<FuncionCine> &func
 
             if (ImGui::Button("Agregar Cliente al Arbol B", ImVec2(240, 30)))
             {
-                Cliente nuevo(nuevoId, nuevoNombre, nuevoCorreo, nuevoTelefono, nuevoPassword);
-                mensajeClientes = clientes.insertar(nuevo)
-                    ? "Cliente agregado al Arbol B: " + nuevo.id
-                    : "No se agrego el cliente. Revise ID/correo duplicado o campos vacios.";
+                if (campoVacio(nuevoId) || campoVacio(nuevoNombre) || campoVacio(nuevoCorreo) ||
+                    campoVacio(nuevoTelefono) || campoVacio(nuevoPassword))
+                {
+                    mensajeClientes = "No se agrego el cliente: todos los campos son obligatorios.";
+                }
+                else if (!correoValido(nuevoCorreo))
+                {
+                    mensajeClientes = "No se agrego el cliente: el correo no tiene un formato valido.";
+                }
+                else if (clientes.buscarPorId(nuevoId) != nullptr)
+                {
+                    mensajeClientes = "No se agrego el cliente: ID duplicado.";
+                }
+                else if (clientes.buscarPorCorreo(nuevoCorreo) != nullptr)
+                {
+                    mensajeClientes = "No se agrego el cliente: correo duplicado.";
+                }
+                else
+                {
+                    Cliente nuevo(nuevoId, nuevoNombre, nuevoCorreo, nuevoTelefono, nuevoPassword);
+                    mensajeClientes = clientes.insertar(nuevo)
+                        ? "Cliente agregado al Arbol B: " + nuevo.id
+                        : "No se agrego el cliente. Revise los datos ingresados.";
+                }
             }
             ImGui::SameLine();
             if (ImGui::Button("Reporte Arbol B Clientes", ImVec2(220, 30)))

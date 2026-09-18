@@ -1,4 +1,5 @@
 #include "structures/ArbolBinario.h"
+#include "utils/Validaciones.h"
 #include <cstdlib>
 #include <cstdio>
 #include <ctime>
@@ -271,11 +272,28 @@ int ArbolBinario::cargarPeliculasCSV(std::string rutaArchivo) {
             continue;
         }
 
+        if (campoVacio(campos[0]) || campoVacio(campos[1]) || campoVacio(campos[2]) ||
+            campoVacio(campos[4]) || campoVacio(campos[5]) || campoVacio(campos[6]) ||
+            campoVacio(campos[7])) {
+            std::cout << "[CSV] Linea " << lineaActual << " ignorada: campos obligatorios vacios.\n";
+            continue;
+        }
+
         int duracion = 0;
         try {
             duracion = std::stoi(campos[3]);
         } catch (...) {
             std::cout << "[CSV] Linea " << lineaActual << " ignorada: duracion invalida.\n";
+            continue;
+        }
+
+        if (duracion <= 0) {
+            std::cout << "[CSV] Linea " << lineaActual << " ignorada: duracion debe ser mayor que cero.\n";
+            continue;
+        }
+
+        if (!fechaValida(campos[6]) || !fechaValida(campos[7])) {
+            std::cout << "[CSV] Linea " << lineaActual << " ignorada: fecha invalida.\n";
             continue;
         }
 
@@ -308,6 +326,24 @@ Pelicula* ArbolBinario::buscarPorCodigo(std::string codigo) {
     int id = extraerIdDesdeCodigo(codigo);
     if (id <= 0) return nullptr;
     return buscarPorId(id);
+}
+
+int ArbolBinario::obtenerDiasRestantes(Pelicula* pelicula) {
+    return diasRestantesBST(pelicula);
+}
+
+std::vector<Pelicula*> ArbolBinario::obtenerPeliculasProximasAFinalizar(int limiteDias) {
+    std::vector<Pelicula*> peliculas = obtenerPeliculasRecorrido("inorden");
+    std::vector<Pelicula*> proximas;
+
+    for (Pelicula* pelicula : peliculas) {
+        int dias = diasRestantesBST(pelicula);
+        if (dias >= 0 && dias < limiteDias) {
+            proximas.push_back(pelicula);
+        }
+    }
+
+    return proximas;
 }
 
 std::vector<Pelicula*> ArbolBinario::obtenerPeliculasRecorrido(const std::string& recorrido) {

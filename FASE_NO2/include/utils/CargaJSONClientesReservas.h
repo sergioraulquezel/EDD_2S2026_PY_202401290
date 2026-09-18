@@ -10,3 +10,4 @@ int cargarClientesYReservasJSON(const std::string& rutaArchivo,
                                 ArbolBClientes& clientes,
                                 TablaHashReservas& reservas,
                                 std::vector<FuncionCine>& funciones);
+std::string obtenerUltimoMensajeCargaClientesReservas();
