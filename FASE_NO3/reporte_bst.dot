@@ -1,0 +1,138 @@
+digraph ArbolPeliculas {
+    rankdir=TB;
+    ordering=out;
+    graph [bgcolor="white", labelloc="t", fontsize=18, fontname="Arial", label="Arbol binario de busqueda (Cartelera de Peliculas)\nEstado BST: CORRECTO | Total de peliculas: 31"];
+    graph [nodesep=0.55, ranksep=0.80];
+    node [shape=box, style="rounded,filled", fontname="Arial", fontsize=10, color="#37474f", penwidth=1.4, margin="0.10,0.08"];
+    edge [color="#37474f", arrowsize=0.8, fontname="Arial", fontsize=9, weight=2];
+    subgraph cluster_leyenda {
+        label="Leyenda";
+        color="#cfd8dc";
+        style="rounded";
+        leyenda_verde [label="Verde: en cartelera", fillcolor="#b7e1a1"];
+        leyenda_amarillo [label="Amarillo: proximo a retirar (menos de una semana)", fillcolor="#ffe082"];
+        leyenda_gris [label="Gris: fecha fin vencida", fillcolor="#e0e0e0"];
+        { rank=same; leyenda_verde; leyenda_amarillo; leyenda_gris; }
+    }
+    nodo34 [fillcolor="#ffe082", label="Codigo: P034\nTitulo: El Padrino\nDuracion: 175 min\nClasificacion: C\nFecha fin: 2026-9-25\nEstado: Proximo a retirar (4 dias)"];
+    nodo34 -> nodo23 [label="izq"];
+    nodo34 -> nodo73 [label="der"];
+    { rank=same; nodo23; nodo73; }
+    nodo23 -> nodo73 [style=invis, weight=20];
+    nodo23 [fillcolor="#b7e1a1", label="Codigo: P023\nTitulo: El Rey Leon\nDuracion: 88 min\nClasificacion: AA\nFecha fin: 2026-10-25\nEstado: En cartelera (34 dias)"];
+    nodo23 -> nodo18 [label="izq"];
+    nodo23 -> nodo30 [label="der"];
+    { rank=same; nodo18; nodo30; }
+    nodo18 -> nodo30 [style=invis, weight=20];
+    nodo18 [fillcolor="#b7e1a1", label="Codigo: P018\nTitulo: Terminator 2\nDuracion: 137 min\nClasificacion: B15\nFecha fin: 2026-11-12\nEstado: En cartelera (52 dias)"];
+    nodo18 -> nodo11 [label="izq"];
+    nodo18 -> nodo20 [label="der"];
+    { rank=same; nodo11; nodo20; }
+    nodo11 -> nodo20 [style=invis, weight=20];
+    nodo11 [fillcolor="#b7e1a1", label="Codigo: P011\nTitulo: Batman: El Caballero de la Noche\nDuracion: 152 min\nClasificacion: B15\nFecha fin: 2026-12-10\nEstado: En cartelera (80 dias)"];
+    nulo1 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo11 -> nulo1 [style=invis, weight=10];
+    nodo11 -> nodo17 [label="der"];
+    { rank=same; nulo1; nodo17; }
+    nulo1 -> nodo17 [style=invis, weight=20];
+    nodo17 [fillcolor="#b7e1a1", label="Codigo: P017\nTitulo: Los Increibles\nDuracion: 115 min\nClasificacion: AA\nFecha fin: 2026-12-25\nEstado: En cartelera (95 dias)"];
+    nodo17 -> nodo16 [label="izq"];
+    nulo2 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo17 -> nulo2 [style=invis, weight=10];
+    { rank=same; nodo16; nulo2; }
+    nodo16 -> nulo2 [style=invis, weight=20];
+    nodo16 [fillcolor="#b7e1a1", label="Codigo: P016\nTitulo: Mad Max: Furia en el Camino\nDuracion: 120 min\nClasificacion: B15\nFecha fin: 2027-01-20\nEstado: En cartelera (121 dias)"];
+    nodo20 [fillcolor="#b7e1a1", label="Codigo: P020\nTitulo: Pulp Fiction\nDuracion: 154 min\nClasificacion: C\nFecha fin: 2026-12-25\nEstado: En cartelera (95 dias)"];
+    nodo30 [fillcolor="#b7e1a1", label="Codigo: P030\nTitulo: Gladiador\nDuracion: 155 min\nClasificacion: B15\nFecha fin: 2026-11-30\nEstado: En cartelera (70 dias)"];
+    nodo30 -> nodo25 [label="izq"];
+    nodo30 -> nodo33 [label="der"];
+    { rank=same; nodo25; nodo33; }
+    nodo25 -> nodo33 [style=invis, weight=20];
+    nodo25 [fillcolor="#b7e1a1", label="Codigo: P025\nTitulo: IT (Eso)\nDuracion: 135 min\nClasificacion: C\nFecha fin: 2026-12-15\nEstado: En cartelera (85 dias)"];
+    nodo33 [fillcolor="#b7e1a1", label="Codigo: P033\nTitulo: Volver al Futuro\nDuracion: 116 min\nClasificacion: B\nFecha fin: 2026-12-05\nEstado: En cartelera (75 dias)"];
+    nodo33 -> nodo32 [label="izq"];
+    nulo3 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo33 -> nulo3 [style=invis, weight=10];
+    { rank=same; nodo32; nulo3; }
+    nodo32 -> nulo3 [style=invis, weight=20];
+    nodo32 [fillcolor="#b7e1a1", label="Codigo: P032\nTitulo: Sergio\nDuracion: 148 min\nClasificacion: B\nFecha fin: 2026-12-20\nEstado: En cartelera (90 dias)"];
+    nodo73 [fillcolor="#b7e1a1", label="Codigo: P073\nTitulo: Vengadores: Endgame\nDuracion: 181 min\nClasificacion: B\nFecha fin: 2026-11-05\nEstado: En cartelera (45 dias)"];
+    nodo73 -> nodo49 [label="izq"];
+    nodo73 -> nodo81 [label="der"];
+    { rank=same; nodo49; nodo81; }
+    nodo49 -> nodo81 [style=invis, weight=20];
+    nodo49 [fillcolor="#b7e1a1", label="Codigo: P049\nTitulo: El Senor de los Anillos: La Comunidad del Anillo\nDuracion: 178 min\nClasificacion: B15\nFecha fin: 2026-11-15\nEstado: En cartelera (55 dias)"];
+    nodo49 -> nodo42 [label="izq"];
+    nodo49 -> nodo68 [label="der"];
+    { rank=same; nodo42; nodo68; }
+    nodo42 -> nodo68 [style=invis, weight=20];
+    nodo42 [fillcolor="#b7e1a1", label="Codigo: P042\nTitulo: Alien: El Octavo Pasajero\nDuracion: 117 min\nClasificacion: C\nFecha fin: 2026-11-18\nEstado: En cartelera (58 dias)"];
+    nodo42 -> nodo36 [label="izq"];
+    nodo42 -> nodo48 [label="der"];
+    { rank=same; nodo36; nodo48; }
+    nodo36 -> nodo48 [style=invis, weight=20];
+    nodo36 [fillcolor="#b7e1a1", label="Codigo: P036\nTitulo: Shrek\nDuracion: 90 min\nClasificacion: AA\nFecha fin: 2026-11-20\nEstado: En cartelera (60 dias)"];
+    nodo48 [fillcolor="#b7e1a1", label="Codigo: P048\nTitulo: Harry Potter y la Piedra Filosofal\nDuracion: 152 min\nClasificacion: AA\nFecha fin: 2027-01-10\nEstado: En cartelera (111 dias)"];
+    nodo68 [fillcolor="#b7e1a1", label="Codigo: P068\nTitulo: Tiburon\nDuracion: 124 min\nClasificacion: B15\nFecha fin: 2026-10-31\nEstado: En cartelera (40 dias)"];
+    nodo68 -> nodo63 [label="izq"];
+    nulo4 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo68 -> nulo4 [style=invis, weight=10];
+    { rank=same; nodo63; nulo4; }
+    nodo63 -> nulo4 [style=invis, weight=20];
+    nodo63 [fillcolor="#b7e1a1", label="Codigo: P063\nTitulo: Titanic\nDuracion: 195 min\nClasificacion: B\nFecha fin: 2026-12-01\nEstado: En cartelera (71 dias)"];
+    nodo63 -> nodo60 [label="izq"];
+    nulo5 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo63 -> nulo5 [style=invis, weight=10];
+    { rank=same; nodo60; nulo5; }
+    nodo60 -> nulo5 [style=invis, weight=20];
+    nodo60 [fillcolor="#b7e1a1", label="Codigo: P060\nTitulo: Indiana Jones\nDuracion: 115 min\nClasificacion: B\nFecha fin: 2026-11-25\nEstado: En cartelera (65 dias)"];
+    nodo60 -> nodo52 [label="izq"];
+    nulo6 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo60 -> nulo6 [style=invis, weight=10];
+    { rank=same; nodo52; nulo6; }
+    nodo52 -> nulo6 [style=invis, weight=20];
+    nodo52 [fillcolor="#b7e1a1", label="Codigo: P052\nTitulo: El Resplandor\nDuracion: 146 min\nClasificacion: C\nFecha fin: 2026-11-30\nEstado: En cartelera (70 dias)"];
+    nulo7 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo52 -> nulo7 [style=invis, weight=10];
+    nodo52 -> nodo57 [label="der"];
+    { rank=same; nulo7; nodo57; }
+    nulo7 -> nodo57 [style=invis, weight=20];
+    nodo57 [fillcolor="#b7e1a1", label="Codigo: P057\nTitulo: Ratatouille\nDuracion: 111 min\nClasificacion: AA\nFecha fin: 2027-01-15\nEstado: En cartelera (116 dias)"];
+    nodo57 -> nodo53 [label="izq"];
+    nulo8 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo57 -> nulo8 [style=invis, weight=10];
+    { rank=same; nodo53; nulo8; }
+    nodo53 -> nulo8 [style=invis, weight=20];
+    nodo53 [fillcolor="#b7e1a1", label="Codigo: P053\nTitulo: Blade Runner 2049\nDuracion: 164 min\nClasificacion: B15\nFecha fin: 2027-01-25\nEstado: En cartelera (126 dias)"];
+    nodo81 [fillcolor="#b7e1a1", label="Codigo: P081\nTitulo: Jurassic Park\nDuracion: 127 min\nClasificacion: B\nFecha fin: 2026-11-10\nEstado: En cartelera (50 dias)"];
+    nodo81 -> nodo80 [label="izq"];
+    nodo81 -> nodo94 [label="der"];
+    { rank=same; nodo80; nodo94; }
+    nodo80 -> nodo94 [style=invis, weight=20];
+    nodo80 [fillcolor="#b7e1a1", label="Codigo: P080\nTitulo: Buscando a Nemo\nDuracion: 100 min\nClasificacion: AA\nFecha fin: 2026-11-25\nEstado: En cartelera (65 dias)"];
+    nodo80 -> nodo77 [label="izq"];
+    nulo9 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo80 -> nulo9 [style=invis, weight=10];
+    { rank=same; nodo77; nulo9; }
+    nodo77 -> nulo9 [style=invis, weight=20];
+    nodo77 [fillcolor="#b7e1a1", label="Codigo: P077\nTitulo: Avatar\nDuracion: 162 min\nClasificacion: B\nFecha fin: 2026-12-15\nEstado: En cartelera (85 dias)"];
+    nodo77 -> nodo75 [label="izq"];
+    nodo77 -> nodo79 [label="der"];
+    { rank=same; nodo75; nodo79; }
+    nodo75 -> nodo79 [style=invis, weight=20];
+    nodo75 [fillcolor="#b7e1a1", label="Codigo: P075\nTitulo: El Conjuro\nDuracion: 112 min\nClasificacion: B15\nFecha fin: 2026-12-20\nEstado: En cartelera (90 dias)"];
+    nodo79 [fillcolor="#b7e1a1", label="Codigo: P079\nTitulo: Mi Villano Favorito\nDuracion: 95 min\nClasificacion: AA\nFecha fin: 2026-12-10\nEstado: En cartelera (80 dias)"];
+    nodo94 [fillcolor="#b7e1a1", label="Codigo: P094\nTitulo: Forrest Gump\nDuracion: 142 min\nClasificacion: B\nFecha fin: 2026-11-20\nEstado: En cartelera (60 dias)"];
+    nodo94 -> nodo88 [label="izq"];
+    nodo94 -> nodo99 [label="der"];
+    { rank=same; nodo88; nodo99; }
+    nodo88 -> nodo99 [style=invis, weight=20];
+    nodo88 [fillcolor="#b7e1a1", label="Codigo: P088\nTitulo: Star Wars: Una Nueva Esperanza\nDuracion: 121 min\nClasificacion: B\nFecha fin: 2026-12-15\nEstado: En cartelera (85 dias)"];
+    nulo10 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo88 -> nulo10 [style=invis, weight=10];
+    nodo88 -> nodo89 [label="der"];
+    { rank=same; nulo10; nodo89; }
+    nulo10 -> nodo89 [style=invis, weight=20];
+    nodo89 [fillcolor="#b7e1a1", label="Codigo: P089\nTitulo: Milagros Inesperados\nDuracion: 189 min\nClasificacion: B15\nFecha fin: 2026-12-31\nEstado: En cartelera (101 dias)"];
+    nodo99 [fillcolor="#b7e1a1", label="Codigo: P099\nTitulo: Mision Imposible\nDuracion: 110 min\nClasificacion: B\nFecha fin: 2026-12-30\nEstado: En cartelera (100 dias)"];
+}

@@ -1,0 +1,1 @@
+.seat-grid .seat{border:1px solid #435468;border-radius:4px;background:#1d2c39;color:#9baabd;padding:0;min-height:30px}.seat-grid .seat:hover:not(:disabled){border-color:#c7f36a;background:#31442d;color:#fff}.seat-grid .seat.busy,.seat-grid .seat.busy:hover{background:#a94d58;border-color:#ef7373;color:#fff;cursor:pointer}.reserve-box .cancel-button{background:#ef7373;color:#fff}
