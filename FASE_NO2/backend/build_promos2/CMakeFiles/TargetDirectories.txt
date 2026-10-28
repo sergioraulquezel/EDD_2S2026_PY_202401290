@@ -1,0 +1,4 @@
+C:/Users/EQUIPO/Documents/202401290_P1_EDD_LAB/FASE_NO2/backend/build_promos2/CMakeFiles/CinemaProject.dir
+C:/Users/EQUIPO/Documents/202401290_P1_EDD_LAB/FASE_NO2/backend/build_promos2/CMakeFiles/CinemaServer.dir
+C:/Users/EQUIPO/Documents/202401290_P1_EDD_LAB/FASE_NO2/backend/build_promos2/CMakeFiles/edit_cache.dir
+C:/Users/EQUIPO/Documents/202401290_P1_EDD_LAB/FASE_NO2/backend/build_promos2/CMakeFiles/rebuild_cache.dir

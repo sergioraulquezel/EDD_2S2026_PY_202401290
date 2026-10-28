@@ -1,7 +1,7 @@
 digraph ArbolPeliculas {
     rankdir=TB;
     ordering=out;
-    graph [bgcolor="white", labelloc="t", fontsize=18, fontname="Arial", label="Arbol binario de busqueda (Cartelera de Peliculas)\nEstado BST: CORRECTO | Total de peliculas: 3"];
+    graph [bgcolor="white", labelloc="t", fontsize=18, fontname="Arial", label="Arbol binario de busqueda (Cartelera de Peliculas)\nEstado BST: CORRECTO | Total de peliculas: 15"];
     graph [nodesep=0.55, ranksep=0.80];
     node [shape=box, style="rounded,filled", fontname="Arial", fontsize=10, color="#37474f", penwidth=1.4, margin="0.10,0.08"];
     edge [color="#37474f", arrowsize=0.8, fontname="Arial", fontsize=9, weight=2];
@@ -14,11 +14,83 @@ digraph ArbolPeliculas {
         leyenda_gris [label="Gris: fecha fin vencida", fillcolor="#e0e0e0"];
         { rank=same; leyenda_verde; leyenda_amarillo; leyenda_gris; }
     }
-    nodo901 [fillcolor="#b7e1a1", label="Codigo: WEB901\nTitulo: Dune: Parte Dos\nDuracion: 166 min\nClasificacion: B15\nFecha fin: 2026-12-31\nEstado: En cartelera (66 dias)"];
-    nodo901 -> nodo123 [label="izq"];
+    nodo901 [fillcolor="#b7e1a1", label="Codigo: WEB901\nTitulo: Dune: Parte Dos\nDuracion: 166 min\nClasificacion: B15\nFecha fin: 2026-12-31\nEstado: En cartelera (65 dias)"];
+    nodo901 -> nodo101 [label="izq"];
     nodo901 -> nodo902 [label="der"];
-    { rank=same; nodo123; nodo902; }
-    nodo123 -> nodo902 [style=invis, weight=20];
-    nodo123 [fillcolor="#b7e1a1", label="Codigo: WEB903\nTitulo: Cars 4\nDuracion: 120 min\nClasificacion: AA\nFecha fin: 2026-12-31\nEstado: En cartelera (66 dias)"];
-    nodo902 [fillcolor="#b7e1a1", label="Codigo: WEB902\nTitulo: Intensamente 2\nDuracion: 100 min\nClasificacion: AA\nFecha fin: 2026-11-30\nEstado: En cartelera (35 dias)"];
+    { rank=same; nodo101; nodo902; }
+    nodo101 -> nodo902 [style=invis, weight=20];
+    nodo101 [fillcolor="#b7e1a1", label="Codigo: PEL101\nTitulo: La ruta de las estrellas\nDuracion: 118 min\nClasificacion: B\nFecha fin: 2026-12-31\nEstado: En cartelera (65 dias)"];
+    nulo1 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo101 -> nulo1 [style=invis, weight=10];
+    nodo101 -> nodo102 [label="der"];
+    { rank=same; nulo1; nodo102; }
+    nulo1 -> nodo102 [style=invis, weight=20];
+    nodo102 [fillcolor="#b7e1a1", label="Codigo: PEL102\nTitulo: El ultimo verano\nDuracion: 104 min\nClasificacion: B\nFecha fin: 2026-12-15\nEstado: En cartelera (49 dias)"];
+    nulo2 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo102 -> nulo2 [style=invis, weight=10];
+    nodo102 -> nodo103 [label="der"];
+    { rank=same; nulo2; nodo103; }
+    nulo2 -> nodo103 [style=invis, weight=20];
+    nodo103 [fillcolor="#b7e1a1", label="Codigo: PEL103\nTitulo: Guardianes del oceano\nDuracion: 126 min\nClasificacion: B12\nFecha fin: 2027-01-20\nEstado: En cartelera (85 dias)"];
+    nulo3 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo103 -> nulo3 [style=invis, weight=10];
+    nodo103 -> nodo104 [label="der"];
+    { rank=same; nulo3; nodo104; }
+    nulo3 -> nodo104 [style=invis, weight=20];
+    nodo104 [fillcolor="#b7e1a1", label="Codigo: PEL104\nTitulo: Codigo de medianoche\nDuracion: 112 min\nClasificacion: B12\nFecha fin: 2027-01-10\nEstado: En cartelera (75 dias)"];
+    nulo4 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo104 -> nulo4 [style=invis, weight=10];
+    nodo104 -> nodo105 [label="der"];
+    { rank=same; nulo4; nodo105; }
+    nulo4 -> nodo105 [style=invis, weight=20];
+    nodo105 [fillcolor="#b7e1a1", label="Codigo: PEL105\nTitulo: Horizonte rojo\nDuracion: 132 min\nClasificacion: B15\nFecha fin: 2027-02-05\nEstado: En cartelera (101 dias)"];
+    nulo5 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo105 -> nulo5 [style=invis, weight=10];
+    nodo105 -> nodo106 [label="der"];
+    { rank=same; nulo5; nodo106; }
+    nulo5 -> nodo106 [style=invis, weight=20];
+    nodo106 [fillcolor="#b7e1a1", label="Codigo: PEL106\nTitulo: El reino perdido\nDuracion: 145 min\nClasificacion: B\nFecha fin: 2027-01-31\nEstado: En cartelera (96 dias)"];
+    nulo6 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo106 -> nulo6 [style=invis, weight=10];
+    nodo106 -> nodo107 [label="der"];
+    { rank=same; nulo6; nodo107; }
+    nulo6 -> nodo107 [style=invis, weight=20];
+    nodo107 [fillcolor="#b7e1a1", label="Codigo: PEL107\nTitulo: Mision planeta azul\nDuracion: 121 min\nClasificacion: B12\nFecha fin: 2027-02-15\nEstado: En cartelera (111 dias)"];
+    nulo7 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo107 -> nulo7 [style=invis, weight=10];
+    nodo107 -> nodo108 [label="der"];
+    { rank=same; nulo7; nodo108; }
+    nulo7 -> nodo108 [style=invis, weight=20];
+    nodo108 [fillcolor="#b7e1a1", label="Codigo: PEL108\nTitulo: La ciudad invisible\nDuracion: 109 min\nClasificacion: B\nFecha fin: 2027-01-25\nEstado: En cartelera (90 dias)"];
+    nulo8 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo108 -> nulo8 [style=invis, weight=10];
+    nodo108 -> nodo109 [label="der"];
+    { rank=same; nulo8; nodo109; }
+    nulo8 -> nodo109 [style=invis, weight=20];
+    nodo109 [fillcolor="#b7e1a1", label="Codigo: PEL109\nTitulo: Rescate en la tormenta\nDuracion: 116 min\nClasificacion: B12\nFecha fin: 2027-02-20\nEstado: En cartelera (116 dias)"];
+    nulo9 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo109 -> nulo9 [style=invis, weight=10];
+    nodo109 -> nodo110 [label="der"];
+    { rank=same; nulo9; nodo110; }
+    nulo9 -> nodo110 [style=invis, weight=20];
+    nodo110 [fillcolor="#b7e1a1", label="Codigo: PEL110\nTitulo: Pequenos exploradores\nDuracion: 91 min\nClasificacion: AA\nFecha fin: 2027-03-01\nEstado: En cartelera (125 dias)"];
+    nulo10 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo110 -> nulo10 [style=invis, weight=10];
+    nodo110 -> nodo111 [label="der"];
+    { rank=same; nulo10; nodo111; }
+    nulo10 -> nodo111 [style=invis, weight=20];
+    nodo111 [fillcolor="#b7e1a1", label="Codigo: PEL111\nTitulo: El guardian del tiempo\nDuracion: 123 min\nClasificacion: B\nFecha fin: 2027-02-28\nEstado: En cartelera (124 dias)"];
+    nulo11 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo111 -> nulo11 [style=invis, weight=10];
+    nodo111 -> nodo112 [label="der"];
+    { rank=same; nulo11; nodo112; }
+    nulo11 -> nodo112 [style=invis, weight=20];
+    nodo112 [fillcolor="#b7e1a1", label="Codigo: PEL112\nTitulo: Ultima frontera\nDuracion: 137 min\nClasificacion: B12\nFecha fin: 2027-03-15\nEstado: En cartelera (139 dias)"];
+    nulo12 [shape=point, style=invis, label="", width=0.01, height=0.01];
+    nodo112 -> nulo12 [style=invis, weight=10];
+    nodo112 -> nodo123 [label="der"];
+    { rank=same; nulo12; nodo123; }
+    nulo12 -> nodo123 [style=invis, weight=20];
+    nodo123 [fillcolor="#b7e1a1", label="Codigo: PEL\nTitulo: Una maravilla\nDuracion: 120 min\nClasificacion: B\nFecha fin: 2026-12-31\nEstado: En cartelera (65 dias)"];
+    nodo902 [fillcolor="#b7e1a1", label="Codigo: WEB902\nTitulo: Intensamente 2\nDuracion: 100 min\nClasificacion: AA\nFecha fin: 2026-11-30\nEstado: En cartelera (34 dias)"];
 }

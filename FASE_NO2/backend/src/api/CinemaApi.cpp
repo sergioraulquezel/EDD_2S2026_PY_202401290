@@ -140,6 +140,7 @@ void configurarRutasCinema(crow::App<crow::CORSHandler>& app, CinemaSystem& sist
         else if (tipo == "avl") sistema.obtenerArbolFunciones().generarReporteGraphviz();
         else if (tipo == "promociones") sistema.obtenerPromociones().generarReporteGraphviz();
         else if (tipo == "sedes") sistema.obtenerGrafoSedes().generarReporteGraphviz();
+        else if (tipo == "arbol-b" || tipo == "clientes") sistema.obtenerClientes().generarReporteGraphviz();
         else return respuestaJson(404, false, "Tipo de reporte no reconocido.");
 
         crow::json::wvalue body;
@@ -245,6 +246,7 @@ void configurarRutasCinema(crow::App<crow::CORSHandler>& app, CinemaSystem& sist
     });
 
     CROW_ROUTE(app, "/api/promociones")
+    .methods(crow::HTTPMethod::Get)
     ([&sistema] {
         crow::json::wvalue body;
         body["ok"] = true;
@@ -274,6 +276,43 @@ void configurarRutasCinema(crow::App<crow::CORSHandler>& app, CinemaSystem& sist
         return respuestaJson(body);
     });
 
+    CROW_ROUTE(app, "/api/promociones")
+    .methods(crow::HTTPMethod::Post)
+    ([&sistema](const crow::request& req) {
+        auto body = crow::json::load(req.body);
+        if (!body || !body["id"] || !tieneTexto(body, "nombre") || !tieneTexto(body, "descripcion")) {
+            return respuestaJson(400, false, "ID, nombre y descripcion son obligatorios.");
+        }
+        int id = body["id"].i();
+        if (id <= 0 || sistema.obtenerPromociones().existePromocion(id)) {
+            return respuestaJson(400, false, "El ID de la promocion ya existe o no es valido.");
+        }
+        sistema.obtenerPromociones().insertarPromocion(new Promocion(id, body["nombre"].s(), body["descripcion"].s()));
+        return respuestaJson(201, true, "Promocion agregada a la lista circular.");
+    });
+    CROW_ROUTE(app, "/api/promociones/<int>/beneficios")
+    .methods(crow::HTTPMethod::Post)
+    ([&sistema](const crow::request& req, int idPromocion) {
+        auto body = crow::json::load(req.body);
+        if (!body || !body["id"] || !tieneTexto(body, "descripcion") || !body["descuento"]) {
+            return respuestaJson(400, false, "ID, descripcion y descuento son obligatorios.");
+        }
+        NodoPromocion* promocion = sistema.obtenerPromociones().buscarPromocion(idPromocion);
+        if (promocion == nullptr) {
+            return respuestaJson(404, false, "Promocion destino no encontrada.");
+        }
+        int idBeneficio = body["id"].i();
+        int descuento = body["descuento"].i();
+        if (idBeneficio <= 0 || descuento < 0 || descuento > 100) {
+            return respuestaJson(400, false, "El ID debe ser positivo y el descuento debe estar entre 0 y 100.");
+        }
+        bool agregado = sistema.obtenerPromociones().agregarBeneficioAPromocion(
+            idPromocion, new Beneficio(idBeneficio, body["descripcion"].s(), descuento));
+        if (!agregado) {
+            return respuestaJson(400, false, "No se pudo agregar el beneficio.");
+        }
+        return respuestaJson(201, true, "Beneficio agregado a la promocion.");
+    });
     CROW_ROUTE(app, "/api/solicitudes/<int>")
     .methods(crow::HTTPMethod::Put)
     ([&sistema](const crow::request& req, int idSolicitud) {

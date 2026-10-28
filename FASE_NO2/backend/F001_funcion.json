@@ -1,20 +1,6 @@
 {
   "codigo_funcion": "F001",
   "asientos_ocupados": [
-    {
-      "fila": 1,
-      "columna": 1,
-      "codigo_reserva": "R001"
-    },
-    {
-      "fila": 2,
-      "columna": 2,
-      "codigo_reserva": "R002"
-    },
-    {
-      "fila": 3,
-      "columna": 3,
-      "codigo_reserva": "R003"
-    }
+
   ]
 }
