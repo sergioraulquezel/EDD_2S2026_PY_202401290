@@ -1,0 +1,55 @@
+Promocion 'Lunes Estudiantil' agregada al ciclo.
+Promocion 'Miercoles 2x1' agregada al ciclo.
+  -> Beneficio de 50% agregado a la promocion 'Lunes Estudiantil'.
+  -> Beneficio de 20% agregado a la promocion 'Lunes Estudiantil'.
+  -> Beneficio de 100% agregado a la promocion 'Miercoles 2x1'.
+Matriz configurada para una sala de 6 filas por 10 columnas.
+Matriz configurada para una sala de 5 filas por 8 columnas.
+Cinema API escuchando en http://localhost:18080
+Prueba de salud: http://localhost:18080/api/health
+Matriz configurada para una sala de 8 filas por 12 columnas.
+Matriz configurada para una sala de 8 filas por 12 columnas.
+Matriz configurada para una sala de 7 filas por 10 columnas.
+Matriz configurada para una sala de 7 filas por 10 columnas.
+[JSON] Peliculas insertadas: 2 | Funciones insertadas: 4 | Peliculas rechazadas: 0 | Funciones rechazadas: 0
+[JSON] Pelicula ignorada por codigo duplicado: PEL101
+[JSON] Pelicula ignorada por codigo duplicado: PEL102
+[JSON] Peliculas insertadas: 0 | Funciones insertadas: 0 | Peliculas rechazadas: 2 | Funciones rechazadas: 0
+[JSON] Pelicula ignorada por codigo duplicado: PEL101
+[JSON] Pelicula ignorada por codigo duplicado: PEL102
+[JSON] Peliculas insertadas: 0 | Funciones insertadas: 0 | Peliculas rechazadas: 2 | Funciones rechazadas: 0
+[JSON] Pelicula ignorada por codigo duplicado: PEL101
+[JSON] Pelicula ignorada por codigo duplicado: PEL102
+[JSON] Peliculas insertadas: 0 | Funciones insertadas: 0 | Peliculas rechazadas: 2 | Funciones rechazadas: 0
+[JSON] Pelicula ignorada por codigo duplicado: PEL101
+[JSON] Pelicula ignorada por codigo duplicado: PEL102
+Matriz configurada para una sala de 9 filas por 14 columnas.
+Matriz configurada para una sala de 9 filas por 14 columnas.
+Matriz configurada para una sala de 8 filas por 12 columnas.
+Matriz configurada para una sala de 8 filas por 12 columnas.
+Matriz configurada para una sala de 8 filas por 12 columnas.
+Matriz configurada para una sala de 8 filas por 12 columnas.
+Matriz configurada para una sala de 10 filas por 16 columnas.
+Matriz configurada para una sala de 10 filas por 16 columnas.
+Matriz configurada para una sala de 10 filas por 16 columnas.
+Matriz configurada para una sala de 9 filas por 14 columnas.
+Matriz configurada para una sala de 9 filas por 14 columnas.
+Matriz configurada para una sala de 9 filas por 14 columnas.
+Matriz configurada para una sala de 8 filas por 14 columnas.
+Matriz configurada para una sala de 8 filas por 14 columnas.
+Matriz configurada para una sala de 7 filas por 12 columnas.
+Matriz configurada para una sala de 7 filas por 12 columnas.
+Matriz configurada para una sala de 7 filas por 12 columnas.
+Matriz configurada para una sala de 8 filas por 14 columnas.
+Matriz configurada para una sala de 8 filas por 14 columnas.
+Matriz configurada para una sala de 8 filas por 14 columnas.
+Matriz configurada para una sala de 6 filas por 10 columnas.
+Matriz configurada para una sala de 6 filas por 10 columnas.
+Matriz configurada para una sala de 8 filas por 12 columnas.
+Matriz configurada para una sala de 8 filas por 12 columnas.
+Matriz configurada para una sala de 9 filas por 14 columnas.
+Matriz configurada para una sala de 9 filas por 14 columnas.
+[JSON] Peliculas insertadas: 10 | Funciones insertadas: 26 | Peliculas rechazadas: 2 | Funciones rechazadas: 0
+[JSON] Pelicula ignorada por codigo duplicado: PEL101
+[JSON] Pelicula ignorada por codigo duplicado: PEL102
+[JSON] Peliculas insertadas: 0 | Funciones insertadas: 0 | Peliculas rechazadas: 2 | Funciones rechazadas: 0

@@ -34,10 +34,12 @@ void CinemaSystem::cargarDatosIniciales()
     cartelera.insertar(peliculaDemo);
     cartelera.insertar(peliculaDemo2);
 
-    funciones.emplace_back(1, "F001", peliculaDemo, "19:00", "1", 6, 10, "F001_funcion.json");
+    grafoSedes.agregarSede({"S001","CinemaUSAC Zona 10","Zona 10, Ciudad de Guatemala",3,"1122-3344"});
+    grafoSedes.agregarSede({"S002","CinemaUSAC Zona 4","Zona 4, Ciudad de Guatemala",3,"1122-3344"});
+    funciones.emplace_back(1, "F001", peliculaDemo, "19:00", "1", 6, 10, "F001_funcion.json", "S001");
     arbolFunciones.insertar(funciones.back());
     crearArchivoAsientosFuncion(funciones.back());
-    funciones.emplace_back(2, "F002", peliculaDemo2, "21:30", "2", 5, 8, "F002_funcion.json");
+    funciones.emplace_back(2, "F002", peliculaDemo2, "21:30", "2", 5, 8, "F002_funcion.json", "S002");
     arbolFunciones.insertar(funciones.back());
     crearArchivoAsientosFuncion(funciones.back());
 }
@@ -65,6 +67,19 @@ FuncionCine* CinemaSystem::buscarFuncion(const std::string& codigoFuncion)
 ArbolBClientes& CinemaSystem::obtenerClientes()
 {
     return clientes;
+}
+
+GrafoSedes& CinemaSystem::obtenerGrafoSedes(){return grafoSedes;}
+void CinemaSystem::actualizarGrafoSedes(){grafoSedes.reconstruir(funciones);}
+
+bool CinemaSystem::crearSede(const Sede& sede, std::string& mensaje)
+{
+    if (campoVacio(sede.codigo) || campoVacio(sede.nombre) || campoVacio(sede.direccion) ||
+        campoVacio(sede.telefono) || sede.cantidadSalas <= 0) {
+        mensaje = "Codigo, nombre, direccion, telefono y cantidad de salas valida son obligatorios."; return false;
+    }
+    if (!grafoSedes.agregarSede(sede)) { mensaje = "Ya existe una sede con ese codigo."; return false; }
+    actualizarGrafoSedes(); mensaje = "Sede registrada sin conexiones iniciales."; return true;
 }
 
 TablaHashReservas& CinemaSystem::obtenerReservas()
@@ -121,17 +136,18 @@ bool CinemaSystem::crearPelicula(int id, const std::string& titulo, const std::s
 }
 
 bool CinemaSystem::crearFuncion(Pelicula* pelicula, const std::string& horario, const std::string& sala,
-                                int filas, int columnas, std::string& codigoCreado,
+                                const std::string& codigoSede, int filas, int columnas, std::string& codigoCreado,
                                 std::string& mensaje)
 {
     if (pelicula == nullptr) {
         mensaje = "Debe seleccionar una pelicula.";
         return false;
     }
-    if (campoVacio(horario) || campoVacio(sala) || filas <= 0 || columnas <= 0) {
-        mensaje = "Horario, sala, filas y columnas son obligatorios y deben ser validos.";
+    if (campoVacio(horario) || campoVacio(sala) || filas <= 0 || columnas <= 0 || campoVacio(codigoSede)) {
+        mensaje = "Sede, horario, sala, filas y columnas son obligatorios y deben ser validos.";
         return false;
     }
+    if (!grafoSedes.existeSede(codigoSede)) { mensaje = "La sede seleccionada no existe."; return false; }
 
     int idFuncion = 1;
     do {
@@ -142,9 +158,10 @@ bool CinemaSystem::crearFuncion(Pelicula* pelicula, const std::string& horario, 
 
     std::string archivoAsientos = codigoCreado + "_funcion.json";
     funciones.emplace_back(idFuncion - 1, codigoCreado, pelicula, horario, sala,
-                           filas, columnas, archivoAsientos);
+                           filas, columnas, archivoAsientos, codigoSede);
     arbolFunciones.insertar(funciones.back());
     crearArchivoAsientosFuncion(funciones.back());
+    actualizarGrafoSedes();
     mensaje = "Funcion creada: " + codigoCreado;
     return true;
 }

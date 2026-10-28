@@ -160,20 +160,20 @@ static void crearArchivoAsientosVacio(const std::string& nombreArchivo, const st
     archivo << "}\n";
 }
 
-int cargarPeliculasYFuncionesJSON(const std::string& rutaArchivo,
-                                  ArbolBinario& cartelera,
-                                  std::vector<FuncionCine>& funciones,
-                                  ArbolAVLFunciones& arbolFunciones)
+int cargarPeliculasYFuncionesJSON(const std::string& rutaArchivo, ArbolBinario& cartelera, std::vector<FuncionCine>& funciones, ArbolAVLFunciones& arbolFunciones, GrafoSedes* grafoSedes)
 {
     std::string ruta = limpiarRuta(rutaArchivo);
     std::string contenido = leerArchivoCompleto(ruta);
     if (contenido.empty()) {
         ultimoMensajeCargaFase2 = "No se pudo abrir o leer el archivo: " + ruta;
-        std::cout << "[JSON] " << ultimoMensajeCargaFase2 << "\n";
+        if (grafoSedes != nullptr) grafoSedes->reconstruir(funciones);
+    std::cout << "[JSON] " << ultimoMensajeCargaFase2 << "\n";
         return 0;
     }
 
     std::string arregloPeliculas = extraerArreglo(contenido, "peliculas");
+    std::string arregloSedes=extraerArreglo(contenido,"sedes");
+    if(grafoSedes)for(const std::string&o:extraerObjetos(arregloSedes)){Sede sede{obtenerString(o,"codigo"),obtenerString(o,"nombre"),obtenerString(o,"direccion"),obtenerInt(o,"cantidad_salas"),obtenerString(o,"telefono")};if(!sede.codigo.empty()&&!grafoSedes->existeSede(sede.codigo))grafoSedes->agregarSede(sede);}
     std::vector<std::string> peliculasJSON = extraerObjetos(arregloPeliculas);
     int peliculasInsertadas = 0;
     int funcionesInsertadas = 0;
@@ -222,10 +222,11 @@ int cargarPeliculasYFuncionesJSON(const std::string& rutaArchivo,
             std::string codigoFuncion = obtenerString(funcionObj, "codigo_funcion");
             std::string horario = obtenerString(funcionObj, "horario");
             std::string sala = obtenerString(funcionObj, "sala");
+            std::string sede = obtenerString(funcionObj, "sede");
             int filas = obtenerInt(funcionObj, "filas");
             int columnas = obtenerInt(funcionObj, "columnas");
 
-            if (campoVacio(codigoFuncion) || campoVacio(horario) || campoVacio(sala) || filas <= 0 || columnas <= 0) {
+            if (campoVacio(codigoFuncion) || campoVacio(horario) || campoVacio(sala) || filas <= 0 || columnas <= 0 || (grafoSedes && !sede.empty() && !grafoSedes->existeSede(sede))) {
                 ++funcionesRechazadas;
                 std::cout << "[JSON] Funcion ignorada por campos invalidos.\n";
                 continue;
@@ -239,7 +240,7 @@ int cargarPeliculasYFuncionesJSON(const std::string& rutaArchivo,
 
             int idFuncion = extraerNumero(codigoFuncion);
             std::string archivoAsientos = codigoFuncion + "_funcion.json";
-            funciones.emplace_back(idFuncion, codigoFuncion, pelicula, horario, sala, filas, columnas, archivoAsientos);
+            funciones.emplace_back(idFuncion, codigoFuncion, pelicula, horario, sala, filas, columnas, archivoAsientos, sede);
             arbolFunciones.insertar(funciones.back());
             crearArchivoAsientosVacio(archivoAsientos, codigoFuncion);
             ++funcionesInsertadas;
@@ -250,6 +251,7 @@ int cargarPeliculasYFuncionesJSON(const std::string& rutaArchivo,
                               " | Funciones insertadas: " + std::to_string(funcionesInsertadas) +
                               " | Peliculas rechazadas: " + std::to_string(peliculasRechazadas) +
                               " | Funciones rechazadas: " + std::to_string(funcionesRechazadas);
+    if (grafoSedes != nullptr) grafoSedes->reconstruir(funciones);
     std::cout << "[JSON] " << ultimoMensajeCargaFase2 << "\n";
     return peliculasInsertadas + funcionesInsertadas;
 }

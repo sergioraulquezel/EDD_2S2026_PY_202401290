@@ -93,7 +93,8 @@ void PanelAdmin::dibujar(CinemaSystem& sistema)
                 }
                 rutaJSON += archivoJSONFase2;
 
-                int totalCargado = cargarPeliculasYFuncionesJSON(rutaJSON, cartelera, funciones, arbolFunciones);
+                int totalCargado = cargarPeliculasYFuncionesJSON(rutaJSON, cartelera, funciones, arbolFunciones, &sistema.obtenerGrafoSedes());
+                sistema.actualizarGrafoSedes();
                 mensajeCargaJSON = obtenerUltimoMensajeCargaFase2() +
                                    " | Total agregado: " + std::to_string(totalCargado) +
                                    " | Funciones en memoria: " + std::to_string(funciones.size()) +
@@ -398,6 +399,7 @@ void PanelAdmin::dibujar(CinemaSystem& sistema)
             if (ImGui::CollapsingHeader("Configuración de Función y Sala", ImGuiTreeNodeFlags_DefaultOpen))
             {
                 static char codigoBuscarFuncion[32] = "F001";
+                static char codigoSedeFuncion[64] = "S001";
                 static int recorridoFuncionesIndex = 1;
                 static std::string mensajeFunciones = "";
                 const char* recorridosFunciones[] = {"preorden", "inorden", "postorden"};
@@ -436,7 +438,20 @@ void PanelAdmin::dibujar(CinemaSystem& sistema)
                 }
 
                 ImGui::Separator();
-                ImGui::Text("2. Configurar Horario y Sala:");
+                ImGui::Text("2. Asignar sede y configurar horario:");
+                const auto& sedesDisponibles = sistema.obtenerGrafoSedes().obtenerSedes();
+                if (sedesDisponibles.empty()) {
+                    ImGui::TextColored(ImVec4(1, 0.5f, 0, 1), "Registre una sede antes de crear funciones.");
+                } else if (ImGui::BeginCombo("Sede de la funcion", codigoSedeFuncion)) {
+                    for (const auto& par : sedesDisponibles) {
+                        std::string etiqueta = par.first + " - " + par.second.nombre;
+                        bool seleccionada = par.first == codigoSedeFuncion;
+                        if (ImGui::Selectable(etiqueta.c_str(), seleccionada))
+                            std::snprintf(codigoSedeFuncion, sizeof(codigoSedeFuncion), "%s", par.first.c_str());
+                        if (seleccionada) ImGui::SetItemDefaultFocus();
+                    }
+                    ImGui::EndCombo();
+                }
                 ImGui::InputText("Horario (ej. 14:00)", inputHorario, IM_ARRAYSIZE(inputHorario));
                 ImGui::InputText("Sala (ej. Sala 1)", inputSala, IM_ARRAYSIZE(inputSala));
 
@@ -449,7 +464,7 @@ void PanelAdmin::dibujar(CinemaSystem& sistema)
                 {
                     std::string codigoCreado;
                     if (sistema.crearFuncion(peliculaSeleccionadaParaFuncion, inputHorario, inputSala,
-                                             inputFilas, inputColumnas, codigoCreado, mensajeFunciones))
+                                             codigoSedeFuncion, inputFilas, inputColumnas, codigoCreado, mensajeFunciones))
                     {
                         funcionSeleccionadaIndex = (int)funciones.size() - 1;
                     }
@@ -477,6 +492,7 @@ void PanelAdmin::dibujar(CinemaSystem& sistema)
                                 funcionSeleccionadaIndex = i;
                                 cargarAsientosFuncion(funciones[i]);
                                 peliculaSeleccionadaParaFuncion = funciones[i].pelicula;
+                                std::snprintf(codigoSedeFuncion, sizeof(codigoSedeFuncion), "%s", funciones[i].sede.c_str());
                                 std::snprintf(inputHorario, sizeof(inputHorario), "%s", funciones[i].horario.c_str());
                                 std::snprintf(inputSala, sizeof(inputSala), "%s", funciones[i].sala.c_str());
                                 inputFilas = funciones[i].asientos.obtenerFilas();
@@ -750,6 +766,54 @@ void PanelAdmin::dibujar(CinemaSystem& sistema)
                 }
             }
 
+            ImGui::EndTabItem();
+        }
+
+        // =========================================================
+        // PESTAÑA: SEDES Y GRAFO NO DIRIGIDO PONDERADO
+        // =========================================================
+        if (ImGui::BeginTabItem("Sedes y Grafo"))
+        {
+            static char sedeCodigo[64] = "S003";
+            static char sedeNombre[100] = "";
+            static char sedeDireccion[160] = "";
+            static char sedeTelefono[64] = "";
+            static int sedeSalas = 1;
+            static char consultaSede[64] = "S001";
+            static char origenBfs[64] = "S001";
+            static char destinoBfs[64] = "S002";
+            static std::string mensajeSedes;
+            ImGui::Text("Registrar nueva sede (vertice sin aristas iniciales)");
+            ImGui::InputText("Codigo", sedeCodigo, IM_ARRAYSIZE(sedeCodigo));
+            ImGui::InputText("Nombre", sedeNombre, IM_ARRAYSIZE(sedeNombre));
+            ImGui::InputText("Direccion", sedeDireccion, IM_ARRAYSIZE(sedeDireccion));
+            ImGui::InputInt("Cantidad de salas", &sedeSalas);
+            ImGui::InputText("Telefono", sedeTelefono, IM_ARRAYSIZE(sedeTelefono));
+            if (ImGui::Button("Registrar sede")) {
+                if (sistema.crearSede({sedeCodigo, sedeNombre, sedeDireccion, sedeSalas, sedeTelefono}, mensajeSedes)) {
+                    std::snprintf(consultaSede, sizeof(consultaSede), "%s", sedeCodigo);
+                }
+            }
+            if (!mensajeSedes.empty()) ImGui::TextWrapped("%s", mensajeSedes.c_str());
+            ImGui::Separator();
+            ImGui::Text("Peliculas programadas por sede");
+            ImGui::InputText("Codigo de sede##peliculas", consultaSede, IM_ARRAYSIZE(consultaSede));
+            bool sedeEncontrada = sistema.obtenerGrafoSedes().existeSede(consultaSede);
+            if (sedeEncontrada) {
+                for (const auto& funcion : funciones) if (funcion.sede == consultaSede && funcion.pelicula)
+                    ImGui::BulletText("%s | %s | %s | Sala %s", funcion.pelicula->getCodigo().c_str(), funcion.pelicula->getTitulo().c_str(), funcion.horario.c_str(), funcion.sala.c_str());
+            } else ImGui::TextDisabled("No existe una sede con ese codigo.");
+            ImGui::Separator();
+            ImGui::Text("Ruta con menos conexiones (BFS)");
+            ImGui::InputText("Origen", origenBfs, IM_ARRAYSIZE(origenBfs)); ImGui::SameLine();
+            ImGui::InputText("Destino", destinoBfs, IM_ARRAYSIZE(destinoBfs));
+            auto camino = sistema.obtenerGrafoSedes().caminoBFS(origenBfs, destinoBfs);
+            if (camino.empty()) ImGui::TextDisabled("Sin ruta entre sedes (o codigo no registrado).");
+            else { std::string texto; for (const auto& codigo : camino) { if (!texto.empty()) texto += " -> "; texto += codigo; } ImGui::Text("%s | Intermedias: %d", texto.c_str(), static_cast<int>(camino.size()) < 3 ? 0 : static_cast<int>(camino.size()) - 2); }
+            ImGui::Separator(); ImGui::Text("Relaciones ordenadas por peliculas compartidas");
+            for (const auto& relacion : sistema.obtenerGrafoSedes().obtenerRelacionesOrdenadas())
+                ImGui::BulletText("%s <-> %s | Peso: %d peliculas", relacion.origen.c_str(), relacion.destino.c_str(), relacion.peso);
+            if (ImGui::Button("Generar reporte del grafo")) sistema.obtenerGrafoSedes().generarReporteGraphviz();
             ImGui::EndTabItem();
         }
 

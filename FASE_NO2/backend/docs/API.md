@@ -48,7 +48,7 @@ Busca una función por su código.
 
 `POST /api/funciones`
 
-Crea una función. El cuerpo JSON utiliza `codigoFuncion`, `codigoPelicula`, `sala`, `horario`, `filas` y `columnas`.
+Crea una función asignada obligatoriamente a una sede. El cuerpo JSON utiliza `pelicula`, `sede`, `sala`, `horario`, `filas` y `columnas`. Al guardarla, recalcula las relaciones del grafo.
 
 `PUT /api/funciones/{codigoFuncion}`
 
@@ -77,3 +77,13 @@ Recibe `correo` y `password`. El administrador utiliza las credenciales configur
 ## CORS
 
 La API permite solicitudes desde cualquier origen para facilitar la conexión posterior con el frontend web.
+
+### Sedes y grafo no dirigido
+
+`GET /api/sedes` lista sedes y `POST /api/sedes` registra `{ "codigo", "nombre", "direccion", "cantidad_salas", "telefono" }`. Una sede nueva empieza sin aristas.
+
+`GET /api/sedes/{codigo}/peliculas` consulta las películas programadas en esa sede con horario, sala y código de función.
+
+`GET /api/sedes/camino?origen=S001&destino=S002` usa BFS para devolver una ruta con el menor número de conexiones.
+
+`GET /api/sedes/ranking` ordena las aristas por peso descendente; el peso es el número de películas compartidas.

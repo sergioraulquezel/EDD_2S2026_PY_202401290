@@ -2,8 +2,14 @@
 
 #include "crow/middlewares/cors.h"
 #include "utils/PersistenciaAsientos.h"
+#include "utils/CargaJSONFase2.h"
+#include "utils/CargaJSONClientesReservas.h"
 #include <string>
 #include <utility>
+#include <set>
+#include <map>
+#include <vector>
+#include <limits>
 
 namespace
 {
@@ -64,7 +70,7 @@ crow::json::wvalue funcionJson(const FuncionCine& funcion)
         {"pelicula", funcion.pelicula != nullptr ? funcion.pelicula->getCodigo() : ""},
         {"titulo", funcion.pelicula != nullptr ? funcion.pelicula->getTitulo() : "Sin pelicula"},
         {"horario", funcion.horario},
-        {"sala", funcion.sala},
+        {"sala", funcion.sala}, {"sede", funcion.sede},
         {"filas", funcion.asientos.obtenerFilas()},
         {"columnas", funcion.asientos.obtenerColumnas()}
     });
@@ -99,12 +105,41 @@ void configurarRutasCinema(crow::App<crow::CORSHandler>& app, CinemaSystem& sist
         return respuestaJson(body);
     });
 
+    CROW_ROUTE(app, "/api/reportes/matriz/<string>")
+    .methods(crow::HTTPMethod::Post)
+    ([&sistema](const std::string& codigoFuncion) {
+        FuncionCine* funcion = sistema.buscarFuncion(codigoFuncion);
+        if (funcion == nullptr) {
+            return respuestaJson(404, false, "Funcion no encontrada.");
+        }
+
+        // Recupera las reservas persistidas antes de dibujar el reporte.
+        cargarAsientosFuncion(*funcion);
+        const std::string titulo = "Funcion: " +
+            (funcion->pelicula != nullptr ? funcion->pelicula->getTitulo() : "Sin pelicula") +
+            " - " + funcion->horario + " - Sala " + funcion->sala;
+        funcion->asientos.generarReporteGraphviz(titulo);
+
+        crow::json::wvalue body;
+        body["ok"] = true;
+        body["message"] = "Reporte de matriz de asientos generado.";
+        body["codigo_funcion"] = codigoFuncion;
+        const int total = funcion->asientos.obtenerFilas() * funcion->asientos.obtenerColumnas();
+        const int reservados = funcion->asientos.contarReservados();
+        body["total"] = total;
+        body["reservados"] = reservados;
+        body["libres"] = total - reservados;
+        body["archivo_dot"] = "reporte_matriz_asientos.dot";
+        body["archivo_png"] = "reporte_matriz_asientos.png";
+        return respuestaJson(body);
+    });
     CROW_ROUTE(app, "/api/reportes/<string>")
     .methods(crow::HTTPMethod::Post)
     ([&sistema](const std::string& tipo) {
         if (tipo == "bst") sistema.obtenerCartelera().generarReporteGraphviz();
         else if (tipo == "avl") sistema.obtenerArbolFunciones().generarReporteGraphviz();
         else if (tipo == "promociones") sistema.obtenerPromociones().generarReporteGraphviz();
+        else if (tipo == "sedes") sistema.obtenerGrafoSedes().generarReporteGraphviz();
         else return respuestaJson(404, false, "Tipo de reporte no reconocido.");
 
         crow::json::wvalue body;
@@ -112,7 +147,7 @@ void configurarRutasCinema(crow::App<crow::CORSHandler>& app, CinemaSystem& sist
         body["message"] = "Reporte Graphviz generado";
         body["tipo"] = tipo;
         body["archivo_dot"] = "reporte_" + tipo + ".dot";
-        body["archivo_png"] = "reporte_" + tipo + ".png";
+        body["archivo_png"] = tipo == "sedes" ? "reporte_grafo_sedes.png" : "reporte_" + tipo + ".png";
         return respuestaJson(body);
     });
 
@@ -249,6 +284,82 @@ void configurarRutasCinema(crow::App<crow::CORSHandler>& app, CinemaSystem& sist
                              actualizado ? "Solicitud actualizada." : "Solicitud no encontrada.");
     });
 
+    CROW_ROUTE(app, "/api/sedes")
+    ([&sistema] {
+        crow::json::wvalue body; body["ok"]=true; body["message"]="Sedes obtenidas";
+        crow::json::wvalue::list items;
+        for (const auto& par : sistema.obtenerGrafoSedes().obtenerSedes()) {
+            items.emplace_back(crow::json::wvalue({{"codigo",par.second.codigo},{"nombre",par.second.nombre},{"direccion",par.second.direccion},{"cantidad_salas",par.second.cantidadSalas},{"telefono",par.second.telefono}}));
+        }
+        body["data"]=std::move(items); return respuestaJson(body);
+    });
+
+    CROW_ROUTE(app, "/api/sedes")
+    .methods(crow::HTTPMethod::Post)
+    ([&sistema](const crow::request& req) {
+        auto body = crow::json::load(req.body);
+        if (!body || !tieneTexto(body, "codigo") || !tieneTexto(body, "nombre") ||
+            !tieneTexto(body, "direccion") || !tieneTexto(body, "telefono") || !body["cantidad_salas"] ||
+            body["cantidad_salas"].t() != crow::json::type::Number || body["cantidad_salas"].i() <= 0 ||
+            body["cantidad_salas"].i() > std::numeric_limits<int>::max())
+            return respuestaJson(400, false, "Codigo, nombre, direccion, telefono y una cantidad_salas positiva son obligatorios.");
+        std::string mensaje;
+        bool creado = sistema.crearSede({body["codigo"].s(), body["nombre"].s(), body["direccion"].s(), static_cast<int>(body["cantidad_salas"].i()), body["telefono"].s()}, mensaje);
+        return respuestaJson(creado ? 201 : 400, creado, mensaje);
+    });
+
+    CROW_ROUTE(app, "/api/sedes/<string>/peliculas")
+    ([&sistema](const std::string& codigo) {
+        auto& grafo = sistema.obtenerGrafoSedes();
+        if (!grafo.existeSede(codigo)) return respuestaJson(404, false, "Sede no encontrada.");
+        crow::json::wvalue::list peliculas;
+        std::set<std::string> agregadas;
+        const auto& todasLasFunciones = sistema.obtenerFunciones();
+        for (const auto& funcion : todasLasFunciones) {
+            if (funcion.sede != codigo || !funcion.pelicula || !agregadas.insert(funcion.pelicula->getCodigo()).second) continue;
+            crow::json::wvalue item = peliculaJson(*funcion.pelicula);
+            crow::json::wvalue::list funciones;
+            for (const auto& funcionSede : todasLasFunciones) if (funcionSede.sede == codigo && funcionSede.pelicula && funcionSede.pelicula->getCodigo() == funcion.pelicula->getCodigo())
+                funciones.emplace_back(crow::json::wvalue({{"horario",funcionSede.horario},{"sala",funcionSede.sala},{"funcion",funcionSede.codigoFuncion}}));
+            item["funciones"] = std::move(funciones);
+            peliculas.emplace_back(std::move(item));
+        }
+        crow::json::wvalue salida; salida["ok"] = true; salida["message"] = "Peliculas de la sede obtenidas"; salida["data"] = std::move(peliculas); return respuestaJson(salida);
+    });
+
+    CROW_ROUTE(app, "/api/sedes/camino")
+    ([&sistema](const crow::request& req) {
+        const char* origen = req.url_params.get("origen"); const char* destino = req.url_params.get("destino");
+        if (!origen || !destino) return respuestaJson(400, false, "Indique origen y destino.");
+        auto& grafo = sistema.obtenerGrafoSedes();
+        if (!grafo.existeSede(origen) || !grafo.existeSede(destino)) return respuestaJson(404, false, "Una de las sedes no existe.");
+        auto camino = grafo.caminoBFS(origen, destino);
+        crow::json::wvalue salida; salida["ok"] = true; salida["conectadas"] = !camino.empty();
+        salida["message"] = camino.empty() ? "No existe una ruta entre estas sedes." : "Ruta con menor cantidad de conexiones encontrada por BFS.";
+        crow::json::wvalue::list codigos; for (const auto& c : camino) codigos.emplace_back(c); salida["data"] = std::move(codigos);
+        salida["intermedias"] = camino.size() < 3 ? 0 : static_cast<int>(camino.size()) - 2; return respuestaJson(salida);
+    });
+
+    CROW_ROUTE(app, "/api/sedes/ranking")
+    ([&sistema] {
+        crow::json::wvalue salida; salida["ok"] = true; salida["message"] = "Relaciones ordenadas por peliculas compartidas";
+        crow::json::wvalue::list items; auto& grafo = sistema.obtenerGrafoSedes();
+        for (const auto& relacion : grafo.obtenerRelacionesOrdenadas()) {
+            const auto& sedes = grafo.obtenerSedes();
+            items.emplace_back(crow::json::wvalue({{"origen",relacion.origen},{"nombre_origen",sedes.at(relacion.origen).nombre},{"destino",relacion.destino},{"nombre_destino",sedes.at(relacion.destino).nombre},{"peso",relacion.peso}}));
+        }
+        salida["data"] = std::move(items); return respuestaJson(salida);
+    });
+
+    CROW_ROUTE(app, "/api/carga/peliculas-funciones")
+    .methods(crow::HTTPMethod::Post)
+    ([&sistema](const crow::request& req) {
+        auto body=crow::json::load(req.body);
+        if(!body || !tieneTexto(body,"ruta")) return respuestaJson(400,false,"Indique la ruta del archivo JSON.");
+        int total=cargarPeliculasYFuncionesJSON(body["ruta"].s(),sistema.obtenerCartelera(),sistema.obtenerFunciones(),sistema.obtenerArbolFunciones(),&sistema.obtenerGrafoSedes());
+        sistema.actualizarGrafoSedes();
+        crow::json::wvalue out; out["ok"]=total>0; out["message"]=obtenerUltimoMensajeCargaFase2(); out["total"]=total; return respuestaJson(total>0?200:400,out);
+    });
     CROW_ROUTE(app, "/api/peliculas")
     ([&sistema](const crow::request& req) {
         crow::json::wvalue body;
@@ -320,15 +431,15 @@ void configurarRutasCinema(crow::App<crow::CORSHandler>& app, CinemaSystem& sist
             auto body = crow::json::load(req.body);
             if (!body || !tieneTexto(body, "pelicula") || !body["filas"] ||
                 !body["columnas"] || !tieneTexto(body, "horario") ||
-                !tieneTexto(body, "sala")) {
-                return respuestaJson(400, false, "Faltan pelicula, horario, sala, filas o columnas.");
+                !tieneTexto(body, "sala") || !tieneTexto(body, "sede")) {
+                return respuestaJson(400, false, "Faltan pelicula, sede, horario, sala, filas o columnas.");
             }
 
             Pelicula* pelicula = sistema.obtenerCartelera().buscarPorCodigo(body["pelicula"].s());
             std::string codigoCreado;
             std::string mensaje;
             bool creada = sistema.crearFuncion(pelicula, body["horario"].s(), body["sala"].s(),
-                                               body["filas"].i(), body["columnas"].i(),
+                                               body["sede"].s(), body["filas"].i(), body["columnas"].i(),
                                                codigoCreado, mensaje);
             crow::json::wvalue respuesta;
             respuesta["ok"] = creada;
@@ -424,6 +535,27 @@ void configurarRutasCinema(crow::App<crow::CORSHandler>& app, CinemaSystem& sist
         return respuestaJson(body);
     });
 
+    CROW_ROUTE(app, "/api/carga/clientes-reservas")
+    .methods(crow::HTTPMethod::Post)
+    ([&sistema](const crow::request& req) {
+        auto body = crow::json::load(req.body);
+        if (!body || !tieneTexto(body, "ruta")) {
+            return respuestaJson(400, false, "Indique la ruta del archivo JSON de clientes y reservas.");
+        }
+
+        int total = cargarClientesYReservasJSON(
+            body["ruta"].s(),
+            sistema.obtenerClientes(),
+            sistema.obtenerReservas(),
+            sistema.obtenerFunciones()
+        );
+
+        crow::json::wvalue salida;
+        salida["ok"] = total > 0;
+        salida["message"] = obtenerUltimoMensajeCargaClientesReservas();
+        salida["total"] = total;
+        return respuestaJson(total > 0 ? 200 : 400, salida);
+    });
     CROW_ROUTE(app, "/api/reservas")
     .methods(crow::HTTPMethod::Post)
     ([&sistema](const crow::request& req) {

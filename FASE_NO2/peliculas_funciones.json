@@ -1,0 +1,76 @@
+{
+  "sedes": [
+    {
+      "codigo": "S003",
+      "nombre": "Cinema EDD Zona 1",
+      "direccion": "6a Avenida, Zona 1, Ciudad de Guatemala",
+      "cantidad_salas": 4,
+      "telefono": "2222-3001"
+    },
+    {
+      "codigo": "S004",
+      "nombre": "Cinema EDD Zona 12",
+      "direccion": "Calzada Aguilar Batres, Zona 12, Ciudad de Guatemala",
+      "cantidad_salas": 5,
+      "telefono": "2222-3002"
+    }
+  ],
+  "peliculas": [
+    {
+      "codigo": "PEL101",
+      "titulo": "La ruta de las estrellas",
+      "genero": "Ciencia ficcion",
+      "duracion": 118,
+      "clasificacion": "B",
+      "idioma": "Espanol",
+      "fecha_estreno": "2026-10-27",
+      "fecha_fin": "2026-12-31",
+      "funciones": [
+        {
+          "codigo_funcion": "F003",
+          "horario": "16:00",
+          "sala": "1",
+          "filas": 8,
+          "columnas": 12,
+          "sede": "S003"
+        },
+        {
+          "codigo_funcion": "F004",
+          "horario": "19:30",
+          "sala": "2",
+          "filas": 8,
+          "columnas": 12,
+          "sede": "S004"
+        }
+      ]
+    },
+    {
+      "codigo": "PEL102",
+      "titulo": "El ultimo verano",
+      "genero": "Drama",
+      "duracion": 104,
+      "clasificacion": "B",
+      "idioma": "Espanol",
+      "fecha_estreno": "2026-10-27",
+      "fecha_fin": "2026-12-15",
+      "funciones": [
+        {
+          "codigo_funcion": "F005",
+          "horario": "17:15",
+          "sala": "3",
+          "filas": 7,
+          "columnas": 10,
+          "sede": "S003"
+        },
+        {
+          "codigo_funcion": "F006",
+          "horario": "20:00",
+          "sala": "4",
+          "filas": 7,
+          "columnas": 10,
+          "sede": "S004"
+        }
+      ]
+    }
+  ]
+}

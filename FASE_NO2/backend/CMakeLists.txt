@@ -10,8 +10,8 @@ include_directories(include)
 include_directories(libs/imgui)
 
 # Encontrar paquetes del sistema requeridos
-find_package(glfw3 REQUIRED)
-find_package(OpenGL REQUIRED)
+find_package(glfw3 QUIET)
+find_package(OpenGL QUIET)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/libs/imgui)
@@ -46,6 +46,7 @@ set(CORE_SOURCES
     src/structures/ListasPromociones.cpp
     src/structures/ListaSolicitudes.cpp
     src/structures/ArbolAVLFunciones.cpp
+    src/structures/GrafoSedes.cpp
     src/utils/CargaJSONFase2.cpp
     src/utils/CargaJSONClientesReservas.cpp
     src/utils/PersistenciaAsientos.cpp
@@ -77,5 +78,7 @@ target_include_directories(CinemaServer PRIVATE
 )
 
 # Enlazar librerías.
-target_link_libraries(CinemaProject glfw OpenGL::GL)
-target_link_libraries(CinemaServer ws2_32)
+if(TARGET CinemaProject)
+    target_link_libraries(CinemaProject glfw OpenGL::GL)
+endif()
+target_link_libraries(CinemaServer ws2_32 mswsock)

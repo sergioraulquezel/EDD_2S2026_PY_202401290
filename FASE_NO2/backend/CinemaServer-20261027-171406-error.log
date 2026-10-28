@@ -1,0 +1,536 @@
+(2026-10-27 23:14:09) [INFO    ] Crow/master server is running at http://0.0.0.0:18080 using 8 threads
+(2026-10-27 23:14:09) [INFO    ] Call `app.loglevel(crow::LogLevel::Warning)` to hide Info level logs.
+(2026-10-27 23:14:10) [INFO    ] Request: 127.0.0.1:60531 0x2aa16609ff0 HTTP/1.1 GET /api/health
+(2026-10-27 23:14:10) [INFO    ] Response: 0x2aa16609ff0 /api/health 200 0
+(2026-10-27 23:14:11) [INFO    ] Request: 127.0.0.1:60531 0x2aa16609ff0 HTTP/1.1 GET /api/sedes
+(2026-10-27 23:14:11) [INFO    ] Response: 0x2aa16609ff0 /api/sedes 200 0
+(2026-10-27 23:14:11) [INFO    ] Request: 127.0.0.1:60531 0x2aa16609ff0 HTTP/1.1 GET /api/sedes/ranking
+(2026-10-27 23:14:11) [INFO    ] Response: 0x2aa16609ff0 /api/sedes/ranking 200 0
+(2026-10-27 23:36:36) [INFO    ] Request: 127.0.0.1:64180 0x2aa1660ebf0 HTTP/1.1 GET /api/peliculas
+(2026-10-27 23:36:36) [INFO    ] Response: 0x2aa1660ebf0 /api/peliculas 200 0
+(2026-10-27 23:36:36) [INFO    ] Request: 127.0.0.1:64180 0x2aa1660ebf0 HTTP/1.1 GET /api/funciones
+(2026-10-27 23:36:36) [INFO    ] Response: 0x2aa1660ebf0 /api/funciones 200 0
+(2026-10-27 23:36:36) [INFO    ] Request: 127.0.0.1:64180 0x2aa1660ebf0 HTTP/1.1 GET /api/sedes(2026-10-27 23:36:36) [INFO    ] Request: 127.0.0.1:53534 0x2aa16609ff0 HTTP/1.1 GET /api/peliculas
+
+(2026-10-27 23:36:36) [INFO    ] Response: 0x2aa1660ebf0 /api/sedes 200 0
+(2026-10-27 23:36:36) [INFO    ] Response: 0x2aa16609ff0 /api/peliculas 200 0
+(2026-10-27 23:36:36) [INFO    ] Request: 127.0.0.1:58985 0x2aa166183a0 HTTP/1.1 GET /api/funciones
+(2026-10-27 23:36:36) [INFO    ] Response: 0x2aa166183a0 /api/funciones 200 0
+(2026-10-27 23:36:36) [INFO    ] Request: 127.0.0.1:53534 0x2aa16609ff0 HTTP/1.1 GET /api/peliculas
+(2026-10-27 23:36:36) [INFO    ] Response: 0x2aa16609ff0 /api/peliculas 200 0
+(2026-10-27 23:36:36) [INFO    ] Request: 127.0.0.1:53534 0x2aa16609ff0 HTTP/1.1 GET /api/funciones
+(2026-10-27 23:36:36) [INFO    ] Response: 0x2aa16609ff0 /api/funciones 200 0
+(2026-10-27 23:36:36) [INFO    ] Request: 127.0.0.1:53534 0x2aa16609ff0 HTTP/1.1 GET /api/sedes
+(2026-10-27 23:36:36) [INFO    ] Response: 0x2aa16609ff0 /api/sedes 200 0
+(2026-10-27 23:36:36) [INFO    ] Request: 127.0.0.1:53534 0x2aa16609ff0 HTTP/1.1 GET /api/peliculas
+(2026-10-27 23:36:36) [INFO    ] Response: 0x2aa16609ff0 /api/peliculas 200 0
+(2026-10-27 23:36:36) [INFO    ] Request: 127.0.0.1:58985 0x2aa166183a0 HTTP/1.1 GET /api/funciones
+(2026-10-27 23:36:36) [INFO    ] Response: 0x2aa166183a0 /api/funciones 200 0
+(2026-10-27 23:37:08) [INFO    ] Request: 127.0.0.1:58468 0x2aa16619c40 HTTP/1.1 GET /api/peliculas(2026-10-27 23:37:08) [INFO    ] Request: 127.0.0.1:65213 0x2aa1660ebf0 HTTP/1.1 GET /api/funciones
+
+(2026-10-27 23:37:08) [INFO    ] Response: 0x2aa1660ebf0 /api/funciones 200 0
+(2026-10-27 23:37:08) [INFO    ] Request: 127.0.0.1:55040 0x2aa16609ff0 HTTP/1.1 GET /api/sedes(2026-10-27 23:37:08) [INFO    ] Response: 0x2aa16619c40 /api/peliculas 200 0
+
+(2026-10-27 23:37:08) [INFO    ] Response: 0x2aa16609ff0 /api/sedes 200 0
+(2026-10-27 23:37:08) [INFO    ] Request: 127.0.0.1:65213 0x2aa1660ebf0 HTTP/1.1 GET /api/funciones
+(2026-10-27 23:37:08) [INFO    ] Response: 0x2aa1660ebf0 /api/funciones 200 0
+(2026-10-27 23:37:08) [INFO    ] Request: 127.0.0.1:58468 0x2aa16619c40 HTTP/1.1 GET /api/peliculas
+(2026-10-27 23:37:08) [INFO    ] Response: 0x2aa16619c40 /api/peliculas 200 0
+(2026-10-27 23:37:08) [INFO    ] Request: 127.0.0.1:55040 0x2aa16609ff0 HTTP/1.1 GET /api/sedes(2026-10-27 23:37:08) [INFO    ] Request: 127.0.0.1:65213 0x2aa1660ebf0 HTTP/1.1 GET /api/funciones
+
+(2026-10-27 23:37:08) [INFO    ] Response: 0x2aa16609ff0 /api/sedes 200 0
+(2026-10-27 23:37:08) [INFO    ] Response: 0x2aa1660ebf0 /api/funciones 200 0
+(2026-10-27 23:37:08) [INFO    ] Request: 127.0.0.1:65213 0x2aa1660ebf0 HTTP/1.1 GET /api/peliculas(2026-10-27 23:37:08) [INFO    ] Request: 127.0.0.1:55040 0x2aa16609ff0 HTTP/1.1 GET /api/funciones
+
+(2026-10-27 23:37:08) [INFO    ] Response: 0x2aa16609ff0 /api/funciones 200 0
+(2026-10-27 23:37:08) [INFO    ] Response: 0x2aa1660ebf0 /api/peliculas 200 0
+(2026-10-27 23:37:08) [INFO    ] Request: 127.0.0.1:65213 0x2aa1660ebf0 HTTP/1.1 GET /api/peliculas
+(2026-10-27 23:37:08) [INFO    ] Response: 0x2aa1660ebf0 /api/peliculas 200 0
+(2026-10-27 23:37:13) [INFO    ] Request: 127.0.0.1:65213 0x2aa1660ebf0 HTTP/1.1 GET /api/solicitudes
+(2026-10-27 23:37:13) [INFO    ] Response: 0x2aa1660ebf0 /api/solicitudes 200 0
+(2026-10-27 23:37:13) [INFO    ] Request: 127.0.0.1:65213 0x2aa1660ebf0 HTTP/1.1 GET /api/solicitudes
+(2026-10-27 23:37:13) [INFO    ] Response: 0x2aa1660ebf0 /api/solicitudes 200 0
+(2026-10-27 23:37:13) [INFO    ] Request: 127.0.0.1:65213 0x2aa1660ebf0 HTTP/1.1 GET /api/sedes/ranking
+(2026-10-27 23:37:13) [INFO    ] Response: 0x2aa1660ebf0 /api/sedes/ranking 200 0
+(2026-10-27 23:37:13) [INFO    ] Request: 127.0.0.1:65213 0x2aa1660ebf0 HTTP/1.1 GET /api/sedes/ranking
+(2026-10-27 23:37:13) [INFO    ] Response: 0x2aa1660ebf0 /api/sedes/ranking 200 0
+(2026-10-27 23:37:16) [INFO    ] Request: 127.0.0.1:65213 0x2aa1660ebf0 HTTP/1.1 POST /api/carga/peliculas-funciones
+(2026-10-27 23:37:16) [INFO    ] Response: 0x2aa1660ebf0 /api/carga/peliculas-funciones 200 0
+(2026-10-27 23:37:16) [INFO    ] Request: 127.0.0.1:65213 0x2aa1660ebf0 HTTP/1.1 GET /api/peliculas
+(2026-10-27 23:37:16) [INFO    ] Request: 127.0.0.1:49188 0x2aa16609ff0 HTTP/1.1 GET /api/sedes
+(2026-10-27 23:37:16) [INFO    ] Request: 127.0.0.1:58616 0x2aa16618120 HTTP/1.1 GET /api/funciones(2026-10-27 23:37:16) [INFO    ] Response: 0x2aa1660ebf0 /api/peliculas 200 0
+
+(2026-10-27 23:37:16) [INFO    ] Response: 0x2aa16609ff0 /api/sedes 200 0
+(2026-10-27 23:37:16) [INFO    ] Response: 0x2aa16618120 /api/funciones 200 0
+(2026-10-27 23:37:16) [INFO    ] Request: 127.0.0.1:65213 0x2aa1660ebf0 HTTP/1.1 GET /api/peliculas
+(2026-10-27 23:37:16) [INFO    ] Request: 127.0.0.1:49188 0x2aa16609ff0 HTTP/1.1 GET /api/sedes
+(2026-10-27 23:37:16) [INFO    ] Response: 0x2aa1660ebf0 /api/peliculas 200 0
+(2026-10-27 23:37:16) [INFO    ] Response: 0x2aa16609ff0 /api/sedes 200 0
+(2026-10-27 23:37:16) [INFO    ] Request: 127.0.0.1:58616 0x2aa16618120 HTTP/1.1 GET /api/funciones
+(2026-10-27 23:37:16) [INFO    ] Request: 127.0.0.1:65213 0x2aa1660ebf0 HTTP/1.1 GET /api/peliculas
+(2026-10-27 23:37:16) [INFO    ] Response: 0x2aa16618120 /api/funciones 200 0
+(2026-10-27 23:37:16) [INFO    ] Response: 0x2aa1660ebf0 /api/peliculas 200 0
+(2026-10-27 23:37:16) [INFO    ] Request: 127.0.0.1:58616 0x2aa16618120 HTTP/1.1 GET /api/funciones(2026-10-27 23:37:16) [INFO    ] Request: 127.0.0.1:65213 0x2aa1660ebf0 HTTP/1.1 GET /api/peliculas
+
+(2026-10-27 23:37:16) [INFO    ] Response: 0x2aa1660ebf0 /api/peliculas 200 0
+(2026-10-27 23:37:16) [INFO    ] Response: 0x2aa16618120 /api/funciones 200 0
+(2026-10-27 23:37:16) [INFO    ] Request: 127.0.0.1:58616 0x2aa16618120 HTTP/1.1 GET /api/funciones
+(2026-10-27 23:37:16) [INFO    ] Response: 0x2aa16618120 /api/funciones 200 0
+(2026-10-27 23:37:27) [INFO    ] Request: 127.0.0.1:51897 0x2aa1662e640 HTTP/1.1 GET /api/solicitudes
+(2026-10-27 23:37:27) [INFO    ] Response: 0x2aa1662e640 /api/solicitudes 200 0
+(2026-10-27 23:37:27) [INFO    ] Request: 127.0.0.1:51897 0x2aa1662e640 HTTP/1.1 GET /api/solicitudes
+(2026-10-27 23:37:27) [INFO    ] Response: 0x2aa1662e640 /api/solicitudes 200 0
+(2026-10-27 23:37:33) [INFO    ] Request: 127.0.0.1:55275 0x2aa16609ff0 HTTP/1.1 POST /api/carga/peliculas-funciones
+(2026-10-27 23:37:33) [INFO    ] Response: 0x2aa16609ff0 /api/carga/peliculas-funciones 400 0
+(2026-10-27 23:37:43) [INFO    ] Request: 127.0.0.1:65004 0x2aa16618120 HTTP/1.1 GET /api/sedes/ranking
+(2026-10-27 23:37:43) [INFO    ] Response: 0x2aa16618120 /api/sedes/ranking 200 0
+(2026-10-27 23:37:43) [INFO    ] Request: 127.0.0.1:65004 0x2aa16618120 HTTP/1.1 GET /api/sedes/ranking
+(2026-10-27 23:37:43) [INFO    ] Response: 0x2aa16618120 /api/sedes/ranking 200 0
+(2026-10-27 23:53:33) [INFO    ] Request: 127.0.0.1:50038 0x2aa16609ff0 HTTP/1.1 GET /api/peliculas
+(2026-10-27 23:53:33) [INFO    ] Response: 0x2aa16609ff0 /api/peliculas 200 0
+(2026-10-27 23:53:33) [INFO    ] Request: 127.0.0.1:55038 0x2aa16618120 HTTP/1.1 GET /api/funciones
+(2026-10-27 23:53:33) [INFO    ] Response: 0x2aa16618120 /api/funciones 200 0(2026-10-27 23:53:33) [INFO    ] Request: 127.0.0.1:50038 0x2aa16609ff0 HTTP/1.1 GET /api/sedes
+
+(2026-10-27 23:53:33) [INFO    ] Request: 127.0.0.1:55421 0x2aa16636b10 HTTP/1.1 GET /api/peliculas(2026-10-27 23:53:33) [INFO    ] Response: 0x2aa16609ff0 /api/sedes 200 0
+
+(2026-10-27 23:53:33) [INFO    ] Response: 0x2aa16636b10 /api/peliculas 200 0
+(2026-10-27 23:53:33) [INFO    ] Request: 127.0.0.1:55038 0x2aa16618120 HTTP/1.1 GET /api/funciones
+(2026-10-27 23:53:33) [INFO    ] Request: 127.0.0.1:50038 0x2aa16609ff0 HTTP/1.1 GET /api/sedes(2026-10-27 23:53:33) [INFO    ] Response: 0x2aa16618120 /api/funciones 200 0
+(2026-10-27 23:53:33) [INFO    ] Request: 127.0.0.1:55421 0x2aa16636b10 HTTP/1.1 GET /api/peliculas
+
+(2026-10-27 23:53:33) [INFO    ] Response: 0x2aa16609ff0 /api/sedes 200 0(2026-10-27 23:53:33) [INFO    ] Request: 127.0.0.1:55038 0x2aa16618120 HTTP/1.1 GET /api/funciones
+
+(2026-10-27 23:53:33) [INFO    ] Response: 0x2aa16636b10 /api/peliculas 200 0
+(2026-10-27 23:53:33) [INFO    ] Response: 0x2aa16618120 /api/funciones 200 0
+(2026-10-27 23:53:33) [INFO    ] Request: 127.0.0.1:55421 0x2aa16636b10 HTTP/1.1 GET /api/peliculas
+(2026-10-27 23:53:33) [INFO    ] Request: 127.0.0.1:55038 0x2aa16618120 HTTP/1.1 GET /api/funciones
+(2026-10-27 23:53:33) [INFO    ] Response: 0x2aa16636b10 /api/peliculas 200 0
+(2026-10-27 23:53:33) [INFO    ] Response: 0x2aa16618120 /api/funciones 200 0
+(2026-10-28 00:33:58) [INFO    ] Request: 127.0.0.1:65345 0x2aa1660ebf0 HTTP/1.1 GET /api/peliculas(2026-10-28 00:33:58) [INFO    ] Request: 127.0.0.1:52060 0x2aa16609ff0 HTTP/1.1 GET /api/funciones
+
+(2026-10-28 00:33:58) [INFO    ] Request: 127.0.0.1:57951 0x2aa16618120 HTTP/1.1 GET /api/sedes
+(2026-10-28 00:33:58) [INFO    ] Response: 0x2aa16609ff0 /api/funciones 200 0(2026-10-28 00:33:58) [INFO    ] Response: 0x2aa1660ebf0 /api/peliculas 200 0
+
+(2026-10-28 00:33:58) [INFO    ] Response: 0x2aa16618120 /api/sedes 200 0
+(2026-10-28 00:33:58) [INFO    ] Request: 127.0.0.1:52060 0x2aa16609ff0 HTTP/1.1 GET /api/funciones(2026-10-28 00:33:58) [INFO    ] Request: 127.0.0.1:65345 0x2aa1660ebf0 HTTP/1.1 GET /api/peliculas
+(2026-10-28 00:33:58) [INFO    ] Request: 127.0.0.1:57951 0x2aa16618120 HTTP/1.1 GET /api/sedes
+
+(2026-10-28 00:33:58) [INFO    ] Response: 0x2aa16609ff0 /api/funciones 200 0
+(2026-10-28 00:33:58) [INFO    ] Response: 0x2aa16618120 /api/sedes 200 0
+(2026-10-28 00:33:58) [INFO    ] Response: 0x2aa1660ebf0 /api/peliculas 200 0
+(2026-10-28 00:33:58) [INFO    ] Request: 127.0.0.1:52060 0x2aa16609ff0 HTTP/1.1 GET /api/funciones
+(2026-10-28 00:33:58) [INFO    ] Response: 0x2aa16609ff0 /api/funciones 200 0(2026-10-28 00:33:58) [INFO    ] Request: 127.0.0.1:65345 0x2aa1660ebf0 HTTP/1.1 GET /api/peliculas
+
+(2026-10-28 00:33:58) [INFO    ] Response: 0x2aa1660ebf0 /api/peliculas 200 0
+(2026-10-28 00:33:58) [INFO    ] Request: 127.0.0.1:52060 0x2aa16609ff0 HTTP/1.1 GET /api/funciones
+(2026-10-28 00:33:58) [INFO    ] Response: 0x2aa16609ff0 /api/funciones 200 0
+(2026-10-28 00:33:58) [INFO    ] Request: 127.0.0.1:65345 0x2aa1660ebf0 HTTP/1.1 GET /api/peliculas
+(2026-10-28 00:33:58) [INFO    ] Response: 0x2aa1660ebf0 /api/peliculas 200 0
+(2026-10-28 00:34:03) [INFO    ] Request: 127.0.0.1:65345 0x2aa1660ebf0 HTTP/1.1 GET /api/solicitudes
+(2026-10-28 00:34:03) [INFO    ] Response: 0x2aa1660ebf0 /api/solicitudes 200 0
+(2026-10-28 00:34:03) [INFO    ] Request: 127.0.0.1:65345 0x2aa1660ebf0 HTTP/1.1 GET /api/solicitudes
+(2026-10-28 00:34:03) [INFO    ] Response: 0x2aa1660ebf0 /api/solicitudes 200 0
+(2026-10-28 00:34:13) [INFO    ] Request: 127.0.0.1:59090 0x2aa166332c0 HTTP/1.1 GET /api/reservas
+(2026-10-28 00:34:13) [INFO    ] Response: 0x2aa166332c0 /api/reservas 200 0
+(2026-10-28 00:34:13) [INFO    ] Request: 127.0.0.1:58312 0x2aa16609ff0 HTTP/1.1 GET /api/clientes
+(2026-10-28 00:34:13) [INFO    ] Response: 0x2aa16609ff0 /api/clientes 200 0
+(2026-10-28 00:34:13) [INFO    ] Request: 127.0.0.1:59090 0x2aa166332c0 HTTP/1.1 GET /api/reservas
+(2026-10-28 00:34:13) [INFO    ] Response: 0x2aa166332c0 /api/reservas 200 0
+(2026-10-28 00:34:13) [INFO    ] Request: 127.0.0.1:58312 0x2aa16609ff0 HTTP/1.1 GET /api/clientes
+(2026-10-28 00:34:13) [INFO    ] Response: 0x2aa16609ff0 /api/clientes 200 0
+(2026-10-28 00:34:27) [INFO    ] Request: 127.0.0.1:56541 0x2aa1660ebf0 HTTP/1.1 GET /api/sedes/ranking
+(2026-10-28 00:34:27) [INFO    ] Response: 0x2aa1660ebf0 /api/sedes/ranking 200 0
+(2026-10-28 00:34:27) [INFO    ] Request: 127.0.0.1:56541 0x2aa1660ebf0 HTTP/1.1 GET /api/sedes/ranking
+(2026-10-28 00:34:27) [INFO    ] Response: 0x2aa1660ebf0 /api/sedes/ranking 200 0
+(2026-10-28 00:34:59) [INFO    ] Request: 127.0.0.1:57801 0x2aa16609ff0 HTTP/1.1 GET /api/sedes/S003/peliculas
+(2026-10-28 00:34:59) [INFO    ] Response: 0x2aa16609ff0 /api/sedes/S003/peliculas 200 0
+(2026-10-28 00:35:11) [INFO    ] Request: 127.0.0.1:51010 0x2aa1660ebf0 HTTP/1.1 GET /api/sedes/camino
+(2026-10-28 00:35:11) [INFO    ] Response: 0x2aa1660ebf0 /api/sedes/camino?origen=S002&destino=S003 200 0
+(2026-10-28 00:35:15) [INFO    ] Request: 127.0.0.1:51010 0x2aa1660ebf0 HTTP/1.1 GET /api/sedes/camino
+(2026-10-28 00:35:15) [INFO    ] Response: 0x2aa1660ebf0 /api/sedes/camino?origen=S001&destino=S003 200 0
+(2026-10-28 00:35:16) [INFO    ] Request: 127.0.0.1:51010 0x2aa1660ebf0 HTTP/1.1 GET /api/sedes/camino
+(2026-10-28 00:35:16) [INFO    ] Response: 0x2aa1660ebf0 /api/sedes/camino?origen=S001&destino=S001 200 0
+(2026-10-28 00:35:30) [INFO    ] Request: 127.0.0.1:52002 0x2aa16609ff0 HTTP/1.1 GET /api/sedes/S003/peliculas
+(2026-10-28 00:35:30) [INFO    ] Response: 0x2aa16609ff0 /api/sedes/S003/peliculas 200 0
+(2026-10-28 00:35:40) [INFO    ] Request: 127.0.0.1:50879 0x2aa1660ebf0 HTTP/1.1 GET /api/sedes/camino
+(2026-10-28 00:35:40) [INFO    ] Response: 0x2aa1660ebf0 /api/sedes/camino?origen=S001&destino=S003 200 0
+(2026-10-28 00:36:04) [INFO    ] Request: 127.0.0.1:61915 0x2aa16609ff0 HTTP/1.1 POST /api/reportes/sedes
+(2026-10-28 00:36:09) [INFO    ] Response: 0x2aa16609ff0 /api/reportes/sedes 200 0
+(2026-10-28 00:41:05) [INFO    ] Request: 127.0.0.1:53653 0x2aa1660ebf0 HTTP/1.1 GET /api/sedes/ranking
+(2026-10-28 00:41:05) [INFO    ] Response: 0x2aa1660ebf0 /api/sedes/ranking 200 0
+(2026-10-28 00:41:05) [INFO    ] Request: 127.0.0.1:53653 0x2aa1660ebf0 HTTP/1.1 GET /api/sedes/ranking
+(2026-10-28 00:41:05) [INFO    ] Response: 0x2aa1660ebf0 /api/sedes/ranking 200 0
+(2026-10-28 01:39:39) [INFO    ] Request: 127.0.0.1:58979 0x2aa16609ff0 HTTP/1.1 GET /api/peliculas(2026-10-28 01:39:39) [INFO    ] Request: 127.0.0.1:64154 0x2aa1660ebf0 HTTP/1.1 GET /api/funciones(2026-10-28 01:39:39) [INFO    ] Request: 127.0.0.1:63662 0x2aa1662f650 HTTP/1.1 GET /api/sedes
+
+
+(2026-10-28 01:39:39) [INFO    ] Response: 0x2aa16609ff0 /api/peliculas 200 0
+(2026-10-28 01:39:39) [INFO    ] Response: 0x2aa1660ebf0 /api/funciones 200 0
+(2026-10-28 01:39:39) [INFO    ] Response: 0x2aa1662f650 /api/sedes 200 0
+(2026-10-28 01:39:39) [INFO    ] Request: 127.0.0.1:58979 0x2aa16609ff0 HTTP/1.1 GET /api/peliculas
+(2026-10-28 01:39:39) [INFO    ] Response: 0x2aa16609ff0 /api/peliculas 200 0
+(2026-10-28 01:39:39) [INFO    ] Request: 127.0.0.1:64154 0x2aa1660ebf0 HTTP/1.1 GET /api/funciones
+(2026-10-28 01:39:39) [INFO    ] Request: 127.0.0.1:63662 0x2aa1662f650 HTTP/1.1 GET /api/sedes(2026-10-28 01:39:39) [INFO    ] Response: 0x2aa1660ebf0 /api/funciones 200 0
+
+(2026-10-28 01:39:39) [INFO    ] Request: 127.0.0.1:58979 0x2aa16609ff0 HTTP/1.1 GET /api/peliculas
+(2026-10-28 01:39:39) [INFO    ] Response: 0x2aa1662f650 /api/sedes 200 0
+(2026-10-28 01:39:39) [INFO    ] Response: 0x2aa16609ff0 /api/peliculas 200 0
+(2026-10-28 01:39:39) [INFO    ] Request: 127.0.0.1:64154 0x2aa1660ebf0 HTTP/1.1 GET /api/funciones
+(2026-10-28 01:39:39) [INFO    ] Response: 0x2aa1660ebf0 /api/funciones 200 0
+(2026-10-28 01:39:39) [INFO    ] Request: 127.0.0.1:58979 0x2aa16609ff0 HTTP/1.1 GET /api/peliculas
+(2026-10-28 01:39:39) [INFO    ] Response: 0x2aa16609ff0 /api/peliculas 200 0
+(2026-10-28 01:39:39) [INFO    ] Request: 127.0.0.1:64154 0x2aa1660ebf0 HTTP/1.1 GET /api/funciones
+(2026-10-28 01:39:39) [INFO    ] Response: 0x2aa1660ebf0 /api/funciones 200 0
+(2026-10-28 01:39:46) [INFO    ] Request: 127.0.0.1:64479 0x2aa16649f60 HTTP/1.1 GET /api/sedes/ranking
+(2026-10-28 01:39:46) [INFO    ] Response: 0x2aa16649f60 /api/sedes/ranking 200 0
+(2026-10-28 01:39:46) [INFO    ] Request: 127.0.0.1:64479 0x2aa16649f60 HTTP/1.1 GET /api/sedes/ranking
+(2026-10-28 01:39:46) [INFO    ] Response: 0x2aa16649f60 /api/sedes/ranking 200 0
+(2026-10-28 01:39:50) [INFO    ] Request: 127.0.0.1:64479 0x2aa16649f60 HTTP/1.1 GET /api/solicitudes
+(2026-10-28 01:39:50) [INFO    ] Response: 0x2aa16649f60 /api/solicitudes 200 0
+(2026-10-28 01:39:50) [INFO    ] Request: 127.0.0.1:64479 0x2aa16649f60 HTTP/1.1 GET /api/solicitudes
+(2026-10-28 01:39:50) [INFO    ] Response: 0x2aa16649f60 /api/solicitudes 200 0
+(2026-10-28 01:39:52) [INFO    ] Request: 127.0.0.1:64479 0x2aa16649f60 HTTP/1.1 GET /api/sedes/ranking
+(2026-10-28 01:39:52) [INFO    ] Response: 0x2aa16649f60 /api/sedes/ranking 200 0
+(2026-10-28 01:39:52) [INFO    ] Request: 127.0.0.1:64479 0x2aa16649f60 HTTP/1.1 GET /api/sedes/ranking
+(2026-10-28 01:39:52) [INFO    ] Response: 0x2aa16649f60 /api/sedes/ranking 200 0
+(2026-10-28 02:24:53) [INFO    ] Request: 127.0.0.1:54501 0x2aa16648a50 HTTP/1.1 GET /api/sedes(2026-10-28 02:24:53) [INFO    ] Request: 127.0.0.1:52236 0x2aa16647540 HTTP/1.1 GET /api/peliculas
+
+(2026-10-28 02:24:53) [INFO    ] Request: 127.0.0.1:58545 0x2aa16646030 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:24:53) [INFO    ] Response: 0x2aa16648a50 /api/sedes 200 0
+(2026-10-28 02:24:53) [INFO    ] Response: 0x2aa16647540 /api/peliculas 200 0
+(2026-10-28 02:24:53) [INFO    ] Response: 0x2aa16646030 /api/funciones 200 0
+(2026-10-28 02:24:53) [INFO    ] Request: 127.0.0.1:54501 0x2aa16648a50 HTTP/1.1 GET /api/sedes
+(2026-10-28 02:24:53) [INFO    ] Response: 0x2aa16648a50 /api/sedes 200 0
+(2026-10-28 02:24:53) [INFO    ] Request: 127.0.0.1:52236 0x2aa16647540 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:24:53) [INFO    ] Request: 127.0.0.1:58545 0x2aa16646030 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:24:53) [INFO    ] Response: 0x2aa16647540 /api/peliculas 200 0
+(2026-10-28 02:24:53) [INFO    ] Response: 0x2aa16646030 /api/funciones 200 0
+(2026-10-28 02:24:53) [INFO    ] Request: 127.0.0.1:52236 0x2aa16647540 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:24:53) [INFO    ] Request: 127.0.0.1:58545 0x2aa16646030 HTTP/1.1 GET /api/funciones(2026-10-28 02:24:53) [INFO    ] Response: 0x2aa16647540 /api/peliculas 200 0
+
+(2026-10-28 02:24:53) [INFO    ] Response: 0x2aa16646030 /api/funciones 200 0
+(2026-10-28 02:24:53) [INFO    ] Request: 127.0.0.1:52236 0x2aa16647540 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:24:53) [INFO    ] Response: 0x2aa16647540 /api/peliculas 200 0
+(2026-10-28 02:24:53) [INFO    ] Request: 127.0.0.1:58545 0x2aa16646030 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:24:53) [INFO    ] Response: 0x2aa16646030 /api/funciones 200 0
+(2026-10-28 02:24:54) [INFO    ] Request: 127.0.0.1:58545 0x2aa16646030 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:24:54) [INFO    ] Request: 127.0.0.1:54501 0x2aa16648a50 HTTP/1.1 GET /api/sedes
+(2026-10-28 02:24:54) [INFO    ] Request: 127.0.0.1:52236 0x2aa16647540 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:24:54) [INFO    ] Response: 0x2aa16646030 /api/peliculas 200 0
+(2026-10-28 02:24:54) [INFO    ] Response: 0x2aa16648a50 /api/sedes 200 0
+(2026-10-28 02:24:54) [INFO    ] Response: 0x2aa16647540 /api/funciones 200 0
+(2026-10-28 02:24:54) [INFO    ] Request: 127.0.0.1:58545 0x2aa16646030 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:24:54) [INFO    ] Request: 127.0.0.1:54501 0x2aa16648a50 HTTP/1.1 GET /api/sedes
+(2026-10-28 02:24:54) [INFO    ] Request: 127.0.0.1:52236 0x2aa16647540 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:24:54) [INFO    ] Response: 0x2aa16648a50 /api/sedes 200 0
+(2026-10-28 02:24:54) [INFO    ] Response: 0x2aa16646030 /api/peliculas 200 0
+(2026-10-28 02:24:54) [INFO    ] Response: 0x2aa16647540 /api/funciones 200 0
+(2026-10-28 02:24:54) [INFO    ] Request: 127.0.0.1:52236 0x2aa16647540 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:24:54) [INFO    ] Request: 127.0.0.1:58545 0x2aa16646030 HTTP/1.1 GET /api/peliculas(2026-10-28 02:24:54) [INFO    ] Response: 0x2aa16647540 /api/funciones 200 0
+
+(2026-10-28 02:24:54) [INFO    ] Response: 0x2aa16646030 /api/peliculas 200 0
+(2026-10-28 02:24:54) [INFO    ] Request: 127.0.0.1:52236 0x2aa16647540 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:24:54) [INFO    ] Request: 127.0.0.1:58545 0x2aa16646030 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:24:54) [INFO    ] Response: 0x2aa16647540 /api/funciones 200 0
+(2026-10-28 02:24:54) [INFO    ] Response: 0x2aa16646030 /api/peliculas 200 0
+(2026-10-28 02:24:57) [INFO    ] Request: 127.0.0.1:58545 0x2aa16646030 HTTP/1.1 POST /api/carga/peliculas-funciones
+(2026-10-28 02:24:57) [INFO    ] Response: 0x2aa16646030 /api/carga/peliculas-funciones 400 0
+(2026-10-28 02:25:09) [INFO    ] Request: 127.0.0.1:62968 0x2aa1664de90 HTTP/1.1 GET /api/sedes/ranking
+(2026-10-28 02:25:09) [INFO    ] Response: 0x2aa1664de90 /api/sedes/ranking 200 0
+(2026-10-28 02:25:09) [INFO    ] Request: 127.0.0.1:62968 0x2aa1664de90 HTTP/1.1 GET /api/sedes/ranking
+(2026-10-28 02:25:09) [INFO    ] Response: 0x2aa1664de90 /api/sedes/ranking 200 0
+(2026-10-28 02:25:17) [INFO    ] Response: 0x2aa16648a50 /api/login 204 0
+(2026-10-28 02:25:17) [INFO    ] Request: 127.0.0.1:56301 0x2aa16646030 HTTP/1.1 POST /api/login
+(2026-10-28 02:25:17) [INFO    ] Response: 0x2aa16646030 /api/login 200 0
+(2026-10-28 02:25:17) [INFO    ] Request: 127.0.0.1:56301 0x2aa16646030 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:25:17) [INFO    ] Response: 0x2aa16646030 /api/peliculas 200 0
+(2026-10-28 02:25:17) [INFO    ] Request: 127.0.0.1:60281 0x2aa1664c980 HTTP/1.1 GET /api/sedes
+(2026-10-28 02:25:17) [INFO    ] Request: 127.0.0.1:52215 0x2aa16647540 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:25:17) [INFO    ] Request: 127.0.0.1:56301 0x2aa16646030 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:25:17) [INFO    ] Response: 0x2aa1664c980 /api/sedes 200 0(2026-10-28 02:25:17) [INFO    ] Response: 0x2aa16646030 /api/peliculas 200 0
+(2026-10-28 02:25:17) [INFO    ] Response: 0x2aa16647540 /api/funciones 200 0
+
+(2026-10-28 02:25:17) [INFO    ] Request: 127.0.0.1:56301 0x2aa16646030 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:25:17) [INFO    ] Response: 0x2aa16646030 /api/peliculas 200 0
+(2026-10-28 02:25:17) [INFO    ] Request: 127.0.0.1:60281 0x2aa1664c980 HTTP/1.1 GET /api/sedes
+(2026-10-28 02:25:17) [INFO    ] Request: 127.0.0.1:52215 0x2aa16647540 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:25:17) [INFO    ] Response: 0x2aa1664c980 /api/sedes 200 0
+(2026-10-28 02:25:17) [INFO    ] Response: 0x2aa16647540 /api/funciones 200 0
+(2026-10-28 02:25:17) [INFO    ] Request: 127.0.0.1:52215 0x2aa16647540 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:25:17) [INFO    ] Response: 0x2aa16647540 /api/funciones 200 0
+(2026-10-28 02:25:27) [INFO    ] Request: 127.0.0.1:62744 0x2aa16648a50 HTTP/1.1 POST /api/carga/peliculas-funciones
+(2026-10-28 02:25:27) [INFO    ] Response: 0x2aa16648a50 /api/carga/peliculas-funciones 400 0
+(2026-10-28 02:27:07) [INFO    ] Request: 127.0.0.1:56919 0x2aa16649f60 HTTP/1.1 GET /api/sedes/ranking
+(2026-10-28 02:27:07) [INFO    ] Response: 0x2aa16649f60 /api/sedes/ranking 200 0
+(2026-10-28 02:27:07) [INFO    ] Request: 127.0.0.1:56919 0x2aa16649f60 HTTP/1.1 GET /api/sedes/ranking
+(2026-10-28 02:27:07) [INFO    ] Response: 0x2aa16649f60 /api/sedes/ranking 200 0
+(2026-10-28 02:27:12) [INFO    ] Request: 127.0.0.1:56919 0x2aa16649f60 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:27:12) [INFO    ] Request: 127.0.0.1:51365 0x2aa16646030 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:27:12) [INFO    ] Response: 0x2aa16649f60 /api/peliculas 200 0
+(2026-10-28 02:27:12) [INFO    ] Request: 127.0.0.1:55352 0x2aa1664b470 HTTP/1.1 GET /api/sedes
+(2026-10-28 02:27:12) [INFO    ] Response: 0x2aa16646030 /api/funciones 200 0
+(2026-10-28 02:27:12) [INFO    ] Response: 0x2aa1664b470 /api/sedes 200 0
+(2026-10-28 02:27:12) [INFO    ] Request: 127.0.0.1:56919 0x2aa16649f60 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:27:12) [INFO    ] Response: 0x2aa16649f60 /api/peliculas 200 0
+(2026-10-28 02:27:12) [INFO    ] Request: 127.0.0.1:51365 0x2aa16646030 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:27:12) [INFO    ] Request: 127.0.0.1:55352 0x2aa1664b470 HTTP/1.1 GET /api/sedes
+(2026-10-28 02:27:12) [INFO    ] Request: 127.0.0.1:56919 0x2aa16649f60 HTTP/1.1 GET /api/peliculas(2026-10-28 02:27:12) [INFO    ] Response: 0x2aa16646030 /api/funciones 200 0
+
+(2026-10-28 02:27:12) [INFO    ] Response: 0x2aa1664b470 /api/sedes 200 0
+(2026-10-28 02:27:12) [INFO    ] Response: 0x2aa16649f60 /api/peliculas 200 0
+(2026-10-28 02:27:12) [INFO    ] Request: 127.0.0.1:51365 0x2aa16646030 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:27:12) [INFO    ] Response: 0x2aa16646030 /api/funciones 200 0
+(2026-10-28 02:27:12) [INFO    ] Request: 127.0.0.1:56919 0x2aa16649f60 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:27:12) [INFO    ] Response: 0x2aa16649f60 /api/peliculas 200 0
+(2026-10-28 02:27:12) [INFO    ] Request: 127.0.0.1:51365 0x2aa16646030 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:27:12) [INFO    ] Response: 0x2aa16646030 /api/funciones 200 0
+(2026-10-28 02:27:16) [INFO    ] Response: 0x2aa16646030 /api/login 204 0
+(2026-10-28 02:27:16) [INFO    ] Request: 127.0.0.1:56919 0x2aa16649f60 HTTP/1.1 POST /api/login
+(2026-10-28 02:27:16) [INFO    ] Response: 0x2aa16649f60 /api/login 200 0
+(2026-10-28 02:27:16) [INFO    ] Request: 127.0.0.1:56919 0x2aa16649f60 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:27:16) [INFO    ] Request: 127.0.0.1:55352 0x2aa1664b470 HTTP/1.1 GET /api/funciones(2026-10-28 02:27:16) [INFO    ] Response: 0x2aa16649f60 /api/peliculas 200 0
+(2026-10-28 02:27:16) [INFO    ] Request: 127.0.0.1:64080 0x2aa16647540 HTTP/1.1 GET /api/sedes
+
+(2026-10-28 02:27:16) [INFO    ] Response: 0x2aa16647540 /api/sedes 200 0
+(2026-10-28 02:27:16) [INFO    ] Response: 0x2aa1664b470 /api/funciones 200 0
+(2026-10-28 02:27:16) [INFO    ] Request: 127.0.0.1:56919 0x2aa16649f60 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:27:16) [INFO    ] Response: 0x2aa16649f60 /api/peliculas 200 0(2026-10-28 02:27:16) [INFO    ] Request: 127.0.0.1:64080 0x2aa16647540 HTTP/1.1 GET /api/sedes
+
+(2026-10-28 02:27:16) [INFO    ] Request: 127.0.0.1:55352 0x2aa1664b470 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:27:16) [INFO    ] Response: 0x2aa16647540 /api/sedes 200 0
+(2026-10-28 02:27:16) [INFO    ] Response: 0x2aa1664b470 /api/funciones 200 0
+(2026-10-28 02:27:16) [INFO    ] Request: 127.0.0.1:56919 0x2aa16649f60 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:27:16) [INFO    ] Response: 0x2aa16649f60 /api/peliculas 200 0
+(2026-10-28 02:27:16) [INFO    ] Request: 127.0.0.1:55352 0x2aa1664b470 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:27:16) [INFO    ] Response: 0x2aa1664b470 /api/funciones 200 0
+(2026-10-28 02:28:04) [INFO    ] Request: 127.0.0.1:62725 0x2aa16648a50 HTTP/1.1 POST /api/carga/peliculas-funciones
+(2026-10-28 02:28:04) [INFO    ] Response: 0x2aa16648a50 /api/carga/peliculas-funciones 200 0
+(2026-10-28 02:28:04) [INFO    ] Request: 127.0.0.1:62725 0x2aa16648a50 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:28:04) [INFO    ] Request: 127.0.0.1:64920 0x2aa16649f60 HTTP/1.1 GET /api/sedes
+(2026-10-28 02:28:04) [INFO    ] Request: 127.0.0.1:52959 0x2aa16646030 HTTP/1.1 GET /api/funciones(2026-10-28 02:28:04) [INFO    ] Response: 0x2aa16648a50 /api/peliculas 200 0
+(2026-10-28 02:28:04) [INFO    ] Response: 0x2aa16649f60 /api/sedes 200 0
+
+(2026-10-28 02:28:04) [INFO    ] Request: 127.0.0.1:62725 0x2aa16648a50 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:28:04) [INFO    ] Response: 0x2aa16646030 /api/funciones 200 0(2026-10-28 02:28:04) [INFO    ] Response: 0x2aa16648a50 /api/peliculas 200 0
+
+(2026-10-28 02:28:04) [INFO    ] Request: 127.0.0.1:64920 0x2aa16649f60 HTTP/1.1 GET /api/sedes
+(2026-10-28 02:28:04) [INFO    ] Response: 0x2aa16649f60 /api/sedes 200 0
+(2026-10-28 02:28:04) [INFO    ] Request: 127.0.0.1:62725 0x2aa16648a50 HTTP/1.1 GET /api/funciones(2026-10-28 02:28:04) [INFO    ] Request: 127.0.0.1:52959 0x2aa16646030 HTTP/1.1 GET /api/peliculas
+
+(2026-10-28 02:28:04) [INFO    ] Response: 0x2aa16646030 /api/peliculas 200 0(2026-10-28 02:28:04) [INFO    ] Response: 0x2aa16648a50 /api/funciones 200 0
+
+(2026-10-28 02:28:04) [INFO    ] Request: 127.0.0.1:52959 0x2aa16646030 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:28:04) [INFO    ] Request: 127.0.0.1:64920 0x2aa16649f60 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:28:04) [INFO    ] Response: 0x2aa16646030 /api/peliculas 200 0
+(2026-10-28 02:28:04) [INFO    ] Response: 0x2aa16649f60 /api/funciones 200 0
+(2026-10-28 02:28:04) [INFO    ] Request: 127.0.0.1:52959 0x2aa16646030 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:28:04) [INFO    ] Response: 0x2aa16646030 /api/funciones 200 0
+(2026-10-28 02:28:10) [INFO    ] Request: 127.0.0.1:64920 0x2aa16649f60 HTTP/1.1 GET /api/sedes/ranking
+(2026-10-28 02:28:10) [INFO    ] Response: 0x2aa16649f60 /api/sedes/ranking 200 0
+(2026-10-28 02:28:10) [INFO    ] Request: 127.0.0.1:64920 0x2aa16649f60 HTTP/1.1 GET /api/sedes/ranking
+(2026-10-28 02:28:10) [INFO    ] Response: 0x2aa16649f60 /api/sedes/ranking 200 0
+(2026-10-28 02:28:26) [INFO    ] Request: 127.0.0.1:53036 0x2aa1664f3a0 HTTP/1.1 GET /api/sedes/camino
+(2026-10-28 02:28:26) [INFO    ] Response: 0x2aa1664f3a0 /api/sedes/camino?origen=S002&destino=S003 200 0
+(2026-10-28 02:28:36) [INFO    ] Request: 127.0.0.1:62268 0x2aa16646030 HTTP/1.1 POST /api/reportes/sedes
+(2026-10-28 02:28:37) [INFO    ] Response: 0x2aa16646030 /api/reportes/sedes 200 0
+(2026-10-28 02:29:14) [INFO    ] Request: 127.0.0.1:52800 0x2aa1664b470 HTTP/1.1 GET /api/solicitudes
+(2026-10-28 02:29:14) [INFO    ] Response: 0x2aa1664b470 /api/solicitudes 200 0
+(2026-10-28 02:29:14) [INFO    ] Request: 127.0.0.1:52800 0x2aa1664b470 HTTP/1.1 GET /api/solicitudes
+(2026-10-28 02:29:14) [INFO    ] Response: 0x2aa1664b470 /api/solicitudes 200 0
+(2026-10-28 02:29:15) [INFO    ] Request: 127.0.0.1:52800 0x2aa1664b470 HTTP/1.1 GET /api/reservas
+(2026-10-28 02:29:15) [INFO    ] Response: 0x2aa1664b470 /api/reservas 200 0
+(2026-10-28 02:29:15) [INFO    ] Request: 127.0.0.1:52800 0x2aa1664b470 HTTP/1.1 GET /api/clientes
+(2026-10-28 02:29:15) [INFO    ] Request: 127.0.0.1:52111 0x2aa16646030 HTTP/1.1 GET /api/reservas
+(2026-10-28 02:29:15) [INFO    ] Response: 0x2aa1664b470 /api/clientes 200 0
+(2026-10-28 02:29:15) [INFO    ] Response: 0x2aa16646030 /api/reservas 200 0
+(2026-10-28 02:29:15) [INFO    ] Request: 127.0.0.1:52800 0x2aa1664b470 HTTP/1.1 GET /api/clientes
+(2026-10-28 02:29:15) [INFO    ] Response: 0x2aa1664b470 /api/clientes 200 0
+(2026-10-28 02:30:38) [INFO    ] Request: 127.0.0.1:58141 0x2aa16647540 HTTP/1.1 GET /api/solicitudes
+(2026-10-28 02:30:38) [INFO    ] Response: 0x2aa16647540 /api/solicitudes 200 0
+(2026-10-28 02:30:38) [INFO    ] Request: 127.0.0.1:58141 0x2aa16647540 HTTP/1.1 GET /api/solicitudes
+(2026-10-28 02:30:38) [INFO    ] Response: 0x2aa16647540 /api/solicitudes 200 0
+(2026-10-28 02:36:18) [INFO    ] Request: 127.0.0.1:56618 0x2aa16649f60 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:36:18) [INFO    ] Request: 127.0.0.1:52781 0x2aa16646030 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:36:18) [INFO    ] Request: 127.0.0.1:58945 0x2aa1664b470 HTTP/1.1 GET /api/sedes
+(2026-10-28 02:36:18) [INFO    ] Response: 0x2aa1664b470 /api/sedes 200 0(2026-10-28 02:36:18) [INFO    ] Response: 0x2aa16649f60 /api/peliculas 200 0
+
+(2026-10-28 02:36:18) [INFO    ] Response: 0x2aa16646030 /api/funciones 200 0(2026-10-28 02:36:18) [INFO    ] Request: 127.0.0.1:56618 0x2aa16649f60 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:36:18) [INFO    ] Request: 127.0.0.1:58945 0x2aa1664b470 HTTP/1.1 GET /api/sedes
+
+(2026-10-28 02:36:18) [INFO    ] Response: 0x2aa1664b470 /api/sedes 200 0
+(2026-10-28 02:36:18) [INFO    ] Request: 127.0.0.1:52781 0x2aa16646030 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:36:18) [INFO    ] Response: 0x2aa16649f60 /api/peliculas 200 0
+(2026-10-28 02:36:18) [INFO    ] Request: 127.0.0.1:56618 0x2aa16649f60 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:36:18) [INFO    ] Response: 0x2aa16646030 /api/funciones 200 0
+(2026-10-28 02:36:18) [INFO    ] Response: 0x2aa16649f60 /api/peliculas 200 0
+(2026-10-28 02:36:18) [INFO    ] Request: 127.0.0.1:58945 0x2aa1664b470 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:36:18) [INFO    ] Request: 127.0.0.1:56618 0x2aa16649f60 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:36:18) [INFO    ] Response: 0x2aa16649f60 /api/peliculas 200 0
+(2026-10-28 02:36:18) [INFO    ] Response: 0x2aa1664b470 /api/funciones 200 0
+(2026-10-28 02:36:18) [INFO    ] Request: 127.0.0.1:56618 0x2aa16649f60 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:36:19) [INFO    ] Response: 0x2aa16649f60 /api/funciones 200 0
+(2026-10-28 02:36:24) [INFO    ] Request: 127.0.0.1:58945 0x2aa1664b470 HTTP/1.1 GET /api/reservas
+(2026-10-28 02:36:24) [INFO    ] Response: 0x2aa1664b470 /api/reservas 200 0
+(2026-10-28 02:36:24) [INFO    ] Request: 127.0.0.1:56618 0x2aa16649f60 HTTP/1.1 GET /api/clientes
+(2026-10-28 02:36:24) [INFO    ] Response: 0x2aa16649f60 /api/clientes 200 0
+(2026-10-28 02:36:24) [INFO    ] Request: 127.0.0.1:58945 0x2aa1664b470 HTTP/1.1 GET /api/reservas(2026-10-28 02:36:24) [INFO    ] Request: 127.0.0.1:56618 0x2aa16649f60 HTTP/1.1 GET /api/clientes
+
+(2026-10-28 02:36:24) [INFO    ] Response: 0x2aa1664b470 /api/reservas 200 0
+(2026-10-28 02:36:24) [INFO    ] Response: 0x2aa16649f60 /api/clientes 200 0
+(2026-10-28 02:37:53) [INFO    ] Request: 127.0.0.1:50910 0x2aa16648a50 HTTP/1.1 GET /api/funciones(2026-10-28 02:37:53) [INFO    ] Request: 127.0.0.1:54435 0x2aa16647540 HTTP/1.1 GET /api/peliculas(2026-10-28 02:37:53) [INFO    ] Request: 127.0.0.1:60987 0x2aa16649f60 HTTP/1.1 GET /api/sedes
+
+
+(2026-10-28 02:37:53) [INFO    ] Response: 0x2aa16649f60 /api/sedes 200 0
+(2026-10-28 02:37:53) [INFO    ] Response: 0x2aa16647540 /api/peliculas 200 0
+(2026-10-28 02:37:53) [INFO    ] Request: 127.0.0.1:60987 0x2aa16649f60 HTTP/1.1 GET /api/sedes(2026-10-28 02:37:53) [INFO    ] Response: 0x2aa16648a50 /api/funciones 200 0(2026-10-28 02:37:53) [INFO    ] Request: 127.0.0.1:54435 0x2aa16647540 HTTP/1.1 GET /api/peliculas
+
+
+(2026-10-28 02:37:53) [INFO    ] Response: 0x2aa16649f60 /api/sedes 200 0
+(2026-10-28 02:37:53) [INFO    ] Response: 0x2aa16647540 /api/peliculas 200 0
+(2026-10-28 02:37:53) [INFO    ] Request: 127.0.0.1:50910 0x2aa16648a50 HTTP/1.1 GET /api/funciones(2026-10-28 02:37:53) [INFO    ] Request: 127.0.0.1:54435 0x2aa16647540 HTTP/1.1 GET /api/peliculas
+
+(2026-10-28 02:37:53) [INFO    ] Response: 0x2aa16647540 /api/peliculas 200 0
+(2026-10-28 02:37:53) [INFO    ] Request: 127.0.0.1:54435 0x2aa16647540 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:37:53) [INFO    ] Response: 0x2aa16648a50 /api/funciones 200 0
+(2026-10-28 02:37:53) [INFO    ] Response: 0x2aa16647540 /api/peliculas 200 0(2026-10-28 02:37:53) [INFO    ] Request: 127.0.0.1:60987 0x2aa16649f60 HTTP/1.1 GET /api/funciones
+
+(2026-10-28 02:37:53) [INFO    ] Response: 0x2aa16649f60 /api/funciones 200 0
+(2026-10-28 02:37:53) [INFO    ] Request: 127.0.0.1:54435 0x2aa16647540 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:37:53) [INFO    ] Response: 0x2aa16647540 /api/funciones 200 0
+(2026-10-28 02:37:57) [INFO    ] Request: 127.0.0.1:54435 0x2aa16647540 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:37:57) [INFO    ] Request: 127.0.0.1:60987 0x2aa16649f60 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:37:57) [INFO    ] Request: 127.0.0.1:50910 0x2aa16648a50 HTTP/1.1 GET /api/sedes
+(2026-10-28 02:37:57) [INFO    ] Response: 0x2aa16647540 /api/peliculas 200 0
+(2026-10-28 02:37:57) [INFO    ] Response: 0x2aa16648a50 /api/sedes 200 0
+(2026-10-28 02:37:57) [INFO    ] Response: 0x2aa16649f60 /api/funciones 200 0
+(2026-10-28 02:37:57) [INFO    ] Request: 127.0.0.1:54435 0x2aa16647540 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:37:57) [INFO    ] Request: 127.0.0.1:50910 0x2aa16648a50 HTTP/1.1 GET /api/sedes
+(2026-10-28 02:37:57) [INFO    ] Request: 127.0.0.1:64094 0x2aa16646030 HTTP/1.1 GET /api/funciones(2026-10-28 02:37:57) [INFO    ] Response: 0x2aa16648a50 /api/sedes 200 0
+(2026-10-28 02:37:57) [INFO    ] Response: 0x2aa16647540 /api/peliculas 200 0
+
+(2026-10-28 02:37:57) [INFO    ] Request: 127.0.0.1:54435 0x2aa16647540 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:37:57) [INFO    ] Response: 0x2aa16646030 /api/funciones 200 0
+(2026-10-28 02:37:57) [INFO    ] Response: 0x2aa16647540 /api/peliculas 200 0(2026-10-28 02:37:57) [INFO    ] Request: 127.0.0.1:50910 0x2aa16648a50 HTTP/1.1 GET /api/funciones
+
+(2026-10-28 02:37:57) [INFO    ] Request: 127.0.0.1:54435 0x2aa16647540 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:37:57) [INFO    ] Response: 0x2aa16648a50 /api/funciones 200 0
+(2026-10-28 02:37:57) [INFO    ] Response: 0x2aa16647540 /api/peliculas 200 0
+(2026-10-28 02:37:57) [INFO    ] Request: 127.0.0.1:64094 0x2aa16646030 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:37:57) [INFO    ] Response: 0x2aa16646030 /api/funciones 200 0
+(2026-10-28 02:44:45) [INFO    ] Request: 127.0.0.1:60540 0x2aa16646030 HTTP/1.1 GET /api/sedes(2026-10-28 02:44:45) [INFO    ] Request: 127.0.0.1:64108 0x2aa16649f60 HTTP/1.1 GET /api/funciones(2026-10-28 02:44:45) [INFO    ] Request: 127.0.0.1:63132 0x2aa1664b470 HTTP/1.1 GET /api/peliculas
+
+
+(2026-10-28 02:44:45) [INFO    ] Response: 0x2aa16646030 /api/sedes 200 0
+(2026-10-28 02:44:45) [INFO    ] Response: 0x2aa1664b470 /api/peliculas 200 0
+(2026-10-28 02:44:45) [INFO    ] Response: 0x2aa16649f60 /api/funciones 200 0(2026-10-28 02:44:45) [INFO    ] Request: 127.0.0.1:60540 0x2aa16646030 HTTP/1.1 GET /api/sedes
+(2026-10-28 02:44:45) [INFO    ] Request: 127.0.0.1:63132 0x2aa1664b470 HTTP/1.1 GET /api/peliculas(2026-10-28 02:44:45) [INFO    ] Response: 0x2aa16646030 /api/sedes 200 0
+
+
+(2026-10-28 02:44:45) [INFO    ] Request: 127.0.0.1:60540 0x2aa16646030 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:44:45) [INFO    ] Response: 0x2aa1664b470 /api/peliculas 200 0
+(2026-10-28 02:44:45) [INFO    ] Request: 127.0.0.1:63132 0x2aa1664b470 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:44:45) [INFO    ] Response: 0x2aa16646030 /api/funciones 200 0
+(2026-10-28 02:44:45) [INFO    ] Request: 127.0.0.1:64108 0x2aa16649f60 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:44:45) [INFO    ] Response: 0x2aa1664b470 /api/peliculas 200 0
+(2026-10-28 02:44:45) [INFO    ] Response: 0x2aa16649f60 /api/funciones 200 0(2026-10-28 02:44:45) [INFO    ] Request: 127.0.0.1:63132 0x2aa1664b470 HTTP/1.1 GET /api/peliculas
+
+(2026-10-28 02:44:45) [INFO    ] Response: 0x2aa1664b470 /api/peliculas 200 0
+(2026-10-28 02:44:45) [INFO    ] Request: 127.0.0.1:60540 0x2aa16646030 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:44:45) [INFO    ] Response: 0x2aa16646030 /api/funciones 200 0
+(2026-10-28 02:44:47) [INFO    ] Request: 127.0.0.1:60540 0x2aa16646030 HTTP/1.1 GET /api/peliculas(2026-10-28 02:44:47) [INFO    ] Request: 127.0.0.1:63132 0x2aa1664b470 HTTP/1.1 GET /api/funciones
+
+(2026-10-28 02:44:47) [INFO    ] Request: 127.0.0.1:64108 0x2aa16649f60 HTTP/1.1 GET /api/sedes
+(2026-10-28 02:44:47) [INFO    ] Response: 0x2aa16649f60 /api/sedes 200 0(2026-10-28 02:44:47) [INFO    ] Response: 0x2aa16646030 /api/peliculas 200 0
+(2026-10-28 02:44:47) [INFO    ] Response: 0x2aa1664b470 /api/funciones 200 0
+
+(2026-10-28 02:44:47) [INFO    ] Request: 127.0.0.1:60540 0x2aa16646030 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:44:47) [INFO    ] Response: 0x2aa16646030 /api/peliculas 200 0
+(2026-10-28 02:44:47) [INFO    ] Request: 127.0.0.1:63132 0x2aa1664b470 HTTP/1.1 GET /api/sedes
+(2026-10-28 02:44:47) [INFO    ] Request: 127.0.0.1:64108 0x2aa16649f60 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:44:47) [INFO    ] Request: 127.0.0.1:60540 0x2aa16646030 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:44:47) [INFO    ] Response: 0x2aa1664b470 /api/sedes 200 0
+(2026-10-28 02:44:47) [INFO    ] Response: 0x2aa16646030 /api/peliculas 200 0
+(2026-10-28 02:44:47) [INFO    ] Response: 0x2aa16649f60 /api/funciones 200 0
+(2026-10-28 02:44:47) [INFO    ] Request: 127.0.0.1:60540 0x2aa16646030 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:44:47) [INFO    ] Request: 127.0.0.1:63132 0x2aa1664b470 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:44:47) [INFO    ] Response: 0x2aa16646030 /api/peliculas 200 0
+(2026-10-28 02:44:47) [INFO    ] Response: 0x2aa1664b470 /api/funciones 200 0
+(2026-10-28 02:44:47) [INFO    ] Request: 127.0.0.1:60540 0x2aa16646030 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:44:47) [INFO    ] Response: 0x2aa16646030 /api/funciones 200 0
+(2026-10-28 02:44:51) [INFO    ] Request: 127.0.0.1:60540 0x2aa16646030 HTTP/1.1 GET /api/solicitudes
+(2026-10-28 02:44:51) [INFO    ] Response: 0x2aa16646030 /api/solicitudes 200 0
+(2026-10-28 02:44:51) [INFO    ] Request: 127.0.0.1:60540 0x2aa16646030 HTTP/1.1 GET /api/solicitudes
+(2026-10-28 02:44:51) [INFO    ] Response: 0x2aa16646030 /api/solicitudes 200 0
+(2026-10-28 02:44:52) [INFO    ] Request: 127.0.0.1:60540 0x2aa16646030 HTTP/1.1 GET /api/clientes
+(2026-10-28 02:44:52) [INFO    ] Request: 127.0.0.1:63057 0x2aa16647540 HTTP/1.1 GET /api/reservas
+(2026-10-28 02:44:52) [INFO    ] Response: 0x2aa16647540 /api/reservas 200 0
+(2026-10-28 02:44:52) [INFO    ] Response: 0x2aa16646030 /api/clientes 200 0
+(2026-10-28 02:44:52) [INFO    ] Request: 127.0.0.1:63057 0x2aa16647540 HTTP/1.1 GET /api/reservas
+(2026-10-28 02:44:52) [INFO    ] Request: 127.0.0.1:60540 0x2aa16646030 HTTP/1.1 GET /api/clientes
+(2026-10-28 02:44:52) [INFO    ] Response: 0x2aa16646030 /api/clientes 200 0
+(2026-10-28 02:44:52) [INFO    ] Response: 0x2aa16647540 /api/reservas 200 0
+(2026-10-28 02:45:09) [INFO    ] Response: 0x2aa1664c980 /api/carga/clientes-reservas 204 0
+(2026-10-28 02:45:09) [INFO    ] Request: 127.0.0.1:61432 0x2aa16648a50 HTTP/1.1 POST /api/carga/clientes-reservas
+(2026-10-28 02:45:09) [INFO    ] Response: 0x2aa16648a50 /api/carga/clientes-reservas 404 0
+(2026-10-28 02:46:14) [INFO    ] Response: 0x2aa16647540 /api/carga/clientes-reservas 204 0
+(2026-10-28 02:46:14) [INFO    ] Request: 127.0.0.1:50978 0x2aa16648a50 HTTP/1.1 POST /api/carga/clientes-reservas
+(2026-10-28 02:46:14) [INFO    ] Response: 0x2aa16648a50 /api/carga/clientes-reservas 404 0
+(2026-10-28 02:47:37) [INFO    ] Response: 0x2aa16646030 /api/carga/clientes-reservas 204 0
+(2026-10-28 02:47:37) [INFO    ] Request: 127.0.0.1:64560 0x2aa16648a50 HTTP/1.1 POST /api/carga/clientes-reservas
+(2026-10-28 02:47:37) [INFO    ] Response: 0x2aa16648a50 /api/carga/clientes-reservas 404 0
+(2026-10-28 02:49:34) [INFO    ] Request: 127.0.0.1:63161 0x2aa16649f60 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:49:34) [INFO    ] Request: 127.0.0.1:58933 0x2aa16647540 HTTP/1.1 GET /api/sedes
+(2026-10-28 02:49:34) [INFO    ] Request: 127.0.0.1:57801 0x2aa16646030 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:49:34) [INFO    ] Response: 0x2aa16649f60 /api/peliculas 200 0(2026-10-28 02:49:34) [INFO    ] Response: 0x2aa16647540 /api/sedes 200 0
+
+(2026-10-28 02:49:34) [INFO    ] Request: 127.0.0.1:58933 0x2aa16647540 HTTP/1.1 GET /api/sedes
+(2026-10-28 02:49:34) [INFO    ] Response: 0x2aa16646030 /api/funciones 200 0
+(2026-10-28 02:49:34) [INFO    ] Request: 127.0.0.1:63161 0x2aa16649f60 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:49:34) [INFO    ] Response: 0x2aa16647540 /api/sedes 200 0
+(2026-10-28 02:49:34) [INFO    ] Request: 127.0.0.1:57801 0x2aa16646030 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:49:34) [INFO    ] Response: 0x2aa16649f60 /api/peliculas 200 0
+(2026-10-28 02:49:34) [INFO    ] Request: 127.0.0.1:63161 0x2aa16649f60 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:49:34) [INFO    ] Response: 0x2aa16646030 /api/funciones 200 0
+(2026-10-28 02:49:34) [INFO    ] Response: 0x2aa16649f60 /api/peliculas 200 0
+(2026-10-28 02:49:34) [INFO    ] Request: 127.0.0.1:58933 0x2aa16647540 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:49:34) [INFO    ] Request: 127.0.0.1:63161 0x2aa16649f60 HTTP/1.1 GET /api/peliculas
+(2026-10-28 02:49:34) [INFO    ] Response: 0x2aa16649f60 /api/peliculas 200 0
+(2026-10-28 02:49:34) [INFO    ] Response: 0x2aa16647540 /api/funciones 200 0
+(2026-10-28 02:49:34) [INFO    ] Request: 127.0.0.1:63161 0x2aa16649f60 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:49:34) [INFO    ] Response: 0x2aa16649f60 /api/funciones 200 0
+(2026-10-28 02:49:36) [INFO    ] Request: 127.0.0.1:63161 0x2aa16649f60 HTTP/1.1 POST /api/carga/peliculas-funciones
+(2026-10-28 02:49:36) [INFO    ] Response: 0x2aa16649f60 /api/carga/peliculas-funciones 400 0
+(2026-10-28 02:49:47) [INFO    ] Request: 127.0.0.1:51640 0x2aa16648a50 HTTP/1.1 GET /api/solicitudes
+(2026-10-28 02:49:47) [INFO    ] Response: 0x2aa16648a50 /api/solicitudes 200 0
+(2026-10-28 02:49:47) [INFO    ] Request: 127.0.0.1:51640 0x2aa16648a50 HTTP/1.1 GET /api/solicitudes
+(2026-10-28 02:49:47) [INFO    ] Response: 0x2aa16648a50 /api/solicitudes 200 0
+(2026-10-28 02:49:51) [INFO    ] Request: 127.0.0.1:51640 0x2aa16648a50 HTTP/1.1 GET /api/clientes
+(2026-10-28 02:49:51) [INFO    ] Request: 127.0.0.1:60235 0x2aa16649f60 HTTP/1.1 GET /api/reservas
+(2026-10-28 02:49:51) [INFO    ] Response: 0x2aa16648a50 /api/clientes 200 0
+(2026-10-28 02:49:51) [INFO    ] Response: 0x2aa16649f60 /api/reservas 200 0
+(2026-10-28 02:49:51) [INFO    ] Request: 127.0.0.1:51640 0x2aa16648a50 HTTP/1.1 GET /api/clientes
+(2026-10-28 02:49:51) [INFO    ] Request: 127.0.0.1:60235 0x2aa16649f60 HTTP/1.1 GET /api/reservas
+(2026-10-28 02:49:51) [INFO    ] Response: 0x2aa16648a50 /api/clientes 200 0
+(2026-10-28 02:49:51) [INFO    ] Response: 0x2aa16649f60 /api/reservas 200 0
+(2026-10-28 02:49:53) [INFO    ] Response: 0x2aa16649f60 /api/carga/clientes-reservas 204 0
+(2026-10-28 02:49:53) [INFO    ] Request: 127.0.0.1:51640 0x2aa16648a50 HTTP/1.1 POST /api/carga/clientes-reservas
+(2026-10-28 02:49:53) [INFO    ] Response: 0x2aa16648a50 /api/carga/clientes-reservas 404 0
+(2026-10-28 02:51:14) [INFO    ] Request: 127.0.0.1:50700 0x2aa16647540 HTTP/1.1 GET /api/peliculas(2026-10-28 02:51:14) [INFO    ] Request: 127.0.0.1:60590 0x2aa16648a50 HTTP/1.1 GET /api/funciones
+
+(2026-10-28 02:51:14) [INFO    ] Request: 127.0.0.1:64759 0x2aa16649f60 HTTP/1.1 GET /api/sedes
+(2026-10-28 02:51:14) [INFO    ] Response: 0x2aa16649f60 /api/sedes 200 0(2026-10-28 02:51:14) [INFO    ] Response: 0x2aa16647540 /api/peliculas 200 0
+
+(2026-10-28 02:51:14) [INFO    ] Response: 0x2aa16648a50 /api/funciones 200 0(2026-10-28 02:51:14) [INFO    ] Request: 127.0.0.1:50700 0x2aa16647540 HTTP/1.1 GET /api/peliculas
+
+(2026-10-28 02:51:14) [INFO    ] Request: 127.0.0.1:64759 0x2aa16649f60 HTTP/1.1 GET /api/sedes
+(2026-10-28 02:51:14) [INFO    ] Response: 0x2aa16647540 /api/peliculas 200 0(2026-10-28 02:51:14) [INFO    ] Response: 0x2aa16649f60 /api/sedes 200 0
+
+(2026-10-28 02:51:14) [INFO    ] Request: 127.0.0.1:60590 0x2aa16648a50 HTTP/1.1 GET /api/funciones(2026-10-28 02:51:14) [INFO    ] Request: 127.0.0.1:64759 0x2aa16649f60 HTTP/1.1 GET /api/peliculas
+
+(2026-10-28 02:51:14) [INFO    ] Response: 0x2aa16649f60 /api/peliculas 200 0
+(2026-10-28 02:51:14) [INFO    ] Request: 127.0.0.1:64759 0x2aa16649f60 HTTP/1.1 GET /api/peliculas(2026-10-28 02:51:14) [INFO    ] Response: 0x2aa16648a50 /api/funciones 200 0
+
+(2026-10-28 02:51:14) [INFO    ] Response: 0x2aa16649f60 /api/peliculas 200 0(2026-10-28 02:51:14) [INFO    ] Request: 127.0.0.1:50700 0x2aa16647540 HTTP/1.1 GET /api/funciones
+
+(2026-10-28 02:51:14) [INFO    ] Response: 0x2aa16647540 /api/funciones 200 0
+(2026-10-28 02:51:14) [INFO    ] Request: 127.0.0.1:64759 0x2aa16649f60 HTTP/1.1 GET /api/funciones
+(2026-10-28 02:51:14) [INFO    ] Response: 0x2aa16649f60 /api/funciones 200 0

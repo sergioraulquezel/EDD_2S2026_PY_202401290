@@ -2,6 +2,7 @@
 
 #include "models/FuncionCine.h"
 #include "structures/ArbolAVLFunciones.h"
+#include "structures/GrafoSedes.h"
 #include "structures/ArbolBClientes.h"
 #include "structures/ArbolBinario.h"
 #include "structures/ListaSolicitudes.h"
@@ -19,6 +20,7 @@ private:
     ArbolAVLFunciones arbolFunciones;
     ArbolBClientes clientes;
     TablaHashReservas reservas;
+    GrafoSedes grafoSedes;
     ListaCircularPromociones promociones;
     ListaCircularDoble solicitudes;
 
@@ -34,6 +36,9 @@ public:
     FuncionCine* buscarFuncion(const std::string& codigoFuncion);
     ArbolBClientes& obtenerClientes();
     TablaHashReservas& obtenerReservas();
+    GrafoSedes& obtenerGrafoSedes();
+    void actualizarGrafoSedes();
+    bool crearSede(const Sede& sede, std::string& mensaje);
     ListaCircularPromociones& obtenerPromociones();
     ListaCircularDoble& obtenerSolicitudes();
 
@@ -43,7 +48,7 @@ public:
                        const std::string& fechaEstreno, std::string& mensaje);
 
     bool crearFuncion(Pelicula* pelicula, const std::string& horario, const std::string& sala,
-                      int filas, int columnas, std::string& codigoCreado,
+                      const std::string& codigoSede, int filas, int columnas, std::string& codigoCreado,
                       std::string& mensaje);
 
     bool editarFuncion(const std::string& codigoFuncion, const std::string& horario,
